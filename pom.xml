@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.jerryio.protocol_diagram</groupId>
+  <artifactId>ProtocolDiagram</artifactId>
+  
+  <version>0.0.1</version>
+  <name>Protocol Diagram</name>
+  <inceptionYear>2022</inceptionYear>
+  <packaging>jar</packaging>
+  
+  <description>Protocol Diagram is a command-line editor for researchers and engineers to create ASCII RFC-like header diagrams for their own custom protocols.</description>
+  <url>https://github.com/Jerrylum/ProtocolDiagram/</url>
+  
+  <issueManagement>
+  	<system>GitHub Issues</system>
+  	<url>https://github.com/Jerrylum/ProtocolDiagram/issues</url>
+  </issueManagement>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  
+  <licenses>
+    <license>
+      <name>GNU General Public License v3.0</name>
+      <url>https://github.com/Jerrylum/ProtocolDiagram/blob/main/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <repositories>
+  </repositories>
+  
+  <build>
+    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+    <defaultGoal>clean package</defaultGoal>
+    
+    <finalName>protocol_diagram</finalName>
+    
+    <plugins>
+    </plugins>
+    
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+</project>
