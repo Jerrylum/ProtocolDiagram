@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.PositiveInt;
 
 public class PositiveIntTest {
     @Test
-    public void testBooleanTVaild() {
+    public void testPositiveIntVaild() {
         assertEquals(PositiveInt.parse(new CodePointBuffer("123")), new PositiveInt("123"));
         assertEquals(PositiveInt.parse(new CodePointBuffer("123abc")), new PositiveInt("123"));
         assertEquals(PositiveInt.parse(new CodePointBuffer("123 ")), new PositiveInt("123"));
@@ -18,7 +18,7 @@ public class PositiveIntTest {
     }
 
     @Test
-    public void testBooleanTNull() {
+    public void testPositiveIntNull() {
         assertNull(PositiveInt.parse(new CodePointBuffer("abc")));
         assertNull(PositiveInt.parse(new CodePointBuffer("")));
         assertNull(PositiveInt.parse(new CodePointBuffer("-1")));
