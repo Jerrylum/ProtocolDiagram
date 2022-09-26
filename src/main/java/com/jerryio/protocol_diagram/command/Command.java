@@ -1,5 +1,6 @@
 package com.jerryio.protocol_diagram.command;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.jerryio.protocol_diagram.token.CommandLine;
@@ -9,12 +10,12 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 public abstract class Command {
 
     private final String name;
-    private final String format;
+    private final String usage;
     private final String description;
 
-    public Command(String name, String format, String description) {
+    public Command(String name, String usage, String description) {
         this.name = name;
-        this.format = format;
+        this.usage = usage;
         this.description = description;
     }
 
@@ -22,8 +23,8 @@ public abstract class Command {
         return name;
     }
 
-    public String getFormat() {
-        return format;
+    public String getUsage() {
+        return usage;
     }
 
     public String getDescription() {
@@ -40,5 +41,21 @@ public abstract class Command {
     public abstract HandleResult handle(List<Parameter> params);
 
     public abstract void execute();
+
+    public static List<Command> getAvailableCommands() {
+        return Arrays.asList(
+            new AddCommand(),
+            new ConfigListCommand(),
+            new DeleteCommand(),
+            new HelpCommand(),
+            new InsertCommand(),
+            new ListCommand(),
+            new MoveCommand(),
+            new QuitCommand(),
+            new RenameCommand(),
+            new ResizeCommand(),
+            new ViewCommand()
+        );
+    }
 
 }
