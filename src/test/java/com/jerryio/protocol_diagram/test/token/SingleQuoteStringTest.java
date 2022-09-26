@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.SingleQuoteString;
 
 public class SingleQuoteStringTest {
     @Test
-    public void testBooleanTVaild() {
+    public void testSingleQuoteStringVaild() {
         assertEquals(SingleQuoteString.parse(new CodePointBuffer("'\\\\'")), new SingleQuoteString("'\\\\'", "\\")); // \
         assertEquals(SingleQuoteString.parse(new CodePointBuffer("'\\''")), new SingleQuoteString("'\\''", "'")); // '
         assertEquals(SingleQuoteString.parse(new CodePointBuffer("'\\\\\\''")), new SingleQuoteString("'\\\\\\''", "\\'")); // \'
@@ -21,7 +21,7 @@ public class SingleQuoteStringTest {
     }
 
     @Test
-    public void testBooleanTNull() {
+    public void testSingleQuoteStringTNull() {
         assertNull(SingleQuoteString.parse(new CodePointBuffer("test"))); // no quote
         assertNull(SingleQuoteString.parse(new CodePointBuffer("")));
         assertNull(SingleQuoteString.parse(new CodePointBuffer("234")));
