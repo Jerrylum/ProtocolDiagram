@@ -6,10 +6,13 @@ import java.util.Scanner;
 
 import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.token.*;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class Main {
+
+    public static Diagram diagram = new Diagram();
 
     public static String doHandleCommand(String input) {
         CodePointBuffer buffer = new CodePointBuffer(input);
@@ -39,8 +42,8 @@ public class Main {
                     System.out.println(feedback);
                 }
             }
-        } catch (Exception e) {
-            System.exit(0); // Keyboard interrupt
+        } catch (RuntimeException e) { // Keyboard interrupt or quit command
+            System.out.println("\nSee you.");
         }
     }
 

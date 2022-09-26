@@ -2,11 +2,13 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
+import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class ResizeCommand extends Command {
-    
+
     public int paramIndex;
     public int paramNewSize;
 
@@ -22,8 +24,8 @@ public class ResizeCommand extends Command {
             return TOO_MANY_ARGUMENTS;
 
         Parameter paramIndex = params.get(0);
-        if (!paramIndex.isNumber() || paramIndex.getInt() <= 0)
-            return fail("Index must be a positive integer.");
+        if (!paramIndex.isNumber() || paramIndex.getInt() < 0)
+            return fail("Index start from zero.");
 
         Parameter paramNewSize = params.get(1);
         if (!paramNewSize.isNumber() || paramNewSize.getInt() <= 0)
@@ -32,17 +34,21 @@ public class ResizeCommand extends Command {
         this.paramIndex = paramIndex.getInt();
         this.paramNewSize = paramNewSize.getInt();
 
-        // TODO check if index is valid
+        if (this.paramIndex >= Main.diagram.size())
+            return fail("Index out of range.");
+
+        Field f = Main.diagram.getField(this.paramIndex);
+        int oldLength = f.getLength();
 
         execute();
 
-        // return result("Resized field \"" + ???? + "\" from " + ??? + " to " + ??? + ".");
-        return success("Resized field.");
+        return success("Resized field \"" + f.getName() + "\" from " + oldLength + " to " + f.getLength() + ".\n\n"
+                + Main.diagram);
     }
 
     @Override
     public void execute() {
-        // TODO resize field
+        Main.diagram.getField(paramIndex).setLength(paramNewSize);
     }
 
 }

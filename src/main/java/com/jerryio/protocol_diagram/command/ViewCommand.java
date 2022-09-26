@@ -2,11 +2,12 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
+import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class ViewCommand extends Command {
-    
+
     public ViewCommand() {
         super("view", "", "Print out the diagram");
     }
@@ -16,7 +17,7 @@ public class ViewCommand extends Command {
         if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
 
-        return HANDLED; // TODO print out the diagram
+        return success("\n" + Main.diagram);
     }
 
     @Override

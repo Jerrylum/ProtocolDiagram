@@ -2,13 +2,15 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
+import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class DeleteCommand extends Command {
 
     public int paramIndex;
-    
+
     public DeleteCommand() {
         super("delete", "<index>", "Remove the specified field from the diagram");
     }
@@ -21,22 +23,24 @@ public class DeleteCommand extends Command {
             return TOO_MANY_ARGUMENTS;
 
         Parameter paramIndex = params.get(0);
-        if (!paramIndex.isNumber() || paramIndex.getInt() <= 0)
-            return fail("Index must be a positive integer.");
+        if (!paramIndex.isNumber() || paramIndex.getInt() < 0)
+            return fail("Index start from zero.");
 
         this.paramIndex = paramIndex.getInt();
 
-        // TODO check if index is valid
+        if (this.paramIndex >= Main.diagram.size())
+            return fail("Index out of range.");
+
+        Field f = Main.diagram.getField(this.paramIndex);
 
         execute();
 
-        // return result("Deleted field \"" + ???? + "\".");
-        return success("Deleted field.");
+        return success("Deleted field \"" + f.getName() + "\".\n\n" + Main.diagram);
     }
 
     @Override
     public void execute() {
-        // TODO delete field
+        Main.diagram.removeField(paramIndex);
     }
-    
+
 }

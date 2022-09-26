@@ -48,7 +48,7 @@ public class Diagram {
 
     @Override
     public String toString() {
-        // TODO
+        // TODO generate a diagram
         StringBuilder sb = new StringBuilder();
 
         for (Field field : fields) {

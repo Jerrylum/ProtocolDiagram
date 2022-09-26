@@ -45,6 +45,7 @@ public abstract class Command {
     public static List<Command> getAvailableCommands() {
         return Arrays.asList(
             new AddCommand(),
+            new ClearCommand(),
             new ConfigListCommand(),
             new DeleteCommand(),
             new HelpCommand(),

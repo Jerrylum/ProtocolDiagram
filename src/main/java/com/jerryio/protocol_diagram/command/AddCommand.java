@@ -2,6 +2,8 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
+import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
@@ -34,12 +36,12 @@ public class AddCommand extends Command {
 
         execute();
 
-        return success("Added field \"" + this.paramName + "\".");
+        return success("Added field \"" + this.paramName + "\".\n\n" + Main.diagram);
     }
 
     @Override
     public void execute() {
-        // TODO add field
+        Main.diagram.addField(new Field(paramName, paramLength));
     }
 
 }

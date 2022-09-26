@@ -2,6 +2,8 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
+import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
@@ -22,8 +24,8 @@ public class RenameCommand extends Command {
             return TOO_MANY_ARGUMENTS;
 
         Parameter paramIndex = params.get(0);
-        if (!paramIndex.isNumber() || paramIndex.getInt() <= 0)
-            return fail("Index must be a positive integer.");
+        if (!paramIndex.isNumber() || paramIndex.getInt() < 0)
+            return fail("Index start from zero.");
 
         Parameter paramNewName = params.get(1);
         if (!paramNewName.isString())
@@ -32,17 +34,20 @@ public class RenameCommand extends Command {
         this.paramIndex = paramIndex.getInt();
         this.paramNewName = paramNewName.getString();
 
-        // TODO check if index is valid
+        if (this.paramIndex >= Main.diagram.size())
+            return fail("Index out of range.");
+
+        Field f = Main.diagram.getField(this.paramIndex);
+        String oldName = f.getName();
 
         execute();
 
-        // return success("Renamed field from \"" + ???? + "\" to \"" + ???? + "\".");
-        return success("Renamed field.");
+        return success("Renamed field from \"" + oldName + "\" to \"" + f.getName() + "\".\n\n" + Main.diagram);
     }
 
     @Override
     public void execute() {
-        // TODO rename field
+        Main.diagram.getField(paramIndex).setName(paramNewName);
     }
-    
+
 }

@@ -16,14 +16,12 @@ public class QuitCommand extends Command {
         if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
 
-        execute();
-
-        return HANDLED;
+        throw new RuntimeException(); // Quit the program
     }
 
     @Override
     public void execute() {
-        // TODO quit program
+        // No need to do anything
     }
 
 }
