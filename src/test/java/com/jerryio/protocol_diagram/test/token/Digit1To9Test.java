@@ -19,6 +19,8 @@ public class Digit1To9Test {
         assertEquals(Digit1To9.parse(new CodePointBuffer("7")), new Digit1To9('7'));
         assertEquals(Digit1To9.parse(new CodePointBuffer("8")), new Digit1To9('8'));
         assertEquals(Digit1To9.parse(new CodePointBuffer("9")), new Digit1To9('9'));
+        assertEquals(Digit1To9.parse(new CodePointBuffer("10")), new Digit1To9('1'));
+        assertEquals(Digit1To9.parse(new CodePointBuffer("1 ")), new Digit1To9('1'));
     }
 
     @Test
@@ -26,9 +28,9 @@ public class Digit1To9Test {
         assertNull(Digit1To9.parse(new CodePointBuffer("0")));
         assertNull(Digit1To9.parse(new CodePointBuffer(" 1")));
         assertNull(Digit1To9.parse(new CodePointBuffer("a")));
+        assertNull(Digit1To9.parse(new CodePointBuffer("A")));
         assertNull(Digit1To9.parse(new CodePointBuffer("")));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("1 ")), new Digit1To9('1'));
         assertNull(Digit1To9.parse(new CodePointBuffer("-1")));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("10")), new Digit1To9('1'));
+        assertNull(Digit1To9.parse(new CodePointBuffer(".123")));
     }
 }
