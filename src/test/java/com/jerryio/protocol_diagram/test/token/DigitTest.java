@@ -20,6 +20,7 @@ public class DigitTest {
         assertEquals(Digit.parse(new CodePointBuffer("7")), new Digit('7'));
         assertEquals(Digit.parse(new CodePointBuffer("8")), new Digit('8'));
         assertEquals(Digit.parse(new CodePointBuffer("9")), new Digit('9'));
+        assertEquals(Digit.parse(new CodePointBuffer("1 ")), new Digit('1'));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class DigitTest {
         assertNull(Digit.parse(new CodePointBuffer("a")));
         assertNull(Digit.parse(new CodePointBuffer("A")));
         assertNull(Digit.parse(new CodePointBuffer(" ")));
-        assertNull(Digit.parse(new CodePointBuffer(" 1")));
-        assertEquals(Digit.parse(new CodePointBuffer("1 ")), new Digit('1'));
+        assertNull(Digit.parse(new CodePointBuffer(" 1")));   
+        assertNull(Digit.parse(new CodePointBuffer(".22")));   
     }
 }
