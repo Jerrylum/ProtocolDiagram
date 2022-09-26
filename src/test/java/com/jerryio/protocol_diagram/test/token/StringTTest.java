@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.StringT;
 
 public class StringTTest {
     @Test
-    public void testBooleanTVaild() {
+    public void testStringTVaild() {
         assertEquals(StringT.parse(new CodePointBuffer("test")), new StringT("test"));// test
         assertEquals(StringT.parse(new CodePointBuffer(" ")), new StringT(""));// empty
         assertEquals(StringT.parse(new CodePointBuffer("test test")), new StringT("test"));// test
@@ -24,7 +24,7 @@ public class StringTTest {
     }
 
     @Test
-    public void testBooleanTNull() {
+    public void testStringTNull() {
         assertNull(StringT.parse(new CodePointBuffer(""))); // empty
         assertNull(StringT.parse(new CodePointBuffer("'"))); // '
         assertNull(StringT.parse(new CodePointBuffer("\""))); // "
