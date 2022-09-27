@@ -24,13 +24,13 @@ public class DigitTest {
     }
 
     @Test
-    public void testDigitNull(){
+    public void testDigitNull() {
         assertNull(Digit.parse(new CodePointBuffer("")));
         assertNull(Digit.parse(new CodePointBuffer("-1")));
         assertNull(Digit.parse(new CodePointBuffer("a")));
         assertNull(Digit.parse(new CodePointBuffer("A")));
         assertNull(Digit.parse(new CodePointBuffer(" ")));
-        assertNull(Digit.parse(new CodePointBuffer(" 1")));   
-        assertNull(Digit.parse(new CodePointBuffer(".22")));   
+        assertNull(Digit.parse(new CodePointBuffer(" 1")));
+        assertNull(Digit.parse(new CodePointBuffer(".22")));
     }
 }

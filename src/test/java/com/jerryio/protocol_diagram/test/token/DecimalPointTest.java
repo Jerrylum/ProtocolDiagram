@@ -17,7 +17,7 @@ public class DecimalPointTest {
     }
 
     @Test
-    public void testDecimalPointNull(){
+    public void testDecimalPointNull() {
         assertNull(DecimalPoint.parse(new CodePointBuffer(" .")));
         assertNull(DecimalPoint.parse(new CodePointBuffer("0")));
         assertNull(DecimalPoint.parse(new CodePointBuffer(" ")));

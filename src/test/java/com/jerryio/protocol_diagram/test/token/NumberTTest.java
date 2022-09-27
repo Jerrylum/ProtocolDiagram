@@ -10,6 +10,11 @@ import com.jerryio.protocol_diagram.token.NumberT;
 public class NumberTTest {
     @Test
     public void testNumberTValid() {
+        NumberT number = NumberT.parse(new CodePointBuffer("0"));
+        assertEquals(number.value(), "0");
+        assertEquals(number.isPositive(), true);
+        assertEquals(number.isDouble(), false);
+
         assertEquals(NumberT.parse(new CodePointBuffer("0")), new NumberT("0", true, false));
         assertEquals(NumberT.parse(new CodePointBuffer("-14")), new NumberT("-14", false, false));
         assertEquals(NumberT.parse(new CodePointBuffer("14")), new NumberT("14", true, false));
@@ -34,7 +39,7 @@ public class NumberTTest {
     }
 
     @Test
-    public void testNumberTNull() {  
+    public void testNumberTNull() {
         assertNull(NumberT.parse(new CodePointBuffer("-")));
         assertNull(NumberT.parse(new CodePointBuffer("")));
         assertNull(NumberT.parse(new CodePointBuffer(" ")));

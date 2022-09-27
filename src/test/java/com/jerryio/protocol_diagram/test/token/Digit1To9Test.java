@@ -24,7 +24,7 @@ public class Digit1To9Test {
     }
 
     @Test
-    public void testDigit1To9Null(){
+    public void testDigit1To9Null() {
         assertNull(Digit1To9.parse(new CodePointBuffer("0")));
         assertNull(Digit1To9.parse(new CodePointBuffer(" 1")));
         assertNull(Digit1To9.parse(new CodePointBuffer("a")));
