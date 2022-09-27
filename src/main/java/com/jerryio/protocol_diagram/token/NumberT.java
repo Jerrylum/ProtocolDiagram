@@ -12,7 +12,7 @@ public record NumberT(String value, boolean isPositive, boolean isDouble) implem
             sb.append(n.value());
             isPositive = false;
         } else {
-            PositiveInt p = PositiveInt.parse(buffer);
+            Int p = Int.parse(buffer);
             if (p == null) {
                 return buffer.rollbackAndReturn(null);
             }
