@@ -9,11 +9,18 @@ import com.jerryio.protocol_diagram.token.Zero;
 
 public class ZeroTest {
     @Test
-    public void testZeroParsing() {
-        assertEquals(Zero.parse(new CodePointBuffer("")), null);
-        assertEquals(Zero.parse(new CodePointBuffer("-")), null);
-        assertEquals(Zero.parse(new CodePointBuffer(" 0")), null);
-        assertEquals(Zero.parse(new CodePointBuffer("0")).getClass(), Zero.class);
-        assertEquals(Zero.parse(new CodePointBuffer("0 ")).getClass(), Zero.class);
+    public void testZeroValid() {
+        assertEquals(Zero.parse(new CodePointBuffer("0")), new Zero('0'));
+        assertEquals(Zero.parse(new CodePointBuffer("0 ")), new Zero('0'));
+    }
+
+    @Test
+    public void testZeroNull() {
+        assertNull(Zero.parse(new CodePointBuffer("1")));
+        assertNull(Zero.parse(new CodePointBuffer("a")));
+        assertNull(Zero.parse(new CodePointBuffer(" ")));
+        assertNull(Zero.parse(new CodePointBuffer("")));
+        assertNull(Zero.parse(new CodePointBuffer("-")));
+        assertNull(Zero.parse(new CodePointBuffer(" 0")));
     }
 }
