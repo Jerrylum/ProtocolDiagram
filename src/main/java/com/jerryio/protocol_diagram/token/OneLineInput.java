@@ -9,24 +9,26 @@ public record OneLineInput(List<Pair<String, Integer>> params) implements Token 
 
         List<Pair<String, Integer>> params = new ArrayList<>();
         while (true) {
-            String name = buffer.readSafeChunk();
-            if (name.isEmpty())
+            SafeString name = SafeString.parse(buffer);
+            if (name == null)
                 break;
 
             buffer.readDelimiter();
 
-            if (buffer.next() != (Character)':')
+            if (buffer.peek() != (Character)':')
                 return null;
+            buffer.next();
 
             buffer.readDelimiter();
 
             PositiveInt p = PositiveInt.parse(buffer);
             if (p == null)
                 return null;
-            params.add(new Pair<>(name, Integer.parseInt(p.value())));
+            params.add(new Pair<>(name.content(), Integer.parseInt(p.value())));
 
-            if (buffer.next() != (Character)',')
+            if (buffer.peek() != (Character)',')
                 break;
+            buffer.next();
 
             buffer.readDelimiter();
         }        

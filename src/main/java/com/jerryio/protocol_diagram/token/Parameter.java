@@ -1,5 +1,7 @@
 package com.jerryio.protocol_diagram.token;
 
+import java.util.Objects;
+
 public class Parameter implements Token {
     private BooleanT bool = null;
     private NumberT number = null;
@@ -80,6 +82,23 @@ public class Parameter implements Token {
             return isDouble() ? number.toDouble() + "" : number.toInt() + "";
         else
             return getString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof Parameter)) {
+            return false;
+        }
+
+        Parameter other = (Parameter) obj;
+
+        return Objects.equals(other.string, string) &&
+                Objects.equals(other.number, number) &&
+                Objects.equals(other.bool, bool);
     }
 
 }

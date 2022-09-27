@@ -6,9 +6,9 @@ public record BooleanT(String value, boolean bool) implements Token {
 
         String s = buffer.readChunk();
         
-        if (s.equals("True") || s.equals("true") || s.equals("t"))
+        if ("true".equalsIgnoreCase(s))
             return buffer.commitAndReturn(new BooleanT(s, true));
-        else if (s.equals("False") || s.equals("false") || s.equals("f"))
+        else if ("false".equalsIgnoreCase(s))
             return buffer.commitAndReturn(new BooleanT(s, false));
         else
             return buffer.rollbackAndReturn(null);

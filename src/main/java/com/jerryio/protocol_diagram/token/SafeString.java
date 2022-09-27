@@ -8,6 +8,7 @@ public record SafeString(String content) implements Token {
         if (word.equals(""))
             return null;
         sb.append(word);
+        // while (buffer.hasNext() && Token.isSafeDelimiter(buffer.peek())) {
 
         while (buffer.hasNext() && buffer.peek() != ':' && buffer.peek() != ',') {
             sb.append(buffer.next());
