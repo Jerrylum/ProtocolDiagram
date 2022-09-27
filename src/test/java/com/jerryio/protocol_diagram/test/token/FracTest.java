@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Frac;
 
-public class FracTest{
+public class FracTest {
     @Test
     public void testFracValid() {
         assertEquals(Frac.parse(new CodePointBuffer(".14")), new Frac(".14"));
@@ -19,7 +19,7 @@ public class FracTest{
     }
 
     @Test
-    public void testFracNull() {  
+    public void testFracNull() {
         assertNull(Frac.parse(new CodePointBuffer(".")));
         assertNull(Frac.parse(new CodePointBuffer("14")));
         assertNull(Frac.parse(new CodePointBuffer("")));

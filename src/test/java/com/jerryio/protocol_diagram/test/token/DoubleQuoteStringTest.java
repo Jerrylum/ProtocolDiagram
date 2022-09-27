@@ -9,14 +9,23 @@ import com.jerryio.protocol_diagram.token.DoubleQuoteString;
 
 public class DoubleQuoteStringTest {
     @Test
-    public void testDoubleQuoteStringVaild() {
+    public void testDoubleQuoteStringValid() {
+        DoubleQuoteString t = new DoubleQuoteString("\"test\"", "test");
+        assertEquals(t.value(), "\"test\"");
+        assertEquals(t.content(), "test");
+
         assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\"")), new DoubleQuoteString("\"\\\\\"", "\\")); // \
         assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\"\"")), new DoubleQuoteString("\"\\\"\"", "\"")); // \"
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\"\"")), new DoubleQuoteString("\"\\\\\\\"\"", "\\\"")); // \\"
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\\\"")), new DoubleQuoteString("\"\\\\\\\\\"", "\\\\")); // \\
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\"")), new DoubleQuoteString("\"test\\\\\"", "test\\")); // test\
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\"\"")), new DoubleQuoteString("\"test\\\"\"", "test\"")); // test\"
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\\\"\"")), new DoubleQuoteString("\"test\\\\\\\"\"", "test\\\"")); // test\\"
+        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\"\"")),
+                new DoubleQuoteString("\"\\\\\\\"\"", "\\\"")); // \\"
+        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\\\"")),
+                new DoubleQuoteString("\"\\\\\\\\\"", "\\\\")); // \\
+        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\"")),
+                new DoubleQuoteString("\"test\\\\\"", "test\\")); // test\
+        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\"\"")),
+                new DoubleQuoteString("\"test\\\"\"", "test\"")); // test\"
+        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\\\"\"")),
+                new DoubleQuoteString("\"test\\\\\\\"\"", "test\\\"")); // test\\"
         assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\"")), new DoubleQuoteString("\"\"", "")); // empty
     }
 

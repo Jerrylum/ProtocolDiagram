@@ -9,15 +9,35 @@ import com.jerryio.protocol_diagram.token.SingleQuoteString;
 
 public class SingleQuoteStringTest {
     @Test
-    public void testBooleanTVaild() {
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("'\\\\'")), new SingleQuoteString("'\\\\'", "\\")); // \
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("'\\''")), new SingleQuoteString("'\\''", "'")); // '
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("'\\\\\\''")), new SingleQuoteString("'\\\\\\''", "\\'")); // \'
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("'\\\\\\\\'")), new SingleQuoteString("'\\\\\\\\'", "\\\\")); // \\
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("'test\\\\'")), new SingleQuoteString("'test\\\\'", "test\\")); // test\
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("'test\\''")), new SingleQuoteString("'test\\''", "test'")); // test'
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("'test\\\\\\''")), new SingleQuoteString("'test\\\\\\''", "test\\'")); // test\'
-        assertEquals(SingleQuoteString.parse(new CodePointBuffer("''")), new SingleQuoteString("''", "")); // empty
+    public void testBooleanTValid() {
+        SingleQuoteString s = new SingleQuoteString("hello", "world");
+        assertEquals(s.value(), "hello");
+        assertEquals(s.content(), "world");
+
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("'\\\\'")),
+                new SingleQuoteString("'\\\\'", "\\")); // \
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("'\\''")),
+                new SingleQuoteString("'\\''", "'")); // '
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("'\\\\\\''")),
+                new SingleQuoteString("'\\\\\\''", "\\'")); // \'
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("'\\\\\\\\'")),
+                new SingleQuoteString("'\\\\\\\\'", "\\\\")); // \\
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("'test\\\\'")),
+                new SingleQuoteString("'test\\\\'", "test\\")); // test\
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("'test\\''")),
+                new SingleQuoteString("'test\\''", "test'")); // test'
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("'test\\\\\\''")),
+                new SingleQuoteString("'test\\\\\\''", "test\\'")); // test\'
+        assertEquals(SingleQuoteString.parse(
+                new CodePointBuffer("''")),
+                new SingleQuoteString("''", "")); // empty
     }
 
     @Test

@@ -1,5 +1,7 @@
 package com.jerryio.protocol_diagram.token;
 
+import java.util.Objects;
+
 public class Parameter implements Token {
     private BooleanT bool = null;
     private NumberT number = null;
@@ -83,35 +85,20 @@ public class Parameter implements Token {
     }
 
     @Override
-    public boolean equals(Object p) {
-        if (p == null) {
-            System.out.println("false1");
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
 
-        if (p.getClass() != Parameter.class) {
-            System.out.println("false2");
+        if (!(obj instanceof Parameter)) {
             return false;
         }
 
-        Parameter temp = (Parameter) p;
-        if(temp.bool == null && bool != null || temp.bool != null && bool == null) {
-            return false;
-        }
-        if(temp.number == null && number != null || temp.number != null && number == null) {
-            return false;
-        }
-        if(temp.string == null && string != null || temp.string != null && string == null) {
-            return false;
-        }
-        // System.out.println(temp.bool==bool);
-        // System.out.println(temp.number==number);
-        // System.out.println(temp.string.equals(string));
-        //return Object.equals(temp.bool, bool) && Object.equals(temp.number, number) && Object.equals(temp.string, string);
+        Parameter other = (Parameter) obj;
 
-        return  ((temp.bool == null && bool == null)||temp.bool.equals(bool)) 
-        && ((temp.number == null && number == null)||temp.number.equals(number)) 
-        && ((temp.string == null && string == null)||temp.string.equals(string));
+        return Objects.equals(other.string, string) &&
+                Objects.equals(other.number, number) &&
+                Objects.equals(other.bool, bool);
     }
 
 }

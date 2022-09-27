@@ -10,10 +10,11 @@ import com.jerryio.protocol_diagram.token.Minus;
 public class MinusTest {
     @Test
     public void testMinusValid() {
-        
+
         assertEquals(Minus.parse(new CodePointBuffer("-")).getClass(), Minus.class);
         assertEquals(Minus.parse(new CodePointBuffer("- ")).getClass(), Minus.class);
     }
+
     @Test
     public void testMinusNull() {
         assertNull(Minus.parse(new CodePointBuffer("")));
