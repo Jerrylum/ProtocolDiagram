@@ -82,4 +82,36 @@ public class Parameter implements Token {
             return getString();
     }
 
+    @Override
+    public boolean equals(Object p) {
+        if (p == null) {
+            System.out.println("false1");
+            return false;
+        }
+
+        if (p.getClass() != Parameter.class) {
+            System.out.println("false2");
+            return false;
+        }
+
+        Parameter temp = (Parameter) p;
+        if(temp.bool == null && bool != null || temp.bool != null && bool == null) {
+            return false;
+        }
+        if(temp.number == null && number != null || temp.number != null && number == null) {
+            return false;
+        }
+        if(temp.string == null && string != null || temp.string != null && string == null) {
+            return false;
+        }
+        // System.out.println(temp.bool==bool);
+        // System.out.println(temp.number==number);
+        // System.out.println(temp.string.equals(string));
+        //return Object.equals(temp.bool, bool) && Object.equals(temp.number, number) && Object.equals(temp.string, string);
+
+        return  ((temp.bool == null && bool == null)||temp.bool.equals(bool)) 
+        && ((temp.number == null && number == null)||temp.number.equals(number)) 
+        && ((temp.string == null && string == null)||temp.string.equals(string));
+    }
+
 }
