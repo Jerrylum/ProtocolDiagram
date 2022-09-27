@@ -19,23 +19,23 @@ public class CommandLineTest {
         assertEquals(CommandLine.parse(new CodePointBuffer("target")).name(), "target");
         assertEquals(CommandLine.parse(new CodePointBuffer("target ")).name(), "target");
         assertTrue(CommandLine.parse(new CodePointBuffer("target")).params().equals(params));
-        params.add(new Parameter(new StringT("value1")));
+        params.add(Parameter.parse(new CodePointBuffer("value1")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1")).params().equals(params));
-        params.add(new Parameter(new StringT("'value2'")));
+        params.add(Parameter.parse(new CodePointBuffer("'value2'")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2'")).params().equals(params));
-        params.add(new Parameter(new StringT("\"value3\"")));
+        params.add(Parameter.parse(new CodePointBuffer("\"value3\"")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2' \"value3\"")).params().equals(params));
-        params.add(new Parameter(new BooleanT("True", true)));
+        params.add(Parameter.parse(new CodePointBuffer("True")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2' \"value3\" True")).params().equals(params));
-        params.add(new Parameter(new BooleanT("False", false)));
+        params.add(Parameter.parse(new CodePointBuffer("False")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2' \"value3\" True False")).params().equals(params));
-        params.add(new Parameter(new NumberT("123", true, false)));
+        params.add(Parameter.parse(new CodePointBuffer("123")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2' \"value3\" True False 123")).params().equals(params));
-        params.add(new Parameter(new NumberT("123.456", true, true)));
+        params.add(Parameter.parse(new CodePointBuffer("123.456")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2' \"value3\" True False 123 123.456")).params().equals(params));
-        params.add(new Parameter(new NumberT("-123.456", false, true)));
+        params.add(Parameter.parse(new CodePointBuffer("-123.456")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2' \"value3\" True False 123 123.456 -123.456")).params().equals(params));
-        params.add(new Parameter(new NumberT("-123", false, false)));
+        params.add(Parameter.parse(new CodePointBuffer("-123")));
         assertTrue(CommandLine.parse(new CodePointBuffer("target value1 'value2' \"value3\" True False 123 123.456 -123.456 -123")).params().equals(params));
     }
 
