@@ -19,13 +19,19 @@ public class ParameterTest {
         assertEquals(Parameter.parse(new CodePointBuffer("0.0")).getDouble(), 0.0, 0.0001);
         assertEquals(Parameter.parse(new CodePointBuffer("-14")).getInt(), -14);
         assertEquals(Parameter.parse(new CodePointBuffer("-14.0")).getDouble(), -14.0, 0.0001);
+        assertEquals(Parameter.parse(new CodePointBuffer("\"14\"")).getString(), "14");
+        assertEquals(Parameter.parse(new CodePointBuffer("\"14.0\"")).getString(), "14.0");
+        assertEquals(Parameter.parse(new CodePointBuffer("\"-14\"")).getString(), "-14");
+        assertEquals(Parameter.parse(new CodePointBuffer("\"-14.0\"")).getString(), "-14.0");
+        assertEquals(Parameter.parse(new CodePointBuffer("'14'")).getString(), "14");
+        assertEquals(Parameter.parse(new CodePointBuffer("'14.0'")).getString(), "14.0");
+        assertEquals(Parameter.parse(new CodePointBuffer("'-14'")).getString(), "-14");
+        assertEquals(Parameter.parse(new CodePointBuffer("'-14.0'")).getString(), "-14.0");
     }
 
 
     @Test
     public void testParameterNull() {  
         assertNull(Parameter.parse(new CodePointBuffer("")));
-        assertNull(Parameter.parse(new CodePointBuffer(" ")));
-        assertNull(Parameter.parse(new CodePointBuffer("\\")));
     }
 }
