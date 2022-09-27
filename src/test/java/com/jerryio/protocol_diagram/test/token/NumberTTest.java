@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.NumberT;
 
 public class NumberTTest {
     @Test
-    public void testNumberTVaild() {
+    public void testNumberTValid() {
         assertEquals(NumberT.parse(new CodePointBuffer("0")), new NumberT("0", true, false));
         assertEquals(NumberT.parse(new CodePointBuffer("-14")), new NumberT("-14", false, false));
         assertEquals(NumberT.parse(new CodePointBuffer("14")), new NumberT("14", true, false));

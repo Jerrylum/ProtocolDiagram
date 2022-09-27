@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.Frac;
 
 public class FracTest{
     @Test
-    public void testFracVaild() {
+    public void testFracValid() {
         assertEquals(Frac.parse(new CodePointBuffer(".14")), new Frac(".14"));
         assertEquals(Frac.parse(new CodePointBuffer(".14.15")), new Frac(".14"));
         assertEquals(Frac.parse(new CodePointBuffer(".14 ")), new Frac(".14"));
@@ -20,6 +20,7 @@ public class FracTest{
 
     @Test
     public void testFracNull() {  
+        assertNull(Frac.parse(new CodePointBuffer(".")));
         assertNull(Frac.parse(new CodePointBuffer("14")));
         assertNull(Frac.parse(new CodePointBuffer("")));
         assertNull(Frac.parse(new CodePointBuffer(" ")));

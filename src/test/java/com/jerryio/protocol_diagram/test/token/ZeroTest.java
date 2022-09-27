@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.Zero;
 
 public class ZeroTest {
     @Test
-    public void testZeroVaild() {
+    public void testZeroValid() {
         assertEquals(Zero.parse(new CodePointBuffer("0")), new Zero('0'));
         assertEquals(Zero.parse(new CodePointBuffer("0 ")), new Zero('0'));
     }

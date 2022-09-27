@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.DecimalPoint;
 
 public class DecimalPointTest {
     @Test
-    public void testDecimalPointVaild() {
+    public void testDecimalPointValid() {
         assertEquals(DecimalPoint.parse(new CodePointBuffer(".")), new DecimalPoint('.'));
         assertEquals(DecimalPoint.parse(new CodePointBuffer(". ")), new DecimalPoint('.'));
         assertEquals(DecimalPoint.parse(new CodePointBuffer(".a")), new DecimalPoint('.'));

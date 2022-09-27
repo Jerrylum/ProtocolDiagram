@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.Digit1To9;
 
 public class Digit1To9Test {
     @Test
-    public void testDigit1To9Vaild() {
+    public void testDigit1To9Valid() {
         assertEquals(Digit1To9.parse(new CodePointBuffer("1")), new Digit1To9('1'));
         assertEquals(Digit1To9.parse(new CodePointBuffer("2")), new Digit1To9('2'));
         assertEquals(Digit1To9.parse(new CodePointBuffer("3")), new Digit1To9('3'));

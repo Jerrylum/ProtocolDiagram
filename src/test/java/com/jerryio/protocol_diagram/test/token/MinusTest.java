@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.Minus;
 
 public class MinusTest {
     @Test
-    public void testMinusVaild() {
+    public void testMinusValid() {
         
         assertEquals(Minus.parse(new CodePointBuffer("-")).getClass(), Minus.class);
         assertEquals(Minus.parse(new CodePointBuffer("- ")).getClass(), Minus.class);

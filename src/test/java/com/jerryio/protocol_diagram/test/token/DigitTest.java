@@ -9,7 +9,7 @@ import com.jerryio.protocol_diagram.token.Digit;
 
 public class DigitTest {
     @Test
-    public void testDigitVaild() {
+    public void testDigitValid() {
         assertEquals(Digit.parse(new CodePointBuffer("0")), new Digit('0'));
         assertEquals(Digit.parse(new CodePointBuffer("1")), new Digit('1'));
         assertEquals(Digit.parse(new CodePointBuffer("2")), new Digit('2'));
