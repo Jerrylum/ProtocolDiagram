@@ -8,7 +8,7 @@ import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class ListCommand extends Command {
-    
+
     public ListCommand() {
         super("list", "", "List all fields in the diagram");
     }
@@ -18,22 +18,26 @@ public class ListCommand extends Command {
         if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("There are ");
-        sb.append(Main.diagram.size());
-        sb.append(" fields in the diagram:");
+        if (Main.diagram.size() == 0) {
+            return success("There is no field in the diagram.");
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append("There are ");
+            sb.append(Main.diagram.size());
+            sb.append(" fields in the diagram:");
 
-        for (int i = 0; i < Main.diagram.size(); i++) {
-            Field f = Main.diagram.getField(i);
-            sb.append("\n");
-            sb.append(i);
-            sb.append(" - ");
-            sb.append(f.getName());
-            sb.append(": ");
-            sb.append(f.getLength());
+            for (int i = 0; i < Main.diagram.size(); i++) {
+                Field f = Main.diagram.getField(i);
+                sb.append("\n");
+                sb.append(i);
+                sb.append(" - ");
+                sb.append(f.getName());
+                sb.append(": ");
+                sb.append(f.getLength());
+            }
+            return success(sb.toString());
         }
 
-        return success(sb.toString());
     }
 
     @Override
