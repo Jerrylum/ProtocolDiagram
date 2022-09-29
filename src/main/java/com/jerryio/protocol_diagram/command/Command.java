@@ -47,6 +47,7 @@ public abstract class Command {
             new AddCommand(),
             new ClearCommand(),
             new ConfigListCommand(),
+            new ConfigCommand(),
             new DeleteCommand(),
             new HelpCommand(),
             new InsertCommand(),
