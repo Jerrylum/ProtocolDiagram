@@ -6,13 +6,15 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class EnumOption extends Option {
 
-    private String[] acceptedValues;
+    private final String[] acceptedValues;
     private String value;
+    private final String defaultValue;
 
     public EnumOption(String key, String defaultValue, String... acceptedValues) {
         super(key);
-        this.value = defaultValue;
         this.acceptedValues = acceptedValues;
+        this.value = defaultValue;
+        this.defaultValue = defaultValue;
     }
 
     @Override
@@ -27,7 +29,11 @@ public class EnumOption extends Option {
     public HandleResult setValue(String hint) {
         String selected = null;
         for (String acceptedValue : acceptedValues) {
-            if (acceptedValue.startsWith(hint)) {
+            if (acceptedValue.equals(hint.toLowerCase())) {
+                selected = acceptedValue;
+                break;
+            }
+            if (acceptedValue.startsWith(hint.toLowerCase())) {
                 if (selected != null) {
                     return fail("Ambiguous value \"" + hint + "\".");
                 }
@@ -50,6 +56,28 @@ public class EnumOption extends Option {
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public String getDefault() {
+        return defaultValue;
+    }
+
+    @Override
+    public String getUsageDescription() {
+        StringBuilder sb = new StringBuilder();
+        for (String acceptedValue : acceptedValues) {
+            if (acceptedValue.equals(defaultValue)) {
+                sb.append(acceptedValue.toUpperCase());
+            } else {
+                sb.append(acceptedValue);
+            }
+            sb.append(" | ");
+        }
+
+        sb.delete(sb.length() - 3, sb.length());
+
+        return sb.toString();
     }
 
 }

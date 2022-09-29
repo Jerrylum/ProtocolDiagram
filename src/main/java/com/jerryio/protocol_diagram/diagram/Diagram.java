@@ -5,12 +5,31 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import com.jerryio.protocol_diagram.config.BooleanOption;
+import com.jerryio.protocol_diagram.config.Configuration;
+import com.jerryio.protocol_diagram.config.EnumOption;
+import com.jerryio.protocol_diagram.config.RangeOption;
+
 public class Diagram {
 
     private List<Field> fields;
+    private Configuration config;
 
     public Diagram() {
         this.fields = new ArrayList<Field>();
+        this.config = new Configuration(
+                new RangeOption("bit", 32, 1, 128),
+                new EnumOption(
+                        "diagram-style", "utf8",
+                        "utf8", "utf8-header", "utf8-corner", "ascii", "ascii-verbose"),
+                new EnumOption(
+                        "header-style", "trim",
+                        "none", "trim", "full"),
+                new BooleanOption("left-space-placeholder", false));
+    }
+
+    public Configuration getConfig() {
+        return config;
     }
 
     public Collection<Field> getFields() {

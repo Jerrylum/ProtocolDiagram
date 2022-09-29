@@ -7,10 +7,12 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 public class BooleanOption extends Option {
 
     private boolean value;
+    private final boolean defaultValue;
 
     public BooleanOption(String key, boolean defaultValue) {
         super(key);
         this.value = defaultValue;
+        this.defaultValue = defaultValue;
     }
 
     @Override
@@ -34,5 +36,15 @@ public class BooleanOption extends Option {
 
     public Boolean getValue() {
         return value;
+    }
+
+    @Override
+    public Boolean getDefault() {
+        return defaultValue;
+    }
+
+    @Override
+    public String getUsageDescription() {
+        return defaultValue ? "TRUE | false" : "true | FALSE";
     }
 }

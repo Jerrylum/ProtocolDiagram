@@ -6,15 +6,17 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class RangeOption extends Option {
 
-    private int min;
-    private int max;
+    private final int min;
+    private final int max;
     private int value;
+    private final int defaultValue;
 
     public RangeOption(String key, int defaultValue, int min, int max) {
         super(key);
-        this.value = defaultValue;
         this.min = min;
         this.max = max;
+        this.value = defaultValue;
+        this.defaultValue = defaultValue;
     }
 
     @Override
@@ -40,6 +42,16 @@ public class RangeOption extends Option {
 
     public Integer getValue() {
         return value;
+    }
+
+    @Override
+    public Integer getDefault() {
+        return defaultValue;
+    }
+
+    @Override
+    public String getUsageDescription() {
+        return "min:" + min + " max:" + max + " default:" + defaultValue;
     }
 
 }

@@ -19,4 +19,8 @@ public abstract class Option {
 
     public abstract Object getValue();
 
+    public abstract Object getDefault();
+
+    public abstract String getUsageDescription();
+
 }
