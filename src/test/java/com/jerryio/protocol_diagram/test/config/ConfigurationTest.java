@@ -38,7 +38,7 @@ public class ConfigurationTest {
         assertEquals(c.getOption("test4"), ro);
         assertEquals(c.getOption("null"), null);
         assertEquals(c.getOption("ke"), ro2);
-
+        assertEquals(c.getOption("tes"), null);
     }
 
     @Test
