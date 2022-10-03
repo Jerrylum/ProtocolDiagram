@@ -13,7 +13,7 @@ public class RangeOptionTest {
         RangeOption ro = new RangeOption("test", 1, 0, 10);
         assertEquals(ro.getDefault(), (Integer)1);
         assertEquals(ro.getValue(), (Integer)1);
-        assertEquals(ro.getUsageDescription(), "0-10");
+        assertEquals(ro.getUsageDescription(), "min:0 max:10 default:1");
         assertEquals(ro.getKey(), "test");
 
     }

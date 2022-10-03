@@ -17,23 +17,28 @@ public class ConfigurationTest {
         BooleanOption bo2 = new BooleanOption("test2", false);
         EnumOption eo = new EnumOption("test3", "test", "test", "test2");
         RangeOption ro = new RangeOption("test4", 1, 1, 10);
+        RangeOption ro2 = new RangeOption("key", -1, -1, 10);
         List<Option> list = new ArrayList<Option>();
         list.add(bo);
         list.add(bo2);
         list.add(eo);
         list.add(ro);
-        Configuration c = new Configuration(bo, bo2, eo, ro);
+        list.add(ro2);
+        Configuration c = new Configuration(bo, bo2, eo, ro, ro2);
         assertEquals(c.getOptions(), list);
         assertEquals(c.getValue("test"), true);
         assertEquals(c.getValue("test2"), false);
         assertEquals(c.getValue("test3"), "test");
         assertEquals(c.getValue("test4"), 1);
+        assertEquals(c.getValue("key"), -1);
         assertEquals(c.getValue("null"), null);
         assertEquals(c.getOption("test"), bo);
         assertEquals(c.getOption("test2"), bo2);
         assertEquals(c.getOption("test3"), eo);
         assertEquals(c.getOption("test4"), ro);
         assertEquals(c.getOption("null"), null);
+        assertEquals(c.getOption("ke"), ro2);
+
     }
 
     @Test

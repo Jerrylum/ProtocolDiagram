@@ -13,7 +13,7 @@ public class EnumOptionTest {
         EnumOption eo = new EnumOption("test", "a", "a", "b", "c");
         assertEquals(eo.getDefault(), "a");
         assertEquals(eo.getValue(), "a");
-        assertEquals(eo.getUsageDescription(), "a | b | c");
+        assertEquals(eo.getUsageDescription(), "A | b | c");
         assertEquals(eo.getKey(), "test");
     }
     @Test
