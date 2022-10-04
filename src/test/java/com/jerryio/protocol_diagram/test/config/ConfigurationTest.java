@@ -1,4 +1,5 @@
 package com.jerryio.protocol_diagram.test.config;
+
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 
 public class ConfigurationTest {
     @Test
-    public void testConfigurationGet(){
+    public void testConfigurationGet() {
         BooleanOption bo = new BooleanOption("test", true);
         BooleanOption bo2 = new BooleanOption("test2", false);
         EnumOption eo = new EnumOption("test3", "test", "test", "test2");
@@ -42,16 +43,11 @@ public class ConfigurationTest {
     }
 
     @Test
-    public void testConfigurationSet(){
+    public void testConfigurationSet() {
         BooleanOption bo = new BooleanOption("test", true);
         BooleanOption bo2 = new BooleanOption("test2", false);
         EnumOption eo = new EnumOption("test3", "test", "test", "test2");
         RangeOption ro = new RangeOption("test4", 1, 1, 10);
-        List<Option> list = new ArrayList<Option>();
-        list.add(bo);
-        list.add(bo2);
-        list.add(eo);
-        list.add(ro);
         Configuration c = new Configuration(bo, bo2, eo, ro);
         assertEquals(c.setValue("test", Parameter.parse(new CodePointBuffer("false"))).success(), true);
         assertEquals(c.setValue("test2", Parameter.parse(new CodePointBuffer("true"))).success(), true);
@@ -59,5 +55,5 @@ public class ConfigurationTest {
         assertEquals(c.setValue("test4", Parameter.parse(new CodePointBuffer("5"))).success(), true);
         assertEquals(c.setValue("null", Parameter.parse(new CodePointBuffer("5"))).success(), false);
     }
-       
+
 }
