@@ -22,7 +22,7 @@ public class ClearCommandTest {
         Main.diagram.addField(new Field("test2", 2));
         assertEquals(2, Main.diagram.size());
         ClearCommand cc = new ClearCommand();
-        cc.handle(CommandLine.parse(new CodePointBuffer("clear")));
+        assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("clear"))).message(), "Removed all fields.");
         assertEquals(Main.diagram.size(), 0);
     }
     @Test
