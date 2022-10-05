@@ -2,9 +2,11 @@ package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.jerryio.protocol_diagram.command.ListCommand;
+import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
@@ -13,6 +15,11 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 
 
 public class ListCommandTest {
+    @Before
+    public void setUp() {
+        Main.diagram = new Diagram();
+    }
+
     @Test
     public void testListCommandGet() {
         ListCommand lc = new ListCommand();
