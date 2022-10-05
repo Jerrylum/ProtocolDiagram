@@ -14,7 +14,7 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 
 public class ViewCommandTest {
     @Test
-    public void testClearCommandGet() {
+    public void testViewCommandGet() {
         ViewCommand cc = new ViewCommand();
         assertEquals(cc.getName(), "view");
         assertEquals(cc.getUsage(), "");
