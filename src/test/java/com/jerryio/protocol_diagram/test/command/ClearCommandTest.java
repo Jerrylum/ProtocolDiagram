@@ -1,4 +1,5 @@
 package com.jerryio.protocol_diagram.test.command;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -16,7 +17,15 @@ import java.util.ArrayList;
 
 public class ClearCommandTest {
     @Test
-    public void testClearHandleSuccess(){
+    public void testClearGet() {
+        ClearCommand cc = new ClearCommand();
+        assertEquals(cc.getName(), "clear");
+        assertEquals(cc.getUsage(), "");
+        assertEquals(cc.getDescription(), "Remove all fields and start again");
+    }
+
+    @Test
+    public void testClearHandleSuccess() {
         Main main = new Main();
         Main.diagram.addField(new Field("test", 1));
         Main.diagram.addField(new Field("test2", 2));
@@ -25,8 +34,9 @@ public class ClearCommandTest {
         assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("clear"))).message(), "Removed all fields.");
         assertEquals(Main.diagram.size(), 0);
     }
+
     @Test
-    public void testClearHandleFailEnum(){
+    public void testClearHandleFailEnum() {
         ClearCommand cc = new ClearCommand();
         assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("clear test"))), HandleResult.TOO_MANY_ARGUMENTS);
         assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
