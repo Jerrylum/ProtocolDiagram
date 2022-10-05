@@ -15,10 +15,10 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 public class ViewCommandTest {
     @Test
     public void testViewCommandGet() {
-        ViewCommand cc = new ViewCommand();
-        assertEquals(cc.getName(), "view");
-        assertEquals(cc.getUsage(), "");
-        assertEquals(cc.getDescription(), "Print out the diagram");
+        ViewCommand vc = new ViewCommand();
+        assertEquals(vc.getName(), "view");
+        assertEquals(vc.getUsage(), "");
+        assertEquals(vc.getDescription(), "Print out the diagram");
     }
 
     @Test
