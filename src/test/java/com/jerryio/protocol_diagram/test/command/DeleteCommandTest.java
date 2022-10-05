@@ -10,9 +10,6 @@ import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 public class DeleteCommandTest {
