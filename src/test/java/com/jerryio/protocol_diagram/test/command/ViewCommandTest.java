@@ -23,7 +23,6 @@ public class ViewCommandTest {
 
     @Test
     public void testViewCommandHandleSuccess() {
-        Main main = new Main();
         Main.diagram.addField(new Field("test", 1));
         Main.diagram.addField(new Field("test2", 2));
         assertEquals(2, Main.diagram.size());
