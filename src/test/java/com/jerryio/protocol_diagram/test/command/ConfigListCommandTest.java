@@ -21,14 +21,14 @@ public class ConfigListCommandTest {
 
     @Test
     public void testConfigListCommandHandleSuccess() {
-        ConfigListCommand lc = new ConfigListCommand();
-        assertEquals(lc.handle(CommandLine.parse(new CodePointBuffer("config"))).success(), true);
+        ConfigListCommand clc = new ConfigListCommand();
+        assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("config"))).success(), true);
     }
 
     @Test
     public void testConfigListCommandHandleFail() {
-        ConfigListCommand lc = new ConfigListCommand();
-        assertEquals(lc.handle(CommandLine.parse(new CodePointBuffer("config test"))), HandleResult.NOT_HANDLED);
-        assertEquals(lc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
+        ConfigListCommand clc = new ConfigListCommand();
+        assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("config test"))), HandleResult.NOT_HANDLED);
+        assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
     }
 }
