@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ViewCommandTest {
     @Test
-    public void testClearGet() {
+    public void testClearCommandGet() {
         ViewCommand cc = new ViewCommand();
         assertEquals(cc.getName(), "view");
         assertEquals(cc.getUsage(), "");
@@ -25,7 +25,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void testClearHandleSuccess() {
+    public void testViewCommandHandleSuccess() {
         Main main = new Main();
         Main.diagram.addField(new Field("test", 1));
         Main.diagram.addField(new Field("test2", 2));
@@ -35,7 +35,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void testClearHandleFailEnum() {
+    public void testViewCommandHandleFail() {
         ViewCommand vc = new ViewCommand();
         assertEquals(vc.handle(CommandLine.parse(new CodePointBuffer("view test"))), HandleResult.TOO_MANY_ARGUMENTS);
         assertEquals(vc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);

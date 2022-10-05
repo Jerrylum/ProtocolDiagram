@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ClearCommandTest {
     @Test
-    public void testClearGet() {
+    public void testClearCommandGet() {
         ClearCommand cc = new ClearCommand();
         assertEquals(cc.getName(), "clear");
         assertEquals(cc.getUsage(), "");
@@ -25,7 +25,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void testClearHandleSuccess() {
+    public void testClearCommandHandleSuccess() {
         Main main = new Main();
         Main.diagram.addField(new Field("test", 1));
         Main.diagram.addField(new Field("test2", 2));
@@ -36,7 +36,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void testClearHandleFailEnum() {
+    public void testClearCommandHandleFail() {
         ClearCommand cc = new ClearCommand();
         assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("clear test"))), HandleResult.TOO_MANY_ARGUMENTS);
         assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
