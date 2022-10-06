@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
+import java.io.ByteArrayOutputStream;
 
 public class MainTest {
     @Before
@@ -20,29 +21,35 @@ public class MainTest {
     @Test
     public void test(){
         String[] arg = new String[1];
-        arg[0] = "-p";
-        Main.main(arg);//"test1(1) test2(2) test3(3)"
-        arg[0] = "--print";
-        Main.main(arg);//"test1(1) test2(2) test3(3)"
+
+        ByteArrayOutputStream out;
+        out = new ByteArrayOutputStream();    
+        System.setOut(new java.io.PrintStream(out)); 
         arg[0] = "-h";
         Main.main(arg);
-        // Usage: java -jar protocol_diagram.jar [options]
-        //     Options:
-        //         --help, -h
-        //         Show this help message
-        //         --print, -p
-        //         Print the diagram to console and exit
-        //         Default: false
-        //         --single-line, -s
-        //         Input the protocol in a single line
+        assertEquals(out.toString().startsWith("Usage: java -jar protocol_diagram.jar [options]"), true);
+
+        out = new ByteArrayOutputStream();    
+        System.setOut(new java.io.PrintStream(out)); 
         arg[0] = "--help";
         Main.main(arg);
-        //same as last trial
-        String[] arg2 = new String[2];
-        arg2[0] = "-s";
-        arg2[1] = "tcp";
-        Main.main(arg2);
+        assertEquals(out.toString().startsWith("Usage: java -jar protocol_diagram.jar [options]"), true);
 
+        out = new ByteArrayOutputStream();    
+        System.setOut(new java.io.PrintStream(out)); 
+        arg[0] = "-p";
+        Main.main(arg);//"test1(1) test2(2) test3(3)"
+        assertEquals(out.toString().startsWith("test1(1) test2(2) test3(3)"), true);
+
+        setup();
+        out = new ByteArrayOutputStream();    
+        System.setOut(new java.io.PrintStream(out)); 
+        arg[0] = "--print";
+        Main.main(arg);//"test1(1) test2(2) test3(3)"
+        assertEquals(out.toString().startsWith("test1(1) test2(2) test3(3)"), true);
+
+
+        
 
 
     }
