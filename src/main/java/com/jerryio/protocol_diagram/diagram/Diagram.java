@@ -3,7 +3,9 @@ package com.jerryio.protocol_diagram.diagram;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.jerryio.protocol_diagram.config.BooleanOption;
 import com.jerryio.protocol_diagram.config.Configuration;
@@ -65,19 +67,122 @@ public class Diagram {
         fields.add(to, field);
     }
 
-    @Override
-    public String toString() {
-        // TODO generate a diagram
-        StringBuilder sb = new StringBuilder();
+    private List<Integer> getCollisions() {
+        final List<Integer> collisions = new ArrayList<>();
 
-        for (Field field : fields) {
-            sb.append(field.getName());
-            sb.append("(");
-            sb.append(field.getLength());
-            sb.append(") ");
+        for (Field field: fields) {
+            collisions.add(Math.max(field.getLength() - 32, 0));
         }
 
-        return sb.toString();
+        return collisions;
+    }
+
+    private Map<Field, List<Field>> split() {
+        final Map<Field, List<Field>> ret = new HashMap<>();
+
+        for (int i = 0, length = 0; i < fields.size(); i++) {
+            final Field cur = fields.get(i);
+            int remain = cur.getLength();
+
+            ret.put(cur, new ArrayList<>());
+
+            while (length + remain > 32) {
+                ret.get(cur).add(new Field(
+                    cur.getName(),
+                    32 - length
+                ));
+
+                remain -= 32 - length;
+                length = 0;
+            }
+
+            ret.get(cur).add(new Field(
+                cur.getName(),
+                remain
+            ));
+
+            length = (length + remain) % 32;
+        }
+
+        return ret;
+    }
+    
+    private String generateHeader(int width) {
+
+        StringBuilder builder = new StringBuilder();
+
+        // print the tens digit in the first line
+        for (int i = 0; i < width; i++) {
+            if (i % 10 == 0) {
+                builder.append(" " + (i / 10));
+            } else {
+                builder.append("  ");
+            }
+        }
+
+        builder.append("\n");
+
+        // print the units digit in the second lien
+        for (int i = 0; i < width; i++) {
+            builder.append(" " + (i % 10));
+        }
+
+        builder.append("\n");
+
+        return builder.toString();
+
+    }
+
+    @Override
+    public String toString() {
+        // return value
+        final StringBuilder ret = new StringBuilder();
+        // canvas props
+        final int length = fields.stream().map((e) -> e.getLength()).reduce(0, (a, b) -> a + b);
+        final int width = Math.min(length, 32);
+        final int height = (int) Math.ceil((double) length / 32);
+
+        // print header
+        ret.append(generateHeader(width));
+
+        // preprocess the list of fields
+        final Canvas canvas = new Canvas(width, height);
+
+        // draw by function
+        final Map<Field, List<Field>> split = this.split();
+        for (int i = 0, x = 0, y = 0; i < split.size(); i++) {
+            final List<Field> chunk = split.get(this.fields.get(i));
+            for (int j = 0; j < chunk.size(); j++) {
+                final Field f = chunk.get(j);
+                canvas.drawRectangle(x, y, f.getLength());
+                y += (x + f.getLength()) / 32;
+                x = (x + f.getLength()) % 32;
+            }
+        }
+
+        // eliminate borders
+        final List<Integer> collisions = this.getCollisions();
+        for (int i = 0, x = 0, y = 0; i < fields.size() && collisions.size() != 0; i++) {
+            Field f = this.fields.get(i);
+            int collision = collisions.get(i);
+
+            // eliminate border until no collision in the current context
+            for (int nx = x, ny = y; collision > 0; nx = 0, ny++) {
+                final int range = Math.min(collision, 32 - nx);
+                canvas.eliminateBorder(nx, ny, range);
+                collision -= range;
+            }
+            y += (x + f.getLength()) / 32;
+            x = (x + f.getLength()) % 32;
+        }
+
+        // generate corners
+        canvas.generateCorners();
+        // append canvas
+        ret.append(canvas.toString());
+
+        // ret.append(buf);
+        return ret.toString();
     }
 
 }
