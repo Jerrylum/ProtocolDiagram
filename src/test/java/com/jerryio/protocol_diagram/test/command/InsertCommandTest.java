@@ -20,13 +20,6 @@ public class InsertCommandTest {
         Main.diagram = new Diagram();
     }
 
-    @Test
-    public void testInsertCommandGet() {
-        InsertCommand ic = new InsertCommand();
-        assertEquals(ic.getName(), "insert");
-        assertEquals(ic.getUsage(), "<index> <length> <name>");
-        assertEquals(ic.getDescription(), "Insert a field at the given index");
-    }
 
     @Test
     public void testInsertCommandHandleSuccess() {

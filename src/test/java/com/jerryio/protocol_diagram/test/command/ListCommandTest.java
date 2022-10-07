@@ -20,13 +20,6 @@ public class ListCommandTest {
         Main.diagram = new Diagram();
     }
 
-    @Test
-    public void testListCommandGet() {
-        ListCommand lc = new ListCommand();
-        assertEquals(lc.getName(), "list");
-        assertEquals(lc.getUsage(), "");
-        assertEquals(lc.getDescription(), "List all fields in the diagram");
-    }
 
     @Test
     public void testListCommandHandleSuccess() {

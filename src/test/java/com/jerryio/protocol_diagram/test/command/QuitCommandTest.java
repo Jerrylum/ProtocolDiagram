@@ -12,13 +12,6 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 
 
 public class QuitCommandTest {
-    @Test
-    public void testQuitCommandGet() {
-        QuitCommand qc = new QuitCommand();
-        assertEquals(qc.getName(), "quit");
-        assertEquals(qc.getUsage(), "");
-        assertEquals(qc.getDescription(), "Quit the program");
-    }
 
     @Test
     public void testQuitCommandHandleSuccess() {

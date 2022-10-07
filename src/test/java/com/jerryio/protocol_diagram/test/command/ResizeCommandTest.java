@@ -20,13 +20,6 @@ public class ResizeCommandTest {
         Main.diagram = new Diagram();
     }
 
-    @Test
-    public void testResizeCommandGet() {
-        ResizeCommand rc = new ResizeCommand();
-        assertEquals(rc.getName(), "resize");
-        assertEquals(rc.getUsage(), "<index> <new-size>");
-        assertEquals(rc.getDescription(), "Resize the specified field");
-    }
 
     @Test
     public void testResizeCommandHandleSuccess() {

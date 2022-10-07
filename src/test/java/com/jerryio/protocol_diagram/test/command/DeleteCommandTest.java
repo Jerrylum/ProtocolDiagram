@@ -21,14 +21,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void testDeleteCommandGet() {
-        DeleteCommand dc = new DeleteCommand();
-        assertEquals(dc.getName(), "delete");
-        assertEquals(dc.getUsage(), "<index>");
-        assertEquals(dc.getDescription(), "Remove the specified field from the diagram");
-    }
-
-    @Test
     public void testDeleteCommandHandleSuccess() {
         Field f1 = new Field("test1", 1);
         Field f2 = new Field("test2", 2);

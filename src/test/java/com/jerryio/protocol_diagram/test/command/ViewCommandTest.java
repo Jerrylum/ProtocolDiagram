@@ -21,14 +21,6 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void testViewCommandGet() {
-        ViewCommand vc = new ViewCommand();
-        assertEquals(vc.getName(), "view");
-        assertEquals(vc.getUsage(), "");
-        assertEquals(vc.getDescription(), "Print out the diagram");
-    }
-
-    @Test
     public void testViewCommandHandleSuccess() {
         Main.diagram.addField(new Field("test", 1));
         Main.diagram.addField(new Field("test2", 2));

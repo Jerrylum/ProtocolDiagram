@@ -12,14 +12,6 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 
 public class HelpCommandTest {
     @Test
-    public void testHelpCommandGet() {
-        HelpCommand hc = new HelpCommand();
-        assertEquals(hc.getName(), "help");
-        assertEquals(hc.getUsage(), "");
-        assertEquals(hc.getDescription(), "Show help message");
-    }
-
-    @Test
     public void testHelpCommandHandleSuccess() {
         HelpCommand hc = new HelpCommand();
         assertEquals(hc.handle(CommandLine.parse(new CodePointBuffer("help"))).success(), true);

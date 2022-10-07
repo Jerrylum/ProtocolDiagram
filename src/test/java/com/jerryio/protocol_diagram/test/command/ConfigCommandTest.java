@@ -11,14 +11,6 @@ import com.jerryio.protocol_diagram.token.CommandLine;
 
 public class ConfigCommandTest {
     @Test
-    public void testConfigCommandGet() {
-        ConfigCommand cc = new ConfigCommand();
-        assertEquals(cc.getName(), "config");
-        assertEquals(cc.getUsage(), "<key> <value>");
-        assertEquals(cc.getDescription(), "Change options' value");
-    }
-
-    @Test
     public void testConfigCommandHandleSuccess() {
         ConfigCommand cc = new ConfigCommand();
         assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("config Bit 1"))).success(), true);

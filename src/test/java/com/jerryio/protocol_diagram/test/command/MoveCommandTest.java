@@ -21,14 +21,6 @@ public class MoveCommandTest {
     }
 
     @Test
-    public void testMoveCommandGet() {
-        MoveCommand mc = new MoveCommand();
-        assertEquals(mc.getName(), "move");
-        assertEquals(mc.getUsage(), "<index> <target>");
-        assertEquals(mc.getDescription(), "Move the specified field from one position to another");
-    }
-
-    @Test
     public void testMoveCommandHandleSuccess() {
         Field f1 = new Field("test1", 1);
         Field f2 = new Field("test2", 2);

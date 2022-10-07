@@ -11,13 +11,6 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 
 
 public class ConfigListCommandTest {
-    @Test
-    public void testConfigListCommandGet() {
-        ConfigListCommand clc = new ConfigListCommand();
-        assertEquals(clc.getName(), "config");
-        assertEquals(clc.getUsage(), "");
-        assertEquals(clc.getDescription(), "List all settings");
-    }
 
     @Test
     public void testConfigListCommandHandleSuccess() {

@@ -19,13 +19,6 @@ public class RenameCommandTest {
     public void setUp() {
         Main.diagram = new Diagram();
     }
-    @Test
-    public void testRenameCommandGet() {
-        RenameCommand rc = new RenameCommand();
-        assertEquals(rc.getName(), "rename");
-        assertEquals(rc.getUsage(), "<index> <new-name>");
-        assertEquals(rc.getDescription(), "Rename the specified field");
-    }
 
     @Test
     public void testRenameCommandHandleSuccess() {

@@ -12,13 +12,6 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 
 
 public class AddCommandTest {
-    @Test
-    public void testAddCommandGet() {
-        AddCommand ac = new AddCommand();
-        assertEquals(ac.getName(), "add");
-        assertEquals(ac.getUsage(), "<length> <name>");
-        assertEquals(ac.getDescription(), "Add a field to the end of the diagram");
-    }
 
     @Test
     public void testAddCommandHandleSuccess() {

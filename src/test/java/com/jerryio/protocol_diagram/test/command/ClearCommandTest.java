@@ -19,13 +19,6 @@ public class ClearCommandTest {
         Main.diagram = new Diagram();
     }
 
-    @Test
-    public void testClearCommandGet() {
-        ClearCommand cc = new ClearCommand();
-        assertEquals(cc.getName(), "clear");
-        assertEquals(cc.getUsage(), "");
-        assertEquals(cc.getDescription(), "Remove all fields and start again");
-    }
 
     @Test
     public void testClearCommandHandleSuccess() {
