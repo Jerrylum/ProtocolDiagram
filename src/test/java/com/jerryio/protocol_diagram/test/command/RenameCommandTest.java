@@ -13,7 +13,6 @@ import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
 
-
 public class RenameCommandTest {
     @Before
     public void setUp() {
@@ -39,9 +38,13 @@ public class RenameCommandTest {
         RenameCommand rc = new RenameCommand();
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename test"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 0 test1 test2"))), HandleResult.TOO_MANY_ARGUMENTS);
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename -1 test1"))), HandleResult.fail("Index start from zero."));
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 0 1"))), HandleResult.fail("New name must be a string."));
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 1 test1"))), HandleResult.fail("Index out of range."));
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 0 test1 test2"))),
+                HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename -1 test1"))),
+                HandleResult.fail("Index start from zero."));
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 0 1"))),
+                HandleResult.fail("New name must be a string."));
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 1 test1"))),
+                HandleResult.fail("Index out of range."));
     }
 }

@@ -6,7 +6,7 @@ import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class HelpCommand extends Command {
-    
+
     public HelpCommand() {
         super("help", "", "Show help message");
     }

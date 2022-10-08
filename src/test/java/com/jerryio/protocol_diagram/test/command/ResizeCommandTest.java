@@ -13,13 +13,11 @@ import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
 
-
 public class ResizeCommandTest {
     @Before
     public void setUp() {
         Main.diagram = new Diagram();
     }
-
 
     @Test
     public void testResizeCommandHandleSuccess() {
@@ -43,9 +41,13 @@ public class ResizeCommandTest {
         ResizeCommand rc = new ResizeCommand();
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0 1 2"))), HandleResult.TOO_MANY_ARGUMENTS);
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize -1 16"))), HandleResult.fail("Index start from zero."));
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0 -1"))), HandleResult.fail("New size must be a positive integer."));
-        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 3 16"))), HandleResult.fail("Index out of range."));
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0 1 2"))),
+                HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize -1 16"))),
+                HandleResult.fail("Index start from zero."));
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0 -1"))),
+                HandleResult.fail("New size must be a positive integer."));
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 3 16"))),
+                HandleResult.fail("Index out of range."));
     }
 }

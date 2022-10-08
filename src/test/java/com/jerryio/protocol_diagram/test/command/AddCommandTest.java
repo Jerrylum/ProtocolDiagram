@@ -10,7 +10,6 @@ import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
 
-
 public class AddCommandTest {
 
     @Test
@@ -32,9 +31,13 @@ public class AddCommandTest {
         AddCommand ac = new AddCommand();
         assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 1"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
-        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 1 test test"))), HandleResult.TOO_MANY_ARGUMENTS);
-        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add -1 test"))), HandleResult.fail("Length must be a positive integer."));
-        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 0 test"))), HandleResult.fail("Length must be a positive integer."));
-        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 1 -1"))), HandleResult.fail("Name must be a string."));
+        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 1 test test"))),
+                HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add -1 test"))),
+                HandleResult.fail("Length must be a positive integer."));
+        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 0 test"))),
+                HandleResult.fail("Length must be a positive integer."));
+        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 1 -1"))),
+                HandleResult.fail("Name must be a string."));
     }
 }

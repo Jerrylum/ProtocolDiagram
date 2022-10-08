@@ -13,13 +13,11 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 
-
 public class InsertCommandTest {
     @Before
     public void setUp() {
         Main.diagram = new Diagram();
     }
-
 
     @Test
     public void testInsertCommandHandleSuccess() {
@@ -52,7 +50,6 @@ public class InsertCommandTest {
         assertEquals(Main.diagram.getField(3).getName(), "test2");
         assertEquals(Main.diagram.getField(4).getName(), "test6");
         assertEquals(Main.diagram.getField(5).getName(), "test3");
-        
     }
 
     @Test
@@ -68,11 +65,17 @@ public class InsertCommandTest {
         assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 1"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 1 2"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
-        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 1 2 test1 test2"))), HandleResult.TOO_MANY_ARGUMENTS);
-        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert -1 2 test1"))), HandleResult.fail("Index start from zero."));
-        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 -1 test4"))), HandleResult.fail("Length must be a positive integer."));
-        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 0 test4"))), HandleResult.fail("Length must be a positive integer."));
-        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 1 1"))), HandleResult.fail("Name must be a string."));
-        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 3 3 test4"))), HandleResult.fail("Index out of range."));
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 1 2 test1 test2"))),
+                HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert -1 2 test1"))),
+                HandleResult.fail("Index start from zero."));
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 -1 test4"))),
+                HandleResult.fail("Length must be a positive integer."));
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 0 test4"))),
+                HandleResult.fail("Length must be a positive integer."));
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 1 1"))),
+                HandleResult.fail("Name must be a string."));
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 3 3 test4"))),
+                HandleResult.fail("Index out of range."));
     }
 }

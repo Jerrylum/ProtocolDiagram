@@ -13,7 +13,6 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 
-
 public class MoveCommandTest {
     @Before
     public void setUp() {
@@ -75,10 +74,15 @@ public class MoveCommandTest {
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 2 1"))), HandleResult.TOO_MANY_ARGUMENTS);
-        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move -1 2"))), HandleResult.fail("Index start from zero."));
-        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 -1"))), HandleResult.fail("Target index start from zero."));
-        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 3 0"))), HandleResult.fail("Index out of range."));
-        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 3"))), HandleResult.fail("Target index out of range."));
-        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 0"))), HandleResult.fail("Index and target index cannot be the same."));
+        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move -1 2"))),
+                HandleResult.fail("Index start from zero."));
+        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 -1"))),
+                HandleResult.fail("Target index start from zero."));
+        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 3 0"))),
+                HandleResult.fail("Index out of range."));
+        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 3"))),
+                HandleResult.fail("Target index out of range."));
+        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 0"))),
+                HandleResult.fail("Index and target index cannot be the same."));
     }
 }

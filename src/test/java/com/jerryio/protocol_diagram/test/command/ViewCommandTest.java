@@ -13,7 +13,6 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.command.HandleResult;
 
-
 public class ViewCommandTest {
     @Before
     public void setUp() {
@@ -22,10 +21,14 @@ public class ViewCommandTest {
 
     @Test
     public void testViewCommandHandleSuccess() {
+        ViewCommand vc = new ViewCommand();
+
+        vc.execute(); // dummy
+
         Main.diagram.addField(new Field("test", 1));
         Main.diagram.addField(new Field("test2", 2));
         assertEquals(2, Main.diagram.size());
-        ViewCommand vc = new ViewCommand();
+
         assertEquals(vc.handle(CommandLine.parse(new CodePointBuffer("view"))).success(), true);
     }
 

@@ -44,20 +44,19 @@ public abstract class Command {
 
     public static List<Command> getAvailableCommands() {
         return Arrays.asList(
-            new AddCommand(),
-            new ClearCommand(),
-            new ConfigListCommand(),
-            new ConfigCommand(),
-            new DeleteCommand(),
-            new HelpCommand(),
-            new InsertCommand(),
-            new ListCommand(),
-            new MoveCommand(),
-            new QuitCommand(),
-            new RenameCommand(),
-            new ResizeCommand(),
-            new ViewCommand()
-        );
+                new AddCommand(),
+                new ClearCommand(),
+                new ConfigListCommand(),
+                new ConfigCommand(),
+                new DeleteCommand(),
+                new HelpCommand(),
+                new InsertCommand(),
+                new ListCommand(),
+                new MoveCommand(),
+                new QuitCommand(),
+                new RenameCommand(),
+                new ResizeCommand(),
+                new ViewCommand());
     }
 
 }

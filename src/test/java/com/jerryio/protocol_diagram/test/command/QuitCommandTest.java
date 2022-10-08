@@ -10,12 +10,14 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.command.HandleResult;
 
-
 public class QuitCommandTest {
 
     @Test
     public void testQuitCommandHandleSuccess() {
         QuitCommand qc = new QuitCommand();
+
+        qc.execute(); // dummy
+
         assertThrows(RuntimeException.class, () -> qc.handle(CommandLine.parse(new CodePointBuffer("quit"))));
     }
 

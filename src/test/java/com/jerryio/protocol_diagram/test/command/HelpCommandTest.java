@@ -9,11 +9,13 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.command.HandleResult;
 
-
 public class HelpCommandTest {
     @Test
     public void testHelpCommandHandleSuccess() {
         HelpCommand hc = new HelpCommand();
+
+        hc.execute(); // dummy
+
         assertEquals(hc.handle(CommandLine.parse(new CodePointBuffer("help"))).success(), true);
     }
 

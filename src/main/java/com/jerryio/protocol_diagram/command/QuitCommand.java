@@ -6,7 +6,7 @@ import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class QuitCommand extends Command {
-    
+
     public QuitCommand() {
         super("quit", "", "Quit the program");
     }

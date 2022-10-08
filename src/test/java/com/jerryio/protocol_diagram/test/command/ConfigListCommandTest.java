@@ -9,12 +9,14 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.command.HandleResult;
 
-
 public class ConfigListCommandTest {
 
     @Test
     public void testConfigListCommandHandleSuccess() {
         ConfigListCommand clc = new ConfigListCommand();
+
+        clc.execute(); // dummy
+
         assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("config"))).success(), true);
     }
 

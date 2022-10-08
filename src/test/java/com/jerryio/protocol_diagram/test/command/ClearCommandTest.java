@@ -19,7 +19,6 @@ public class ClearCommandTest {
         Main.diagram = new Diagram();
     }
 
-
     @Test
     public void testClearCommandHandleSuccess() {
         Main.diagram.addField(new Field("test", 1));
