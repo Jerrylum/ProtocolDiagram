@@ -57,7 +57,7 @@ public class FieldNameRender implements IMiddleware {
 				final Field f = chunk.get(j);
 
 				if (idx == j) {
-					canvas.drawText(x * 2, y * 2 + (offset ? 1 : 0), f.getLength() * 2, f.getName());
+					canvas.drawText(x * 2, y * 2 + 1 + (offset ? 1 : 0), f.getLength() * 2, f.getName());
 				}
 				y += (x + f.getLength()) / canvasWidth;
 				x = (x + f.getLength()) % canvasWidth;

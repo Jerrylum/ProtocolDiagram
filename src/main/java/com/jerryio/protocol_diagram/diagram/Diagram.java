@@ -18,6 +18,7 @@ import com.jerryio.protocol_diagram.diagram.middlewares.BorderStyleTransformer;
 import com.jerryio.protocol_diagram.diagram.middlewares.CollisionEliminator;
 import com.jerryio.protocol_diagram.diagram.middlewares.FieldNameRender;
 import com.jerryio.protocol_diagram.diagram.middlewares.IMiddleware;
+import com.jerryio.protocol_diagram.diagram.middlewares.LeftSpacePlaceholderVisualizer;
 import com.jerryio.protocol_diagram.diagram.middlewares.RectangleRenderer;
 import com.jerryio.protocol_diagram.diagram.services.SplitService;
 import com.jerryio.protocol_diagram.diagram.strategies.FullHeaderStyleStrategy;
@@ -86,7 +87,7 @@ public class Diagram {
         final StringBuilder ret = new StringBuilder();
         // canvas props
         final int length = fields.stream().map((e) -> e.getLength()).reduce(0, (a, b) -> a + b);
-        final int width = Math.min(length, (int) this.config.getValue("bit"));
+        final int width = (int) this.config.getValue("bit");
         final int height = (int) Math.ceil((double) length / (int) this.config.getValue("bit"));
 
         // preprocess the list of fields
@@ -98,19 +99,7 @@ public class Diagram {
             put(SplitService.class, new SplitService(config));
         }};
 
-        // draw on canvas
-        List<IMiddleware> middlewares = new ArrayList<>() {{
-            add(new RectangleRenderer(dependencies));
-            add(new CollisionEliminator(dependencies));
-            add(new BorderCornerGenerator(dependencies));
-            add(new FieldNameRender(dependencies));
-            add(new BorderStyleTransformer(dependencies));
-        }};
-
-        for (IMiddleware middleware: middlewares) {
-            middleware.execute(canvas, fields);
-        }
-
+        // draw header
         HeaderStyleContext context = new HeaderStyleContext();
 
         switch(this.config.getValue("header-style").toString()) {
@@ -118,6 +107,20 @@ public class Diagram {
             case "trim": context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
             case "full": context.setStrategy(new FullHeaderStyleStrategy(dependencies)); break;
             default: context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
+        }
+
+        // draw canvas
+        List<IMiddleware> middlewares = new ArrayList<>() {{
+            add(new RectangleRenderer(dependencies));
+            add(new CollisionEliminator(dependencies));
+            add(new BorderCornerGenerator(dependencies));
+            add(new FieldNameRender(dependencies));
+            add(new LeftSpacePlaceholderVisualizer(dependencies));
+            add(new BorderStyleTransformer(dependencies));
+        }};
+
+        for (IMiddleware middleware: middlewares) {
+            middleware.execute(canvas, fields);
         }
 
         // append canvas

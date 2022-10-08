@@ -61,7 +61,7 @@ public class Canvas {
 		final int pivot = x + (length - trimmed.length() - 1) / 2;
 
 		for (int i = 0; i < trimmed.length(); i++) {
-			this.canvas[y + 1][pivot + i + 1] = trimmed.charAt(i);
+			this.canvas[y][pivot + i + 1] = trimmed.charAt(i);
 		}
 	}
 
