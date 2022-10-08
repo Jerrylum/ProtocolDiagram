@@ -1,57 +1,53 @@
 package com.jerryio.protocol_diagram;
 
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
+
+import java.util.Scanner;
+
+import com.jerryio.protocol_diagram.command.Command;
+import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.token.*;
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("hello world");
 
-        // CodePointBuffer buffer = new CodePointBuffer("-");
+    public static Diagram diagram = new Diagram();
 
-        // Minus d = Minus.parse(buffer);
-        // if (d != null) {
-        //     System.out.println(d.value());
-        // } else {
-        //     System.out.println("null");
-        // }
+    public static String doHandleCommand(String input) {
+        CodePointBuffer buffer = new CodePointBuffer(input);
+        CommandLine line = CommandLine.parse(buffer);
 
-        // Int p = Int.parse(new CodePointBuffer("0"));
-        // NumberT p = NumberT.parse(new CodePointBuffer("3.14"));
-        // BooleanT p = BooleanT.parse(new CodePointBuffer("t "));
-        // SingleQuoteString p = SingleQuoteString.parse(new CodePointBuffer("'hello world'"));
-        // DoubleQuoteString p = DoubleQuoteString.parse(new CodePointBuffer("\"hello world\""));
-        // StringT p = StringT.parse(new CodePointBuffer("hello world"));
-        // Parameter p = Parameter.parse(new CodePointBuffer("8"));
-        // if (p != null) {
-        //     System.out.println(p.getDouble());
-        // } else {
-        //     System.out.println("null");
-        // }
-
-        // SafeString p = SafeString.parse(new CodePointBuffer("hello world:"));
-        // if (p != null) {
-        //     System.out.println(p.content());
-        // } else {
-        //     System.out.println("null");
-        // }
-
-        // CommandLine p = CommandLine.parse(new CodePointBuffer("add 8 'hello world'"));
-        // if (p != null) {
-        //     System.out.println(">>" + p.name() + "<<");
-        //     System.out.println(">>" + p.params().get(0).isNumber() + "<<");
-
-        // } else {
-        //     System.out.println("null");
-        // }
-
-        OneLineInput p = OneLineInput.parse(new CodePointBuffer("a: 8, b: 9"));
-        if (p != null) {
-            System.out.println(">>" + p.params().get(0).first() + "<<");
-            System.out.println(">>" + p.params().get(0).second() + "<<");
-
-        } else {
-            System.out.println("null");
+        if (line == null) {
+            return "Usage: <command> [arguments]\nPlease type \"help\" for more information.";
         }
+
+        for (Command cmd : Command.getAvailableCommands()) {
+            HandleResult result = cmd.handle(line);
+            if (result == NOT_HANDLED) continue;
+
+            return result.message();
+        }
+
+        return "Unknown command \"" + line.name() + "\". Please type \"help\" for more information.";
+    }
+
+    public static void doStartScanner() {
+        try (Scanner scan = new Scanner(System.in)) {
+            while (true) {
+                System.out.print("\n> ");
+
+                String feedback = doHandleCommand(scan.nextLine());
+                if (feedback != null) {
+                    System.out.println(feedback);
+                }
+            }
+        } catch (RuntimeException e) { // Keyboard interrupt or quit command
+            System.out.println("\nSee you.");
+        }
+    }
+
+    public static void main(String[] args) {
+        doStartScanner();
     }
 }
