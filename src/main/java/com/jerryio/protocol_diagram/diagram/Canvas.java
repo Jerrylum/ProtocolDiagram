@@ -12,6 +12,22 @@ public class Canvas {
 			this.canvas = new char[this.height][this.width];
 	}
 
+	public int getWidth() {
+		return this.width;
+	}
+
+	public int getHeight() {
+		return this.height;
+	}
+
+	public char getChar(Coordinate c) {
+		return this.canvas[c.y()][c.x()];
+	}
+
+	public void setChar(Coordinate c, char content) {
+		this.canvas[c.y()][c.x()] = content;
+	}
+
 	public void reset() {
 		for (int i = 0; i < this.height; i++) {
 				for (int j = 0; j < this.width; j ++) {
@@ -20,12 +36,7 @@ public class Canvas {
 		}
 	}
 
-	public void drawRectangle(int _x, int _y, int _length) {
-    // x in diagram = 2 * x on screen
-    final int x = _x * 2;
-    final int y = _y * 2;
-		final int length = _length * 2;
-
+	public void drawRectangle(int x, int y, int length) {
     // draw top border
     for (int i = x + 1; i < x + length; i++) {
 			if ((int) this.canvas[y][i] == 0) {
@@ -45,8 +56,13 @@ public class Canvas {
     this.canvas[y + 1][x + length] = GridType.VERTICAL.toChar();
 	}
 
-	public void drawText(int _x, int _y, int _length, String str) {
+	public void drawText(int x, int y, int length, String str) {
+		final String trimmed = str.substring(0, Math.min(str.length(), length - 1));
+		final int pivot = x + (length - trimmed.length() - 1) / 2;
 
+		for (int i = 0; i < trimmed.length(); i++) {
+			this.canvas[y + 1][pivot + i + 1] = trimmed.charAt(i);
+		}
 	}
 
 	public void generateCorners() {
@@ -84,11 +100,7 @@ public class Canvas {
 		}
 	}
 
-	public void eliminateBorder(int _x, int _y, int _length) {
-    final int x = _x * 2;
-    final int y = _y * 2;
-		final int length = _length * 2;
-
+	public void eliminateBorder(int x, int y, int length) {
     for (int i = x + 1; i < x + length; i++) {
 			if ((int) this.canvas[y + 2][i] == GridType.HORIZONTAL.toChar()) {
 				this.canvas[y + 2][i] = GridType.EMPTY.toChar();

@@ -3,14 +3,27 @@ package com.jerryio.protocol_diagram.diagram;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.jerryio.protocol_diagram.config.BooleanOption;
 import com.jerryio.protocol_diagram.config.Configuration;
 import com.jerryio.protocol_diagram.config.EnumOption;
 import com.jerryio.protocol_diagram.config.RangeOption;
+import com.jerryio.protocol_diagram.diagram.middlewares.BorderCornerGenerator;
+import com.jerryio.protocol_diagram.diagram.middlewares.BorderStyleTransformer;
+import com.jerryio.protocol_diagram.diagram.middlewares.CollisionEliminator;
+import com.jerryio.protocol_diagram.diagram.middlewares.FieldNameRender;
+import com.jerryio.protocol_diagram.diagram.middlewares.IMiddleware;
+import com.jerryio.protocol_diagram.diagram.middlewares.RectangleRenderer;
+import com.jerryio.protocol_diagram.diagram.services.SplitService;
+import com.jerryio.protocol_diagram.diagram.strategies.FullHeaderStyleStrategy;
+import com.jerryio.protocol_diagram.diagram.strategies.HeaderStyleContext;
+import com.jerryio.protocol_diagram.diagram.strategies.NoneHeaderStyleStrategy;
+import com.jerryio.protocol_diagram.diagram.strategies.TrimmedHeaderStyleStrategy;
 
 public class Diagram {
 
@@ -67,117 +80,48 @@ public class Diagram {
         fields.add(to, field);
     }
 
-    private List<Integer> getCollisions() {
-        final List<Integer> collisions = new ArrayList<>();
-
-        for (Field field: fields) {
-            collisions.add(Math.max(field.getLength() - 32, 0));
-        }
-
-        return collisions;
-    }
-
-    private Map<Field, List<Field>> split() {
-        final Map<Field, List<Field>> ret = new HashMap<>();
-
-        for (int i = 0, length = 0; i < fields.size(); i++) {
-            final Field cur = fields.get(i);
-            int remain = cur.getLength();
-
-            ret.put(cur, new ArrayList<>());
-
-            while (length + remain > 32) {
-                ret.get(cur).add(new Field(
-                    cur.getName(),
-                    32 - length
-                ));
-
-                remain -= 32 - length;
-                length = 0;
-            }
-
-            ret.get(cur).add(new Field(
-                cur.getName(),
-                remain
-            ));
-
-            length = (length + remain) % 32;
-        }
-
-        return ret;
-    }
-    
-    private String generateHeader(int width) {
-
-        StringBuilder builder = new StringBuilder();
-
-        // print the tens digit in the first line
-        for (int i = 0; i < width; i++) {
-            if (i % 10 == 0) {
-                builder.append(" " + (i / 10));
-            } else {
-                builder.append("  ");
-            }
-        }
-
-        builder.append("\n");
-
-        // print the units digit in the second lien
-        for (int i = 0; i < width; i++) {
-            builder.append(" " + (i % 10));
-        }
-
-        builder.append("\n");
-
-        return builder.toString();
-
-    }
-
     @Override
     public String toString() {
         // return value
         final StringBuilder ret = new StringBuilder();
         // canvas props
         final int length = fields.stream().map((e) -> e.getLength()).reduce(0, (a, b) -> a + b);
-        final int width = Math.min(length, 32);
-        final int height = (int) Math.ceil((double) length / 32);
-
-        // print header
-        ret.append(generateHeader(width));
+        final int width = Math.min(length, (int) this.config.getValue("bit"));
+        final int height = (int) Math.ceil((double) length / (int) this.config.getValue("bit"));
 
         // preprocess the list of fields
         final Canvas canvas = new Canvas(width, height);
 
-        // draw by function
-        final Map<Field, List<Field>> split = this.split();
-        for (int i = 0, x = 0, y = 0; i < split.size(); i++) {
-            final List<Field> chunk = split.get(this.fields.get(i));
-            for (int j = 0; j < chunk.size(); j++) {
-                final Field f = chunk.get(j);
-                canvas.drawRectangle(x, y, f.getLength());
-                y += (x + f.getLength()) / 32;
-                x = (x + f.getLength()) % 32;
-            }
+        // create list of dependencies
+        final Map<Class, Object> dependencies = new HashMap<>(){{
+            put(Configuration.class, config);
+            put(SplitService.class, new SplitService(config));
+        }};
+
+        // draw on canvas
+        List<IMiddleware> middlewares = new ArrayList<>() {{
+            add(new RectangleRenderer(dependencies));
+            add(new CollisionEliminator(dependencies));
+            add(new BorderCornerGenerator(dependencies));
+            add(new FieldNameRender(dependencies));
+            add(new BorderStyleTransformer(dependencies));
+        }};
+
+        for (IMiddleware middleware: middlewares) {
+            middleware.execute(canvas, fields);
         }
 
-        // eliminate borders
-        final List<Integer> collisions = this.getCollisions();
-        for (int i = 0, x = 0, y = 0; i < fields.size() && collisions.size() != 0; i++) {
-            Field f = this.fields.get(i);
-            int collision = collisions.get(i);
+        HeaderStyleContext context = new HeaderStyleContext();
 
-            // eliminate border until no collision in the current context
-            for (int nx = x, ny = y; collision > 0; nx = 0, ny++) {
-                final int range = Math.min(collision, 32 - nx);
-                canvas.eliminateBorder(nx, ny, range);
-                collision -= range;
-            }
-            y += (x + f.getLength()) / 32;
-            x = (x + f.getLength()) % 32;
+        switch(this.config.getValue("header-style").toString()) {
+            case "none": context.setStrategy(new NoneHeaderStyleStrategy(dependencies)); break;
+            case "trim": context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
+            case "full": context.setStrategy(new FullHeaderStyleStrategy(dependencies)); break;
+            default: context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
         }
 
-        // generate corners
-        canvas.generateCorners();
+        // append canvas
+        ret.append(context.execute(width).toString());
         // append canvas
         ret.append(canvas.toString());
 
