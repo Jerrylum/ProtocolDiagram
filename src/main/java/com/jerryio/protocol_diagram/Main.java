@@ -53,7 +53,6 @@ public class Main {
     public static void doStartScanner() {
         Scanner scan = new Scanner(System.in);
         try {
-            
             while (true) {
                 System.out.print("\n> ");
 
