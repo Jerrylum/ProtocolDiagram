@@ -51,18 +51,18 @@ public class Main {
     }
 
     public static void doStartScanner() {
-        try (Scanner scan = new Scanner(System.in)) {
+        Scanner scan = new Scanner(System.in);
+        try {
+            
             while (true) {
                 System.out.print("\n> ");
 
-                String feedback = doHandleCommand(scan.nextLine());
-                if (feedback != null) {
-                    System.out.println(feedback);
-                }
+                System.out.println(doHandleCommand(scan.nextLine()));
             }
         } catch (RuntimeException e) { // Keyboard interrupt or quit command
             System.out.println("\nSee you.");
         }
+        scan.close();
     }
 
     public static void main(String[] argv) {

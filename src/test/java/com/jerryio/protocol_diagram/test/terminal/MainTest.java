@@ -1,115 +1,161 @@
 package com.jerryio.protocol_diagram.test.terminal;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
-import com.jerryio.protocol_diagram.diagram.Field;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 
 public class MainTest {
+
+    private ByteArrayOutputStream out;
+    private InputStream defaultIn;
+    private PrintStream defaultOut;
+
     @Before
-    public void setup(){
+    public void setup() {
         Main.diagram = new Diagram();
-        Main.diagram.addField(new Field("test1", 1));
-        Main.diagram.addField(new Field("test2", 2));
-        Main.diagram.addField(new Field("test3", 3));
+
+        defaultIn = System.in;
+
+        defaultOut = System.out;
+        System.setOut(new java.io.PrintStream(out = new ByteArrayOutputStream()));
     }
 
-    public void init(String[] args){
-        setup();
-        Main.main(args);
+    @After
+    public void tearDown() {
+        System.setIn(defaultIn);
+        System.setOut(defaultOut);
     }
 
-    @Test
-    public void testHelp(){
-        String[] arg = new String[1];
-        ByteArrayOutputStream out;
-        out = new ByteArrayOutputStream();    
-        System.setOut(new java.io.PrintStream(out)); 
-        arg[0] = "--help";
-        init(arg);
-        assertEquals(out.toString().startsWith("Usage: java -jar protocol_diagram.jar [options]"), true);
-
-        out.reset();
-        arg[0] = "-h";
-        init(arg);
-        assertEquals(out.toString().startsWith("Usage: java -jar protocol_diagram.jar [options]"), true);
+    public void setInput(String input) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
     }
 
     @Test
-    public void testPrint(){
-        String[] arg = new String[1];
-        ByteArrayOutputStream out;
-        out = new ByteArrayOutputStream();    
-        System.setOut(new java.io.PrintStream(out)); 
-        out.reset();
-        arg[0] = "-p";
-        init(arg);//"test1(1) test2(2) test3(3)"
-        assertEquals(out.toString().startsWith("test1(1) test2(2) test3(3)"), true);
+    public void testHandleCommand() {
+        String invalidFormat = "Usage: <command> [arguments]\nPlease type \"help\" for more information.";
+        String unknownCommand = "Unknown command";
 
-        out.reset();
-        arg[0] = "--print";
-        init(arg);//"test1(1) test2(2) test3(3)"
-        assertEquals(out.toString().startsWith("test1(1) test2(2) test3(3)"), true);
-    }
-    @Test
-    public void testSingleLine(){
-        String[] arg = new String[3];
-        ByteArrayOutputStream out;
-        out = new ByteArrayOutputStream();    
-        System.setOut(new java.io.PrintStream(out)); 
-        out.reset();
-        arg[0] = "--single-line";
-        arg[1] = "test4: 4";
-        arg[2] = "-p";
-        init(arg);//"test1(1) test2(2) test3(3) test4(4)"
-        assertEquals(Main.diagram.getFields().size(), 4);
-        assertEquals(out.toString().startsWith("test1(1) test2(2) test3(3) test4(4)"), true);
+        assertEquals(invalidFormat, Main.doHandleCommand(""));
+        assertEquals(invalidFormat, Main.doHandleCommand("add '"));
+        assertEquals(invalidFormat, Main.doHandleCommand("add 3 '"));
 
-        out.reset();
-        setup();
-        arg = new String[3];
-        arg[0] = "-s";
-        arg[1] = "test4: 4,test5:5";
-        arg[2] = "-p";
-        init(arg);//"test1(1) test2(2) test3(3) test4(4)"
-        assertEquals(Main.diagram.getFields().size(), 5);
-        assertEquals(out.toString().startsWith("test1(1) test2(2) test3(3) test4(4) test5(5)"), true);
-        
+        assertTrue(Main.doHandleCommand("unknown").startsWith(unknownCommand));
+        assertTrue(Main.doHandleCommand("unknown 'something'").startsWith(unknownCommand));
+
+        assertTrue(Main.doHandleCommand("add 5 c") != null);
+
+        assertEquals(1, Main.diagram.getFields().size());
     }
 
     @Test
-    public void testErrorMessage(){
-        String[] arg = new String[1];
-        ByteArrayOutputStream out;
-        out = new ByteArrayOutputStream();    
-        System.setOut(new java.io.PrintStream(out)); 
-        out.reset();
-        arg[0] = "-print";
-        init(arg);//"test1(1) test2(2) test3(3)"
-        assertEquals(out.toString().startsWith("Was passed main parameter '"+arg[0]+"' but no main parameter was defined in your arg class"), true);
+    public void testHandleSingleLine() {
+        assertTrue(Main.doHandleSingleLine("").success());
+        assertTrue(!Main.doHandleSingleLine("a").success());
+        assertTrue(!Main.doHandleSingleLine("a:").success());
+        assertTrue(Main.doHandleSingleLine("a:3").success());
+        assertTrue(Main.doHandleSingleLine("a:3,b:4").success());
 
-        out.reset();
-        arg[0] = "--single-line";
-        init(arg);
-        assertEquals(out.toString().startsWith("Expected a value after parameter --single-line"), true);
-
-        out.reset();
-        arg[0] = "-s";
-        init(arg);
-        assertEquals(out.toString().startsWith("Expected a value after parameter -s"), true);
-
-        out.reset();
-        arg = new String[2];
-        arg[0] = "--single-line";
-        arg[1] = "12321";
-        init(arg);
-        assertEquals(out.toString().startsWith("Invalid single line input"), true);
+        assertEquals(3, Main.diagram.getFields().size());
     }
-    
+
+    @Test
+    public void testTerminalFailedToParseArgument() {
+        Main.main(new String[] { "unknown" });
+        assertTrue(out.toString().startsWith("Was passed main parameter"));
+
+        out.reset();
+
+        Main.main(new String[] { "unknown", "word" });
+        assertTrue(out.toString().startsWith("Was passed main parameter"));
+
+        out.reset();
+
+        Main.main(new String[] { "unknown word" });
+        assertTrue(out.toString().startsWith("Was passed main parameter"));
+
+        out.reset();
+
+        Main.main(new String[] { "--unknown" });
+        assertTrue(out.toString().startsWith("Was passed main parameter"));
+
+        out.reset();
+
+        Main.main(new String[] { "--s" });
+        assertTrue(out.toString().startsWith("Was passed main parameter"));
+    }
+
+    @Test
+    public void testTerminalHelpArgument() {
+        Main.main(new String[] { "--help" });
+        assertTrue(out.toString().startsWith("Usage: java -jar protocol_diagram.jar [options]"));
+
+        out.reset();
+
+        Main.main(new String[] { "-h" });
+        assertTrue(out.toString().startsWith("Usage: java -jar protocol_diagram.jar [options]"));
+    }
+
+    @Test
+    public void testTerminalSignalLineInputFlag() {
+        Main.main(new String[] { "--single-line" });
+        assertTrue(out.toString().startsWith("Expected a value after parameter --single-line"));
+
+        out.reset();
+
+        Main.main(new String[] { "-s" });
+        assertTrue(out.toString().startsWith("Expected a value after parameter -s"));
+
+        out.reset();
+
+        Main.main(new String[] { "-s", "a" });
+        assertTrue(out.toString().startsWith("Invalid single line input"));
+
+        out.reset();
+
+        Main.main(new String[] { "-s", "a:3", "-p" });
+    }
+
+    @Test
+    public void testTerminalPrintFlag() {
+        Main.main(new String[] { "-p" });
+        assertTrue(!out.toString().equals(""));
+    }
+
+    @Test
+    public void testEditorMode() {
+        new Main(); // Just for coverage
+
+        setInput("quit");
+
+        Main.main(new String[] {});
+        assertTrue(out.toString().startsWith("\n> \nSee you."));
+
+        out.reset();
+
+        setInput("add 3 anything\nquit");
+
+        Main.main(new String[] {});
+        assertTrue(out.toString().startsWith("\n> Added field \"anything\".\n\n"));
+
+        out.reset();
+
+        System.setIn(null);
+        Main.main(new String[] {});
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testUnexpectedError() {
+        System.setOut(null);
+        Main.main(new String[] {});
+    }
 }
