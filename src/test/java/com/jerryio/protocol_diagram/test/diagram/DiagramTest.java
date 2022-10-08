@@ -34,7 +34,7 @@ public class DiagramTest {
     }
 
     @Test
-    public void testDiagramInsert(){
+    public void testDiagramInsert() {
         Diagram dtest = new Diagram();
         dtest.addField(new Field("testadd", 1));
         dtest.addField(new Field("testadd2", 2));
@@ -46,7 +46,7 @@ public class DiagramTest {
     }
 
     @Test
-    public void testDiagramMove(){
+    public void testDiagramMove() {
         Diagram dtest = new Diagram();
         dtest.addField(new Field("testadd", 1));
         dtest.addField(new Field("testadd2", 2));
@@ -59,7 +59,7 @@ public class DiagramTest {
     }
 
     @Test
-    public void testDiagramMove2(){
+    public void testDiagramMove2() {
         Diagram dtest = new Diagram();
         dtest.addField(new Field("testadd", 1));
         dtest.addField(new Field("testadd2", 2));
@@ -72,7 +72,7 @@ public class DiagramTest {
     }
 
     @Test
-    public void testDiagramMove3(){
+    public void testDiagramMove3() {
         Diagram dtest = new Diagram();
         dtest.addField(new Field("testadd", 1));
         dtest.addField(new Field("testadd2", 2));
@@ -85,7 +85,7 @@ public class DiagramTest {
     }
 
     @Test
-    public void testDiagramMove4(){
+    public void testDiagramMove4() {
         Diagram dtest = new Diagram();
         dtest.addField(new Field("testadd", 1));
         dtest.addField(new Field("testadd2", 2));
@@ -98,7 +98,7 @@ public class DiagramTest {
     }
 
     @Test
-    public void testDiagramMove5(){
+    public void testDiagramMove5() {
         Diagram dtest = new Diagram();
         dtest.addField(new Field("testadd", 1));
         dtest.addField(new Field("testadd2", 2));
