@@ -146,16 +146,5 @@ public class MainTest {
 
         Main.main(new String[] {});
         assertTrue(out.toString().startsWith("\n> Added field \"anything\".\n\n"));
-
-        out.reset();
-
-        System.setIn(null);
-        Main.main(new String[] {});
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testUnexpectedError() {
-        System.setOut(null);
-        Main.main(new String[] {});
     }
 }

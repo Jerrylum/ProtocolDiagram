@@ -3,7 +3,7 @@
   <groupId>com.jerryio.protocol_diagram</groupId>
   <artifactId>ProtocolDiagram</artifactId>
   
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <name>Protocol Diagram</name>
   <inceptionYear>2022</inceptionYear>
   <packaging>jar</packaging>
@@ -12,14 +12,14 @@
   <url>https://github.com/Jerrylum/ProtocolDiagram/</url>
   
   <issueManagement>
-  	<system>GitHub Issues</system>
-  	<url>https://github.com/Jerrylum/ProtocolDiagram/issues</url>
+    <system>GitHub Issues</system>
+    <url>https://github.com/Jerrylum/ProtocolDiagram/issues</url>
   </issueManagement>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.16</maven.compiler.source>
-    <maven.compiler.target>1.16</maven.compiler.target>
+    <maven.compiler.source>16</maven.compiler.source>
+    <maven.compiler.target>16</maven.compiler.target>
   </properties>
   
   <licenses>
@@ -52,9 +52,57 @@
     <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
     <defaultGoal>clean package</defaultGoal>
     
-    <finalName>protocol_diagram</finalName>
+    <finalName>protocol_diagram-base</finalName>
     
     <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.4.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <finalName>protocol_diagram</finalName>
+          <archive>
+            <!-- https://stackoverflow.com/questions/9689793/cant-execute-jar-file-no-main-manifest-attribute -->
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.jerryio.protocol_diagram.Main</mainClass>
+            </manifest>
+          </archive>
+          <!-- https://stackoverflow.com/questions/20697144/can-not-set-the-final-jar-name-with-maven-assembly-plugin -->
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.8</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     
     <resources>
