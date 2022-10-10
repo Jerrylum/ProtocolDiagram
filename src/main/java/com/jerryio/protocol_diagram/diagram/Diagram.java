@@ -69,72 +69,13 @@ public class Diagram {
 
     @Override
     public String toString() {
-        // // TODO generate a diagram
-        // StringBuilder sb = new StringBuilder();
-
-        // for (Field field : fields) {
-        //     sb.append(field.getName());
-        //     sb.append("(");
-        //     sb.append(field.getLength());
-        //     sb.append(") ");
-        // }
-
-        // return sb.toString();
-
         final int bit = (int) config.getValue("bit");
-        final List<Row> rows = new ArrayList<>();
 
-        int uid = 0;
-        Row currentRow = new Row(bit);
-        for (Field f : fields) {
-            while (f.getLength() != 0) {
-                currentRow.addField(uid, f);
-                if (currentRow.getUsed() == bit) {
-                    rows.add(currentRow);
-                    currentRow = new Row(bit);
-                }
-            }
-            uid++;
-        }
+        final List<Row> rows = DiagramUtils.convertFieldsToRow(bit, fields);
+        final List<Floor> floors = DiagramUtils.spliceFloors(bit, rows);
+        final List<Segment> segments = DiagramUtils.mergeRowsAndFloors(rows, floors);
 
-        if (currentRow.getUsed() != 0)
-            rows.add(currentRow);
-
-
-
-        rows.add(0, new Row(bit).addField(uid++, new Field(null, bit)));
-        rows.add(rows.size(), new Row(bit).addField(uid++, new Field(null, bit)));
-
-
-
-        List<Floor> floors = new ArrayList<>();
-
-        for (int i = 0; i < rows.size() - 1; i++) {           
-            Row topRow = rows.get(i);
-            int[] top = topRow.getSplicePositions();
-            Row downRow = rows.get(i + 1);
-            int[] down = downRow.getSplicePositions();
-            
-            Floor floor = new Floor(bit);
-
-            // merge two list in accenting order
-            int topIndex = 0, downIndex = 0;
-            while (topIndex < top.length || downIndex < down.length) {
-                if (topIndex < top.length && downIndex < down.length) {
-                    if (top[topIndex] < down[downIndex]) {
-                        floor.addSplice(-1, top[topIndex++]);
-                    } else {
-                        floor.addSplice(-1, down[downIndex++]);
-                    }
-                } else if (topIndex < top.length) {
-                    floor.addSplice(-1, top[topIndex++]);
-                } else {
-                    floor.addSplice(-1, down[downIndex++]);
-                }
-            }
-            floors.add(floor);
-        }
-        
+        DiagramUtils.setDisplayNameForAllFields(segments, fields);
 
         // System.out.println(rows.size());
 

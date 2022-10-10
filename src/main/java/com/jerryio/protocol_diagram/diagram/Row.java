@@ -29,13 +29,13 @@ public class Row {
         return segments.get(index);
     }
 
-    public Row addField(int uid, Field field) {
+    public Row addField(Field field) {
         int consume = Math.min(field.getLength(), bit - used);
         field.setLength(field.getLength() - consume);
-        used += consume;
-
+        
         if (consume != 0)
-            segments.add(new RowSegment(uid, field.getName(), consume));
+            segments.add(new RowSegment(field, used, consume));
+        used += consume;
 
         return this;
     }
@@ -44,14 +44,18 @@ public class Row {
         return used;
     }
 
-    public int[] getSplicePositions() {
-        int[] array = new int[segments.size()];
-        int index = 0;
-        for (int i = 0; i < segments.size(); i++) {
-            array[i] = index += segments.get(i).getLength();
-        }
-        return array;
+    public int getCount() {
+        return segments.size();
     }
+
+    // public int[] getSplicePositions() {
+    //     int[] array = new int[segments.size()];
+    //     int index = 0;
+    //     for (int i = 0; i < segments.size(); i++) {
+    //         array[i] = index += segments.get(i).getLength();
+    //     }
+    //     return array;
+    // }
 
 
 }

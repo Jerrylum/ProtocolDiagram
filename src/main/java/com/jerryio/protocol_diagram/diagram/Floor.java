@@ -2,6 +2,7 @@ package com.jerryio.protocol_diagram.diagram;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Floor {
@@ -21,18 +22,16 @@ public class Floor {
     }
 
     public Collection<FloorSegment> getSegments() {
-        return segments;
+        return Collections.unmodifiableCollection(segments);
     }
 
-    // public void addFloorSegment(FloorSegment f) {
-    //     segments.add(f);
-    //     used += f.getLength();
-    // }
-
-    public void addSplice(int uid, int position) {
-        int length = position - used;
+    public void addSplice(RowSegment before, RowSegment after) {
+        int length = before.getEndIndex() - used;
         if (length != 0) {
-            segments.add(new FloorSegment(uid, length));
+            Field represent = null;
+            if (before.getRepresent().equals(after.getRepresent()) && before.getEndIndex() > after.getStartIndex())
+                represent = before.getRepresent();
+            segments.add(new FloorSegment(represent, used, length));
             used += length;
         }
     }
