@@ -2,12 +2,22 @@ package com.jerryio.protocol_diagram;
 
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.InstanceCreator;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.config.Option;
+import com.jerryio.protocol_diagram.config.RangeOption;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.*;
@@ -85,6 +95,12 @@ public class Main {
             HandleResult result = doHandleSingleLine(args.singleLine);
             if (!result.success()) {
                 System.out.println(result.message());
+                return;
+            }
+        } else if (args.source != null) {
+            diagram = FileSystem.load(args.source);
+            if (diagram == null) {
+                System.out.println("Failed to load diagram from " + args.source);
                 return;
             }
         }
