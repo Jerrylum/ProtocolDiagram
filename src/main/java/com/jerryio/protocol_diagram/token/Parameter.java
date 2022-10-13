@@ -11,12 +11,12 @@ public class Parameter implements Token {
         buffer.savepoint();
 
         int i = 0;
-        while (buffer.peek(i) != null && buffer.peek(i) != ' ')
+        while (buffer.peek(i) != null && !Token.isDelimiter(buffer.peek(i)))
             i++;
         int firstStop = buffer.getIndex() + i;
 
         BooleanT bool = BooleanT.parse(buffer);
-        if (bool != null && firstStop == buffer.getIndex())
+        if (bool != null)
             return buffer.commitAndReturn(new Parameter(bool));
 
         NumberT number = NumberT.parse(buffer);

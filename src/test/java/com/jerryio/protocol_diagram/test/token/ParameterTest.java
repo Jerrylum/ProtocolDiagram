@@ -27,6 +27,7 @@ public class ParameterTest {
         assertEquals(Parameter.parse(new CodePointBuffer("'14.0'")).getString(), "14.0");
         assertEquals(Parameter.parse(new CodePointBuffer("'-14'")).getString(), "-14");
         assertEquals(Parameter.parse(new CodePointBuffer("'-14.0'")).getString(), "-14.0");
+        assertEquals(Parameter.parse(new CodePointBuffer("3.14h")).getString(), "h");
     }
 
     @Test
