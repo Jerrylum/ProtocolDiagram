@@ -49,6 +49,8 @@ public class DeleteCommandTest {
         assertEquals(dc.handle(CommandLine.parse(new CodePointBuffer("delete"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(dc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
         assertEquals(dc.handle(CommandLine.parse(new CodePointBuffer("delete 1 2"))), HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(dc.handle(CommandLine.parse(new CodePointBuffer("delete a"))),
+                HandleResult.fail("Index start from zero."));
         assertEquals(dc.handle(CommandLine.parse(new CodePointBuffer("delete -1"))),
                 HandleResult.fail("Index start from zero."));
         assertEquals(dc.handle(CommandLine.parse(new CodePointBuffer("delete 1"))),

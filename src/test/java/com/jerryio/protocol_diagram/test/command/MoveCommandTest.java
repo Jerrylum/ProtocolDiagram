@@ -74,8 +74,12 @@ public class MoveCommandTest {
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0"))), HandleResult.TOO_FEW_ARGUMENTS);
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 2 1"))), HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move a 2"))),
+                HandleResult.fail("Index start from zero."));
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move -1 2"))),
                 HandleResult.fail("Index start from zero."));
+        assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 a"))),
+                HandleResult.fail("Target index start from zero."));
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 0 -1"))),
                 HandleResult.fail("Target index start from zero."));
         assertEquals(mc.handle(CommandLine.parse(new CodePointBuffer("move 3 0"))),

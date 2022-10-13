@@ -74,5 +74,7 @@ public class RangeOptionTest {
         assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).success(), false);
         assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).message(),
                 "The value must be an integer.");
+        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("a"))).message(),
+                "The value must be an integer.");
     }
 }
