@@ -11,17 +11,25 @@ public class Parameter implements Token {
         buffer.savepoint();
 
         int i = 0;
-        while (buffer.peek(i) != null && !Token.isDelimiter(buffer.peek(i)))
+        while (!Token.isDelimiter(buffer.peek(i)))
             i++;
-        int firstStop = buffer.getIndex() + i;
 
+        int firstStop = buffer.getIndex() + i;
+        System.out.println(firstStop);
         BooleanT bool = BooleanT.parse(buffer);
         if (bool != null)
             return buffer.commitAndReturn(new Parameter(bool));
 
         NumberT number = NumberT.parse(buffer);
-        if (number != null && firstStop == buffer.getIndex())
-            return buffer.commitAndReturn(new Parameter(number));
+        System.out.println(buffer.getIndex());
+        if (number != null) {
+            if (buffer.getIndex() == firstStop)
+                return buffer.commitAndReturn(new Parameter(number));
+            else {
+                buffer.rollback();
+                buffer.savepoint();
+            }
+        }
 
         StringT string = StringT.parse(buffer);
         if (string != null)

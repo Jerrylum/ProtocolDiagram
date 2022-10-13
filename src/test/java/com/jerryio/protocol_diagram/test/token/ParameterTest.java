@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
+import com.jerryio.protocol_diagram.token.Frac;
+import com.jerryio.protocol_diagram.token.Int;
 import com.jerryio.protocol_diagram.token.Parameter;
 
 public class ParameterTest {
@@ -27,7 +29,7 @@ public class ParameterTest {
         assertEquals(Parameter.parse(new CodePointBuffer("'14.0'")).getString(), "14.0");
         assertEquals(Parameter.parse(new CodePointBuffer("'-14'")).getString(), "-14");
         assertEquals(Parameter.parse(new CodePointBuffer("'-14.0'")).getString(), "-14.0");
-        assertEquals(Parameter.parse(new CodePointBuffer("3.14h")).getString(), "h");
+        assertEquals(Parameter.parse(new CodePointBuffer("3.14h")).toString(), "3.14h");
     }
 
     @Test
