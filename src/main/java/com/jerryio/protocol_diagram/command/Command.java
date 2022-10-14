@@ -49,6 +49,7 @@ public abstract class Command {
                 new ConfigListCommand(),
                 new ConfigCommand(),
                 new DeleteCommand(),
+                new ExportCommand(),
                 new HelpCommand(),
                 new InsertCommand(),
                 new ListCommand(),
@@ -56,6 +57,7 @@ public abstract class Command {
                 new QuitCommand(),
                 new RenameCommand(),
                 new ResizeCommand(),
+                new SaveCommand(),
                 new ViewCommand());
     }
 
