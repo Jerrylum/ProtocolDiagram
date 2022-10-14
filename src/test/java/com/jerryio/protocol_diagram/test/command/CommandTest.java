@@ -23,12 +23,6 @@ public class CommandTest {
                 // TODO Auto-generated method stub
                 return null;
             }
-
-            @Override
-            public void execute() {
-                // TODO Auto-generated method stub
-
-            }
         }
         TestCommand tc = new TestCommand();
         assertEquals(tc.getName(), "test");

@@ -14,8 +14,6 @@ public class HelpCommandTest {
     public void testHelpCommandHandleSuccess() {
         HelpCommand hc = new HelpCommand();
 
-        hc.execute(); // dummy
-
         assertEquals(hc.handle(CommandLine.parse(new CodePointBuffer("help"))).success(), true);
     }
 

@@ -69,29 +69,29 @@ public class MainTest {
     }
 
     @Test
-    public void testTerminalFailedToParseArgument() {
+    public void testTerminalFailedToContinue() {
         Main.main(new String[] { "unknown" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "unknown", "word" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Only one main parameter allowed but found several"));
 
         out.reset();
 
         Main.main(new String[] { "unknown word" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "--unknown" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "--s" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
     }
 
     @Test

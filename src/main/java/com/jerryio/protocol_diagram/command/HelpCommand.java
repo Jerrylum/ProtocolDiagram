@@ -38,9 +38,4 @@ public class HelpCommand extends Command {
         return success(sb.toString());
     }
 
-    @Override
-    public void execute() {
-        // No need to do anything
-    }
-
 }

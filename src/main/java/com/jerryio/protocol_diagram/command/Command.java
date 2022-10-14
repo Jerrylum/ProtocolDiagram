@@ -31,7 +31,7 @@ public abstract class Command {
         return description;
     }
 
-    public HandleResult handle(CommandLine line) {
+    public final HandleResult handle(CommandLine line) {
         if (getName().equalsIgnoreCase(line.name()))
             return handle(line.params());
         else
@@ -39,8 +39,6 @@ public abstract class Command {
     }
 
     public abstract HandleResult handle(List<Parameter> params);
-
-    public abstract void execute();
 
     public static List<Command> getAvailableCommands() {
         return Arrays.asList(

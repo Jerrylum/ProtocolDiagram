@@ -6,7 +6,7 @@ import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
-public class ClearCommand extends Command {
+public class ClearCommand extends Command implements ICancellable {
 
     public ClearCommand() {
         super("clear", "", "Remove all fields and start again");

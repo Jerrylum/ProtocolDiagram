@@ -28,14 +28,7 @@ public class ExportCommand extends Command {
 
         this.paramPath = paramPath.getString();
 
-        execute();
-
         return FileSystem.export(this.paramPath, Main.diagram);
-    }
-
-    @Override
-    public void execute() {
-        // Nothing to do        
     }
 
 }

@@ -23,8 +23,6 @@ public class ListCommandTest {
     public void testListCommandHandleSuccess() {
         ListCommand lc = new ListCommand();
 
-        lc.execute(); // dummy
-
         assertEquals(lc.handle(CommandLine.parse(
                 new CodePointBuffer("list"))).message(), "There is no field in the diagram.");
         Main.diagram.addField(new Field("test", 1));

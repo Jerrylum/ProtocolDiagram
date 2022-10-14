@@ -19,9 +19,4 @@ public class QuitCommand extends Command {
         throw new RuntimeException(); // Quit the program
     }
 
-    @Override
-    public void execute() {
-        // No need to do anything
-    }
-
 }

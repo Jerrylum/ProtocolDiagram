@@ -44,9 +44,4 @@ public class SaveCommand extends Command {
         return result;
     }
 
-    @Override
-    public void execute() {
-        // Nothing to do
-    }
-
 }

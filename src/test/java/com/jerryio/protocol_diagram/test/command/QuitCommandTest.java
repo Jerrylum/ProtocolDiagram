@@ -16,8 +16,6 @@ public class QuitCommandTest {
     public void testQuitCommandHandleSuccess() {
         QuitCommand qc = new QuitCommand();
 
-        qc.execute(); // dummy
-
         assertThrows(RuntimeException.class, () -> qc.handle(CommandLine.parse(new CodePointBuffer("quit"))));
     }
 

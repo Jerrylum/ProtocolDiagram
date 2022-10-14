@@ -41,9 +41,4 @@ public class ConfigListCommand extends Command {
         return success(sb.toString());
     }
 
-    @Override
-    public void execute() {
-        // No need to do anything
-    }
-
 }
