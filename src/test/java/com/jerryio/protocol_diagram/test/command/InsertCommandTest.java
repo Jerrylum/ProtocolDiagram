@@ -67,6 +67,10 @@ public class InsertCommandTest {
         assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
         assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 1 2 test1 test2"))),
                 HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert a 2 test1"))),
+                HandleResult.fail("Index start from zero."));
+        assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 a test4"))),
+                HandleResult.fail("Length must be a positive integer."));
         assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert -1 2 test1"))),
                 HandleResult.fail("Index start from zero."));
         assertEquals(ic.handle(CommandLine.parse(new CodePointBuffer("insert 0 -1 test4"))),

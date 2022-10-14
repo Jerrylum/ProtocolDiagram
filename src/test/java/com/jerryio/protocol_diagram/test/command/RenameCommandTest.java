@@ -40,6 +40,8 @@ public class RenameCommandTest {
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 0 test1 test2"))),
                 HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename a test1"))),
+                HandleResult.fail("Index start from zero."));
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename -1 test1"))),
                 HandleResult.fail("Index start from zero."));
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("rename 0 1"))),
