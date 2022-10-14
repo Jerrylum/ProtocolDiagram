@@ -9,6 +9,8 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class SaveCommand extends Command {
 
+    public String paramPath;
+
     public SaveCommand() {
         super("save", "[path]", "Save the diagram to the specified path");
     }
@@ -37,9 +39,13 @@ public class SaveCommand extends Command {
                 path += ".json";
         }
 
+        this.paramPath = path;
+
         HandleResult result = FileSystem.save(path, Main.diagram);
-        if (result.success())
+        if (result.success()) {
             FileSystem.mountedFile = path;
+            FileSystem.isModified = false;
+        }
 
         return result;
     }

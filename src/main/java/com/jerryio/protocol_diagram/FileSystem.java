@@ -12,6 +12,7 @@ import com.jerryio.protocol_diagram.diagram.Diagram;
 public class FileSystem {
 
     public static String mountedFile = null;
+    public static boolean isModified = false;
 
     public static HandleResult save(String path, Diagram d) {
         File file = new File(path);

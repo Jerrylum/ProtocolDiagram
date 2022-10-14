@@ -2,6 +2,7 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
+import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
@@ -13,10 +14,17 @@ public class QuitCommand extends Command {
 
     @Override
     public HandleResult handle(List<Parameter> params) {
-        if (params.size() > 0)
+        if (params.size() > 1)
             return TOO_MANY_ARGUMENTS;
 
-        throw new RuntimeException(); // Quit the program
+        boolean isForceQuit = params.size() == 1 &&
+                params.get(0).isString() &&
+                params.get(0).getString().equals("force");
+
+        if (!FileSystem.isModified || isForceQuit)
+            throw new RuntimeException(); // Quit the program
+        else
+            return fail("Unsaved changes. Please save the diagram first or use \"quit force\" to quit without saving.");
     }
 
 }

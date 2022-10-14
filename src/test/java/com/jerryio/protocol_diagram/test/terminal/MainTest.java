@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 
@@ -23,6 +24,8 @@ public class MainTest {
     @Before
     public void setup() {
         Main.diagram = new Diagram();
+        FileSystem.mountedFile = null;
+        FileSystem.isModified = false;
 
         defaultIn = System.in;
 
