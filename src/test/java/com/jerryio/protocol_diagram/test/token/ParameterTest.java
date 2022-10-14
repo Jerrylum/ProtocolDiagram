@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
-import com.jerryio.protocol_diagram.token.Frac;
-import com.jerryio.protocol_diagram.token.Int;
 import com.jerryio.protocol_diagram.token.Parameter;
 
 public class ParameterTest {

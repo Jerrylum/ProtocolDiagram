@@ -15,13 +15,11 @@ public class Parameter implements Token {
             i++;
 
         int firstStop = buffer.getIndex() + i;
-        System.out.println(firstStop);
         BooleanT bool = BooleanT.parse(buffer);
         if (bool != null)
             return buffer.commitAndReturn(new Parameter(bool));
 
         NumberT number = NumberT.parse(buffer);
-        System.out.println(buffer.getIndex());
         if (number != null) {
             if (buffer.getIndex() == firstStop)
                 return buffer.commitAndReturn(new Parameter(number));
