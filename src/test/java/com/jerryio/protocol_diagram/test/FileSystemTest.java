@@ -1,6 +1,7 @@
 package com.jerryio.protocol_diagram.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import com.jerryio.protocol_diagram.token.Parameter;
 public class FileSystemTest {
     @Before
     public void setUp() throws Exception {
+        new FileSystem(); // dummy
         File ExpObj = new File("test.txt");
         File JsonObj = new File("test.json");
         if (ExpObj.exists()) {
@@ -41,6 +43,12 @@ public class FileSystemTest {
 
     @Test
     public void testSaveLoad() throws IOException {
+        String root = "";
+        if (System.getProperty("os.name").toLowerCase().contains("win")) 
+             root = System.getenv("SystemDrive") + "/test.json";
+        else 
+            root = "/test.json";
+        assertEquals(false, FileSystem.save(root, new Diagram()).success());
         assertEquals(false, FileSystem.save("./", new Diagram()).success());
         assertEquals(null, FileSystem.load("./"));
 
@@ -100,6 +108,13 @@ public class FileSystemTest {
 
     @Test
     public void testExport() throws IOException {
+        String root = "";
+        if (System.getProperty("os.name").toLowerCase().contains("win")) 
+             root = System.getenv("SystemDrive") + "/test.txt";
+        else 
+            root = "/test.txt";
+        assertEquals(false, FileSystem.export(root, new Diagram()).success());
+        assertEquals(false, FileSystem.export("./ ", Main.diagram).success());
         assertEquals(false, FileSystem.export("./", Main.diagram).success());
         
         Diagram d1;
@@ -167,6 +182,22 @@ public class FileSystemTest {
         assertEquals(true, FileSystem.export("./test.txt", d1).success());
         data = gettxt(path);
         assertEquals(d1.toString(), data);
+
+    }
+
+    @Test
+    public void testresolvePath() {
+        assertEquals(null, FileSystem.resolvePath("", "json"));
+        assertEquals(null, FileSystem.resolvePath(" ", "json"));
+        FileSystem.save("test.json", Main.diagram); 
+        assertNotEquals(null, FileSystem.resolvePath("test", "json"));
+        assertEquals(null, FileSystem.resolvePath("./", "json"));
+        assertEquals(null, FileSystem.resolvePath("./ ", "json"));
+        assertEquals(null, FileSystem.resolvePath(" ./", "json"));
+        assertEquals(null, FileSystem.resolvePath("..", "json"));
+        assertEquals(null, FileSystem.resolvePath("../", "json"));
+        assertEquals(null, FileSystem.resolvePath("./..", "json"));
+        assertNotEquals(null, FileSystem.resolvePath("test", "json"));
 
     }
 }

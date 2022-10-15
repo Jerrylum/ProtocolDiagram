@@ -26,6 +26,7 @@ public class QuitCommandTest {
 
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit"))).success(), false);
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit any"))).success(), false);
+        assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit 123"))).success(), false);
         assertThrows(RuntimeException.class, () -> qc.handle(CommandLine.parse(new CodePointBuffer("quit force"))));
         
         FileSystem.isModified = false;
@@ -36,5 +37,6 @@ public class QuitCommandTest {
         QuitCommand qc = new QuitCommand();
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit test test"))), HandleResult.TOO_MANY_ARGUMENTS);
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
+        
     }
 }

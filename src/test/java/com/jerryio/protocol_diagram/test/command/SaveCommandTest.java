@@ -39,6 +39,15 @@ public class SaveCommandTest {
     public void testHandle() {
         List<Parameter> params = new ArrayList<Parameter>();
         SaveCommand cmd = new SaveCommand();
+        String root = "";
+        if (System.getProperty("os.name").toLowerCase().contains("win")) 
+             root = System.getenv("SystemDrive") + "/test.json";
+        else 
+            root = "/test.json";
+        params.add(Parameter.parse(new CodePointBuffer(root)));
+        assertEquals(false, cmd.handle(params).success());
+        params.clear();
+
         assertEquals(false, cmd.handle(params).success()); // no file name
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
         assertEquals(true, cmd.handle(params).success()); // save to json
