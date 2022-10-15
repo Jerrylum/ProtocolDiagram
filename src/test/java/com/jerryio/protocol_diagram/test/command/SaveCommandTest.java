@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.SaveCommand;
 import com.jerryio.protocol_diagram.diagram.Diagram;
@@ -19,6 +20,7 @@ import com.jerryio.protocol_diagram.token.Parameter;
 public class SaveCommandTest {
     @Before
     public void setUp() throws Exception {
+        FileSystem.mountedFile = null;
         Main.diagram = new Diagram();
         File ExpObj = new File("test.txt");
         File JsonObj = new File("test.json");
@@ -53,8 +55,5 @@ public class SaveCommandTest {
         assertEquals(false, cmd.handle(params).success());
         // params.add(Parameter.parse(new CodePointBuffer("./")));// dir
         // assertEquals(false, cmd.handle(params).success());
-
-
-
     }
 }

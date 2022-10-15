@@ -17,6 +17,8 @@ public class QuitCommandTest {
     public void testQuitCommandHandleSuccess() {
         QuitCommand qc = new QuitCommand();
 
+        FileSystem.isModified = false;
+
         assertThrows(RuntimeException.class, () -> qc.handle(CommandLine.parse(new CodePointBuffer("quit"))));
         assertThrows(RuntimeException.class, () -> qc.handle(CommandLine.parse(new CodePointBuffer("quit any"))));
     
@@ -25,6 +27,8 @@ public class QuitCommandTest {
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit"))).success(), false);
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit any"))).success(), false);
         assertThrows(RuntimeException.class, () -> qc.handle(CommandLine.parse(new CodePointBuffer("quit force"))));
+        
+        FileSystem.isModified = false;
     }
 
     @Test
