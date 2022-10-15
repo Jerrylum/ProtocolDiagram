@@ -20,7 +20,6 @@ public class CommandTest {
 
             @Override
             public HandleResult handle(List<Parameter> params) {
-                // TODO Auto-generated method stub
                 return null;
             }
         }
