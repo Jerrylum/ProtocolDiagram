@@ -1,11 +1,12 @@
 package com.jerryio.protocol_diagram.test.command;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,49 +23,55 @@ public class LoadCommandTest {
     public void setUp() throws Exception {
         FileSystem.mountedFile = null;
         Main.diagram = new Diagram();
+
+        new File("test.txt").delete();
+        new File("test.json").delete();
+
         Diagram d = new Diagram();
-        File ExpObj = new File("test.txt");
-        File JsonObj = new File("test.json");
-        if (ExpObj.exists()) {
-            ExpObj.delete();
-        }
-        if (JsonObj.exists()) {
-            JsonObj.delete();
-        }
         d.addField(new Field("test1", 1));
         d.addField(new Field("test2", 2));
         d.addField(new Field("test3", 3));
         FileSystem.save("test.json", d);
     }
 
+    @After
+    public void tearDown() {
+        new File("test.txt").delete();
+        new File("test.json").delete();
+    }
+
     @Test
     public void testHandle() {
         List<Parameter> params = new ArrayList<Parameter>();
         LoadCommand cmd = new LoadCommand();
-        assertEquals(false, cmd.handle(params).success()); // no file name
+        assertFalse(cmd.handle(params).success()); // no file name
+
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
-        assertEquals(false, cmd.handle(params).success()); //too many args
+        assertFalse(cmd.handle(params).success()); // too many args
+
         params.clear();
-        params.add(Parameter.parse(new CodePointBuffer("test")));//no .json
-        assertEquals(true, cmd.handle(params).success());
+        params.add(Parameter.parse(new CodePointBuffer("test"))); // no .json
+        assertTrue(cmd.handle(params).success());
+
         params.clear();
-        params.add(Parameter.parse(new CodePointBuffer("123")));//not string
-        assertEquals(false, cmd.handle(params).success());
+        params.add(Parameter.parse(new CodePointBuffer("123"))); // not string
+        assertFalse(cmd.handle(params).success());
+
         params.clear();
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
-        assertEquals(true, cmd.handle(params).success());
+        assertTrue(cmd.handle(params).success());
 
         FileSystem.isModified = true;
 
-        assertEquals(false, cmd.handle(params).success()); // file unsave changes
+        assertFalse(cmd.handle(params).success()); // file un-save changes
 
         FileSystem.isModified = false;
 
         params.clear();
         params.add(Parameter.parse(new CodePointBuffer("test2.json")));
-        assertEquals(false, cmd.handle(params).success()); // no diagram
-        
+        assertFalse(cmd.handle(params).success()); // no diagram
+
     }
 
 }
