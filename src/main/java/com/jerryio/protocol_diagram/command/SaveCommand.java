@@ -31,12 +31,9 @@ public class SaveCommand extends Command {
 
         if (path == null) {
             if (FileSystem.mountedFile == null)
-                return fail("No file mounted.");
+                return fail("You are not editing a file. Please specify a path to save the file.");
 
             path = FileSystem.mountedFile;
-        } else {
-            if (!path.endsWith(".json"))
-                path += ".json";
         }
 
         this.paramPath = path;

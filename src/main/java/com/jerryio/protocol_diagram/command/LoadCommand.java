@@ -32,9 +32,6 @@ public class LoadCommand extends Command {
         }
 
         String path = paramPath.getString();
-        if (!path.endsWith(".json"))
-            path += ".json";
-
         this.paramPath = path;
 
         Diagram diagram = FileSystem.load(path);
