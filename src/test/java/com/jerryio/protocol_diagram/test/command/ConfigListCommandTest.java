@@ -15,8 +15,6 @@ public class ConfigListCommandTest {
     public void testConfigListCommandHandleSuccess() {
         ConfigListCommand clc = new ConfigListCommand();
 
-        clc.execute(); // dummy
-
         assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("config"))).success(), true);
     }
 

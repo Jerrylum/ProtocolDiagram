@@ -13,8 +13,6 @@ public class ConfigCommandTest {
     public void testConfigCommandHandleSuccess() {
         ConfigCommand cc = new ConfigCommand();
 
-        cc.execute(); // dummy
-
         assertEquals(cc.handle(CommandLine.parse(
                 new CodePointBuffer("config Bit 1"))).success(), true);
         assertEquals(cc.handle(CommandLine.parse(

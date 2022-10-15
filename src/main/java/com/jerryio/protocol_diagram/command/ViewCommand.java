@@ -20,9 +20,4 @@ public class ViewCommand extends Command {
         return success("\n" + Main.diagram);
     }
 
-    @Override
-    public void execute() {
-        // No need to do anything
-    }
-
 }

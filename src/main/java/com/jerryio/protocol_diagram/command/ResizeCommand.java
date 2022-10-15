@@ -7,7 +7,7 @@ import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
-public class ResizeCommand extends Command {
+public class ResizeCommand extends Command implements ICancellable {
 
     public int paramIndex;
     public int paramNewSize;

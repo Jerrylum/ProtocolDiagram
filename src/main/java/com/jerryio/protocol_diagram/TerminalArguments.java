@@ -4,6 +4,9 @@ import com.beust.jcommander.Parameter;
 
 public class TerminalArguments {
 
+    @Parameter(description = "The file path of the diagram")
+    public String source = null;
+
     @Parameter(names = { "--print", "-p" }, description = "Print the diagram to console and exit")
     public boolean print = false;
 

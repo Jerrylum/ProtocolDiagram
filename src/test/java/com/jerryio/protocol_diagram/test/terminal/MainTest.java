@@ -6,11 +6,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.diagram.Field;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -23,17 +26,25 @@ public class MainTest {
     @Before
     public void setup() {
         Main.diagram = new Diagram();
+        FileSystem.mountedFile = null;
+        FileSystem.isModified = false;
 
         defaultIn = System.in;
 
         defaultOut = System.out;
         System.setOut(new java.io.PrintStream(out = new ByteArrayOutputStream()));
+
+        Diagram d = new Diagram();
+        d.addField(new Field("anything", 1));
+        FileSystem.save("test.json", d);
     }
 
     @After
     public void tearDown() {
         System.setIn(defaultIn);
         System.setOut(defaultOut);
+
+        new File("test.json").delete();
     }
 
     public void setInput(String input) {
@@ -52,7 +63,8 @@ public class MainTest {
         assertTrue(Main.doHandleCommand("unknown").startsWith(unknownCommand));
         assertTrue(Main.doHandleCommand("unknown 'something'").startsWith(unknownCommand));
 
-        assertTrue(Main.doHandleCommand("add 5 c") != null);
+        assertNotNull(Main.doHandleCommand("add 5 c"));
+        assertNotNull(Main.doHandleCommand("view"));
 
         assertEquals(1, Main.diagram.getFields().size());
     }
@@ -69,29 +81,29 @@ public class MainTest {
     }
 
     @Test
-    public void testTerminalFailedToParseArgument() {
+    public void testTerminalFailedToContinue() {
         Main.main(new String[] { "unknown" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "unknown", "word" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Only one main parameter allowed but found several"));
 
         out.reset();
 
         Main.main(new String[] { "unknown word" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "--unknown" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "--s" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
     }
 
     @Test
@@ -123,6 +135,11 @@ public class MainTest {
         out.reset();
 
         Main.main(new String[] { "-s", "a:3", "-p" });
+    }
+
+    @Test
+    public void testTerminalLoadSource() {
+        Main.main(new String[] { "test.json", "-p" });
     }
 
     @Test

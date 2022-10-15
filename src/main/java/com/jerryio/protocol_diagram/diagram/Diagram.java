@@ -1,16 +1,33 @@
 package com.jerryio.protocol_diagram.diagram;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 import com.jerryio.protocol_diagram.config.BooleanOption;
 import com.jerryio.protocol_diagram.config.Configuration;
 import com.jerryio.protocol_diagram.config.EnumOption;
+import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.config.RangeOption;
+import com.jerryio.protocol_diagram.token.CodePointBuffer;
+import com.jerryio.protocol_diagram.token.Parameter;
 
 public class Diagram {
+
+    private static final Gson GSON_BUILDER = new GsonBuilder()
+            .serializeNulls()
+            .registerTypeAdapter(Diagram.class, new Diagram.GsonTypeAdapter())
+            .excludeFieldsWithoutExposeAnnotation()
+            .create();
 
     private List<Field> fields;
     private Configuration config;
@@ -65,6 +82,14 @@ public class Diagram {
         fields.add(to, field);
     }
 
+    public String toJson() {
+        return GSON_BUILDER.toJson(this);
+    }
+
+    public static Diagram fromJson(String input) {
+        return GSON_BUILDER.fromJson(input, Diagram.class);
+    }
+
     @Override
     public String toString() {
         // TODO generate a diagram
@@ -78,6 +103,45 @@ public class Diagram {
         }
 
         return sb.toString();
+    }
+
+    public static class GsonTypeAdapter extends TypeAdapter<Diagram> {
+        private static final Gson INTERNAL_GSON_BUILDER = new GsonBuilder().serializeNulls().create();
+
+        public Diagram read(JsonReader reader) throws IOException {
+            Diagram d = new Diagram();
+
+            reader.beginObject();
+            while (reader.hasNext()) {
+                String name = reader.nextName();
+                if (name.equals("fields")) {
+                    d.fields.addAll(Arrays.asList(INTERNAL_GSON_BUILDER.fromJson(reader, Field[].class)));
+                } else if (name.equals("config")) {
+                    reader.beginObject();
+                    while (reader.hasNext()) {
+                        String configName = reader.nextName();
+                        Parameter configValue = Parameter.parse(new CodePointBuffer(reader.nextString()));
+                        d.getConfig().setValue(configName, configValue);
+                    }
+                    reader.endObject();
+                } else {
+                    reader.skipValue();
+                }
+            }
+            reader.endObject();
+            return d;
+        }
+
+        public void write(JsonWriter writer, Diagram d) throws IOException {
+            writer.beginObject();
+            writer.name("fields").jsonValue(INTERNAL_GSON_BUILDER.toJson(d.getFields()));
+            writer.name("config").beginObject();
+            for (Option option : d.getConfig().getOptions()) {
+                writer.name(option.getKey()).value(option.getValue().toString());
+            }
+            writer.endObject();
+            writer.endObject();
+        }
     }
 
 }

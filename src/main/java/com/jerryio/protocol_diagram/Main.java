@@ -8,6 +8,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.command.IDiagramModifier;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.*;
@@ -29,6 +30,11 @@ public class Main {
             HandleResult result = cmd.handle(line);
             if (result == NOT_HANDLED)
                 continue;
+            if (result.success()) {
+                if (cmd instanceof IDiagramModifier) {
+                    FileSystem.isModified = true;
+                }
+            }
 
             return result.message();
         }
@@ -87,6 +93,13 @@ public class Main {
                 System.out.println(result.message());
                 return;
             }
+        } else if (args.source != null) {
+            diagram = FileSystem.load(args.source);
+            if (diagram == null) {
+                System.out.println("Failed to load diagram from " + args.source);
+                return;
+            }
+            FileSystem.mountedFile = args.source;
         }
 
         if (args.print) {
