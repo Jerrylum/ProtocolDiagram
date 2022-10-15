@@ -199,7 +199,6 @@ public class FileSystemTest {
             assertNull(FileSystem.resolvePath("./ ", "json"));
         else
             assertNull(FileSystem.resolvePath("\u0000", "json")); // only non-visible character is invalid on linux
-        assertNull(FileSystem.resolvePath(" ./", "json"));
         assertNull(FileSystem.resolvePath("..", "json"));
         assertNull(FileSystem.resolvePath("../", "json"));
         assertNull(FileSystem.resolvePath("./..", "json"));

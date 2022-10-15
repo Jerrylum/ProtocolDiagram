@@ -51,10 +51,6 @@ public class LoadCommandTest {
         assertFalse(cmd.handle(params).success()); // too many args
 
         params.clear();
-        params.add(Parameter.parse(new CodePointBuffer("test"))); // no .json
-        assertTrue(cmd.handle(params).success());
-
-        params.clear();
         params.add(Parameter.parse(new CodePointBuffer("123"))); // not string
         assertFalse(cmd.handle(params).success());
 
