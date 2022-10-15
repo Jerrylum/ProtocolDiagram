@@ -87,6 +87,14 @@ public class Main {
             return;
         }
 
+        if (args.template != null) {
+            args.singleLine = ExistingProtocol.getProtocol(args.template);
+            if (args.singleLine == null) {
+                System.out.println("Unknown template \"" + args.template + "\"");
+                return;
+            }
+        }
+
         if (args.singleLine != null) {
             HandleResult result = doHandleSingleLine(args.singleLine);
             if (!result.success()) {

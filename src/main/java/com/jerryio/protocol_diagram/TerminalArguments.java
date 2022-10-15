@@ -13,6 +13,9 @@ public class TerminalArguments {
     @Parameter(names = { "--single-line", "-s" }, description = "Input the protocol in a single line")
     public String singleLine = null;
 
+    @Parameter(names = { "--template", "-t" }, description = "Input existing protocol template")
+    public String template = null;
+
     @Parameter(names = { "--help", "-h" }, help = true, description = "Show this help message")
     public boolean help = false;
 }
