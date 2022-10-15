@@ -106,6 +106,26 @@ public class MainTest {
     }
 
     @Test
+    public void testTerminalTemplateFlag() {
+        Main.main(new String[] { "--template" });
+        assertTrue(out.toString().startsWith("Expected a value after parameter --template"));
+
+        out.reset();
+
+        Main.main(new String[] { "-t" });
+        assertTrue(out.toString().startsWith("Expected a value after parameter -t"));
+
+        out.reset();
+
+        Main.main(new String[] { "-t", "a" });
+        assertTrue(out.toString().startsWith("Unknown template"));
+
+        out.reset();
+
+        Main.main(new String[] { "-t", "tcp", "-p" });
+    }
+
+    @Test
     public void testTerminalSignalLineInputFlag() {
         Main.main(new String[] { "--single-line" });
         assertTrue(out.toString().startsWith("Expected a value after parameter --single-line"));
