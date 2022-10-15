@@ -18,8 +18,10 @@ public class LoadCommand extends Command {
 
     @Override
     public HandleResult handle(List<Parameter> params) {
-        if (params.size() != 1)
+        if (params.size() < 1)
             return TOO_FEW_ARGUMENTS;
+        if (params.size() > 1)
+            return TOO_MANY_ARGUMENTS;
 
         Parameter paramPath = params.get(0);
         if (!paramPath.isString())
