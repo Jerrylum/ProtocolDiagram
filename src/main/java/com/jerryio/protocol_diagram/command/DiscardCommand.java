@@ -16,7 +16,7 @@ public class DiscardCommand extends Command {
 
     @Override
     public HandleResult handle(List<Parameter> params) {
-        if (params.size() > 1)
+        if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
 
         FileSystem.mountedFile = null;
