@@ -63,9 +63,8 @@ public class MainTest {
         assertTrue(Main.doHandleCommand("unknown").startsWith(unknownCommand));
         assertTrue(Main.doHandleCommand("unknown 'something'").startsWith(unknownCommand));
 
-        assertTrue(Main.doHandleCommand("add 5 c") != null);
-
-        assertTrue(Main.doHandleCommand("view") != null);
+        assertNotNull(Main.doHandleCommand("add 5 c"));
+        assertNotNull(Main.doHandleCommand("view"));
 
         assertEquals(1, Main.diagram.getFields().size());
     }

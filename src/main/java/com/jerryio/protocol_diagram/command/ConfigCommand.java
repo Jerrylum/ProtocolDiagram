@@ -7,7 +7,7 @@ import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
-public class ConfigCommand extends Command implements ICancellable {
+public class ConfigCommand extends Command implements IDiagramModifier {
 
     public String paramKey;
     public Parameter paramValue;
@@ -32,10 +32,4 @@ public class ConfigCommand extends Command implements ICancellable {
 
         return option.setValue(this.paramValue);
     }
-
-    @Override
-    public void execute() {
-        // Nothing to do
-    }
-
 }

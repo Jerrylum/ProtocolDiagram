@@ -37,6 +37,5 @@ public class QuitCommandTest {
         QuitCommand qc = new QuitCommand();
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit test test"))), HandleResult.TOO_MANY_ARGUMENTS);
         assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
-        
     }
 }

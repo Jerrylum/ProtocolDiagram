@@ -52,6 +52,5 @@ public class ExportCommandTest {
 
         params.add(Parameter.parse(new CodePointBuffer("test.txt")));
         assertEquals(true, cmd.handle(params).success()); // save to txt
-
     }
 }

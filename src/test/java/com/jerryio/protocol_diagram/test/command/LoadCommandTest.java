@@ -67,7 +67,6 @@ public class LoadCommandTest {
         params.clear();
         params.add(Parameter.parse(new CodePointBuffer("test2.json")));
         assertFalse(cmd.handle(params).success()); // no diagram
-
     }
 
 }
