@@ -7,7 +7,7 @@ import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
-public class RenameCommand extends Command {
+public class RenameCommand extends Command implements ICancellable {
 
     public int paramIndex;
     public String paramNewName;

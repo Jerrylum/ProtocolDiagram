@@ -14,7 +14,7 @@ public class NumberTTest {
         assertEquals(number.value(), "0");
         assertEquals(number.isPositive(), true);
         assertEquals(number.isDouble(), false);
-
+        assertEquals(NumberT.parse(new CodePointBuffer("14a")).toInt(), 14);
         assertEquals(NumberT.parse(new CodePointBuffer("0")), new NumberT("0", true, false));
         assertEquals(NumberT.parse(new CodePointBuffer("-14")), new NumberT("-14", false, false));
         assertEquals(NumberT.parse(new CodePointBuffer("14")), new NumberT("14", true, false));

@@ -43,6 +43,10 @@ public class ResizeCommandTest {
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0 1 2"))),
                 HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize a 16"))),
+                HandleResult.fail("Index start from zero."));
+        assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0 a"))),
+                HandleResult.fail("New size must be a positive integer."));
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize -1 16"))),
                 HandleResult.fail("Index start from zero."));
         assertEquals(rc.handle(CommandLine.parse(new CodePointBuffer("resize 0 -1"))),

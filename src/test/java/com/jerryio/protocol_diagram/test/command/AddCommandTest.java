@@ -39,6 +39,8 @@ public class AddCommandTest {
         assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
         assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 1 test test"))),
                 HandleResult.TOO_MANY_ARGUMENTS);
+        assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add a test"))),
+                HandleResult.fail("Length must be a positive integer."));
         assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add -1 test"))),
                 HandleResult.fail("Length must be a positive integer."));
         assertEquals(ac.handle(CommandLine.parse(new CodePointBuffer("add 0 test"))),

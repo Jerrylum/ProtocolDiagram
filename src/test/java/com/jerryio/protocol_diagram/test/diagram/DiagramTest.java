@@ -1,6 +1,9 @@
 package com.jerryio.protocol_diagram.test.diagram;
 
 import com.jerryio.protocol_diagram.diagram.*;
+import com.jerryio.protocol_diagram.token.CodePointBuffer;
+import com.jerryio.protocol_diagram.token.Parameter;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -118,6 +121,51 @@ public class DiagramTest {
         dtest.addField(new Field("testadd3", 3));
         dtest.clear();
         assertEquals(dtest.size(), 0);
+    }
+
+    @Test
+    public void testReadWriteJson() {
+        Diagram d1 = new Diagram();
+
+        assertNull(Diagram.fromJson(""));
+
+        assertNull(Diagram.fromJson(null));
+
+        String empty = "{\"fields\":[]}";
+        assertEquals(Diagram.fromJson(empty).toJson(), d1.toJson());
+
+        empty = "{\"config\":{}}";
+        assertEquals(Diagram.fromJson(empty).toJson(), d1.toJson());
+
+        empty = "{\"something new\":{}}";
+        assertEquals(Diagram.fromJson(empty).toJson(), d1.toJson());
+
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
+
+        d1.addField(new Field("test4", 4));
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
+
+        d1.addField(new Field("test5", 5));
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
+
+        d1.getConfig().setValue("bit", Parameter.parse(new CodePointBuffer("8")));
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
+
+        d1.getConfig().setValue("diagram-style", Parameter.parse(new CodePointBuffer("ascii-verbose")));
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
+
+        d1.getConfig().setValue("header-style", Parameter.parse(new CodePointBuffer("full")));
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
+
+        d1.getConfig().setValue("left-space-placeholder", Parameter.parse(new CodePointBuffer("true")));
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
+
+        d1.getConfig().setValue("left-space-placeholder", Parameter.parse(new CodePointBuffer("true")));
+        d1.getConfig().setValue("header-style", Parameter.parse(new CodePointBuffer("trim")));
+        d1.getConfig().setValue("diagram-style", Parameter.parse(new CodePointBuffer("utf8-corner")));
+        d1.getConfig().setValue("bit", Parameter.parse(new CodePointBuffer("16")));
+        d1.addField(new Field("test6", 6));
+        assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
     }
 
 }

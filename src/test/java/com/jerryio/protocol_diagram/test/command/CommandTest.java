@@ -20,14 +20,7 @@ public class CommandTest {
 
             @Override
             public HandleResult handle(List<Parameter> params) {
-                // TODO Auto-generated method stub
                 return null;
-            }
-
-            @Override
-            public void execute() {
-                // TODO Auto-generated method stub
-
             }
         }
         TestCommand tc = new TestCommand();

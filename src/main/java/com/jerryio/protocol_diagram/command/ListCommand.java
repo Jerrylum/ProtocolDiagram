@@ -40,9 +40,4 @@ public class ListCommand extends Command {
 
     }
 
-    @Override
-    public void execute() {
-        // No need to do anything
-    }
-
 }
