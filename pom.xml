@@ -3,7 +3,7 @@
   <groupId>com.jerryio.protocol_diagram</groupId>
   <artifactId>ProtocolDiagram</artifactId>
   
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <name>Protocol Diagram</name>
   <inceptionYear>2022</inceptionYear>
   <packaging>jar</packaging>
