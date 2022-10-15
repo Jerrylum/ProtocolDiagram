@@ -109,11 +109,6 @@ public class Diagram {
         private static final Gson INTERNAL_GSON_BUILDER = new GsonBuilder().serializeNulls().create();
 
         public Diagram read(JsonReader reader) throws IOException {
-            if (reader.peek() == JsonToken.NULL) {
-                reader.nextNull();
-                return null;
-            }
-
             Diagram d = new Diagram();
 
             reader.beginObject();
@@ -129,6 +124,8 @@ public class Diagram {
                         d.getConfig().setValue(configName, configValue);
                     }
                     reader.endObject();
+                } else {
+                    reader.skipValue();
                 }
             }
             reader.endObject();
@@ -136,11 +133,6 @@ public class Diagram {
         }
 
         public void write(JsonWriter writer, Diagram d) throws IOException {
-            if (d == null) {
-                writer.nullValue();
-                return;
-            }
-
             writer.beginObject();
             writer.name("fields").jsonValue(INTERNAL_GSON_BUILDER.toJson(d.getFields()));
             writer.name("config").beginObject();

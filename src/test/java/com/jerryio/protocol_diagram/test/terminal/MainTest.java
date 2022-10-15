@@ -9,9 +9,11 @@ import org.junit.Test;
 import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.diagram.Field;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -31,12 +33,18 @@ public class MainTest {
 
         defaultOut = System.out;
         System.setOut(new java.io.PrintStream(out = new ByteArrayOutputStream()));
+
+        Diagram d = new Diagram();
+        d.addField(new Field("anything", 1));
+        FileSystem.save("test.json", d);
     }
 
     @After
     public void tearDown() {
         System.setIn(defaultIn);
         System.setOut(defaultOut);
+
+        new File("test.json").delete();
     }
 
     public void setInput(String input) {
@@ -56,6 +64,8 @@ public class MainTest {
         assertTrue(Main.doHandleCommand("unknown 'something'").startsWith(unknownCommand));
 
         assertTrue(Main.doHandleCommand("add 5 c") != null);
+
+        assertTrue(Main.doHandleCommand("view") != null);
 
         assertEquals(1, Main.diagram.getFields().size());
     }
@@ -126,6 +136,11 @@ public class MainTest {
         out.reset();
 
         Main.main(new String[] { "-s", "a:3", "-p" });
+    }
+
+    @Test
+    public void testTerminalLoadSource() {
+        Main.main(new String[] { "test.json", "-p" });
     }
 
     @Test
