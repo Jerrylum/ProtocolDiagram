@@ -70,8 +70,10 @@ public class RangeOptionTest {
         assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("-1"))).success());
         assertEquals("The value must be between 0 and 10.", ro.setValue(Parameter.parse(new CodePointBuffer("-1"))).message());
         assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("11"))).success());
-        assertEquals("The value must be between 0 and 10.", (ro.setValue(Parameter.parse(new CodePointBuffer("11"))).message()));
+        assertEquals("The value must be between 0 and 10.", ro.setValue(Parameter.parse(new CodePointBuffer("11"))).message());
         assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).success());
         assertEquals("The value must be an integer.", ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).message());
+        assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("a"))).success());
+        assertEquals("The value must be an integer.", ro.setValue(Parameter.parse(new CodePointBuffer("a"))).message());
     }
 }
