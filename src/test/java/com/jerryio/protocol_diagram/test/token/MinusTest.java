@@ -11,8 +11,8 @@ public class MinusTest {
     @Test
     public void testMinusValid() {
 
-        assertEquals(Minus.parse(new CodePointBuffer("-")).getClass(), Minus.class);
-        assertEquals(Minus.parse(new CodePointBuffer("- ")).getClass(), Minus.class);
+        assertEquals(Minus.class, Minus.parse(new CodePointBuffer("-")).getClass());
+        assertEquals(Minus.class, Minus.parse(new CodePointBuffer("- ")).getClass());
     }
 
     @Test

@@ -1,6 +1,8 @@
 package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,17 +42,17 @@ public class ExportCommandTest {
     public void testHandle() {
         List<Parameter> params = new ArrayList<Parameter>();
         ExportCommand cmd = new ExportCommand();
-        assertEquals(false, cmd.handle(params).success()); // too few args
+        assertFalse(cmd.handle(params).success()); // too few args
         params.add(Parameter.parse(new CodePointBuffer("test.txt")));
         params.add(Parameter.parse(new CodePointBuffer("test.txt")));
-        assertEquals(false, cmd.handle(params).success()); // too many args
+        assertFalse(cmd.handle(params).success()); // too many args
         params.clear();
 
         params.add(Parameter.parse(new CodePointBuffer("123")));
-        assertEquals(false, cmd.handle(params).success()); // not string
+        assertFalse(cmd.handle(params).success()); // not string
         params.clear();
 
         params.add(Parameter.parse(new CodePointBuffer("test.txt")));
-        assertEquals(true, cmd.handle(params).success()); // save to txt
+        assertTrue(cmd.handle(params).success()); // save to txt
     }
 }

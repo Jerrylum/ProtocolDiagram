@@ -10,11 +10,11 @@ import com.jerryio.protocol_diagram.token.NegativeInt;
 public class NegativeIntTest {
     @Test
     public void testNegativeIntValid() {
-        assertEquals(NegativeInt.parse(new CodePointBuffer("-123")), new NegativeInt("-123"));
-        assertEquals(NegativeInt.parse(new CodePointBuffer("-123abc")), new NegativeInt("-123"));
-        assertEquals(NegativeInt.parse(new CodePointBuffer("-123 ")), new NegativeInt("-123"));
-        assertEquals(NegativeInt.parse(new CodePointBuffer("-123 456")), new NegativeInt("-123"));
-        assertEquals(NegativeInt.parse(new CodePointBuffer("-3.14")), new NegativeInt("-3"));
+        assertEquals(new NegativeInt("-123"), NegativeInt.parse(new CodePointBuffer("-123")));
+        assertEquals(new NegativeInt("-123"), NegativeInt.parse(new CodePointBuffer("-123abc")));
+        assertEquals(new NegativeInt("-123"), NegativeInt.parse(new CodePointBuffer("-123 ")));
+        assertEquals(new NegativeInt("-123"), NegativeInt.parse(new CodePointBuffer("-123 456")));
+        assertEquals(new NegativeInt("-3"), NegativeInt.parse(new CodePointBuffer("-3.14")));
     }
 
     @Test
