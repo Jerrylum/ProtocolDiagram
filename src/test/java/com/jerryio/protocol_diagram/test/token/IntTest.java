@@ -10,12 +10,12 @@ import com.jerryio.protocol_diagram.token.Int;
 public class IntTest {
     @Test
     public void testIntValid() {
-        assertEquals(Int.parse(new CodePointBuffer("0")), new Int("0"));
-        assertEquals(Int.parse(new CodePointBuffer("123")), new Int("123"));
-        assertEquals(Int.parse(new CodePointBuffer("0 ")), new Int("0"));
-        assertEquals(Int.parse(new CodePointBuffer("123 ")), new Int("123"));
-        assertEquals(Int.parse(new CodePointBuffer("0.16")), new Int("0"));
-        assertEquals(Int.parse(new CodePointBuffer("3.14")), new Int("3"));
+        assertEquals(new Int("0"), Int.parse(new CodePointBuffer("0")));
+        assertEquals(new Int("123"), Int.parse(new CodePointBuffer("123")));
+        assertEquals(new Int("0"), Int.parse(new CodePointBuffer("0 ")));
+        assertEquals(new Int("123"), Int.parse(new CodePointBuffer("123 ")));
+        assertEquals(new Int("0"), Int.parse(new CodePointBuffer("0.16")));
+        assertEquals(new Int("3"), Int.parse(new CodePointBuffer("3.14")));
     }
 
     @Test

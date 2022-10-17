@@ -10,17 +10,17 @@ import com.jerryio.protocol_diagram.token.Digit1To9;
 public class Digit1To9Test {
     @Test
     public void testDigit1To9Valid() {
-        assertEquals(Digit1To9.parse(new CodePointBuffer("1")), new Digit1To9('1'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("2")), new Digit1To9('2'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("3")), new Digit1To9('3'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("4")), new Digit1To9('4'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("5")), new Digit1To9('5'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("6")), new Digit1To9('6'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("7")), new Digit1To9('7'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("8")), new Digit1To9('8'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("9")), new Digit1To9('9'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("10")), new Digit1To9('1'));
-        assertEquals(Digit1To9.parse(new CodePointBuffer("1 ")), new Digit1To9('1'));
+        assertEquals(new Digit1To9('1'), Digit1To9.parse(new CodePointBuffer("1")));
+        assertEquals(new Digit1To9('2'), Digit1To9.parse(new CodePointBuffer("2")));
+        assertEquals(new Digit1To9('3'), Digit1To9.parse(new CodePointBuffer("3")));
+        assertEquals(new Digit1To9('4'), Digit1To9.parse(new CodePointBuffer("4")));
+        assertEquals(new Digit1To9('5'), Digit1To9.parse(new CodePointBuffer("5")));
+        assertEquals(new Digit1To9('6'), Digit1To9.parse(new CodePointBuffer("6")));
+        assertEquals(new Digit1To9('7'), Digit1To9.parse(new CodePointBuffer("7")));
+        assertEquals(new Digit1To9('8'), Digit1To9.parse(new CodePointBuffer("8")));
+        assertEquals(new Digit1To9('9'), Digit1To9.parse(new CodePointBuffer("9")));
+        assertEquals(new Digit1To9('1'), Digit1To9.parse(new CodePointBuffer("10")));
+        assertEquals(new Digit1To9('1'), Digit1To9.parse(new CodePointBuffer("1 ")));
     }
 
     @Test

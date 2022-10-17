@@ -10,15 +10,15 @@ import com.jerryio.protocol_diagram.token.Token;
 public class TokenTest {
     @Test
     public void testTokenDelimiterMethods() {
-        assertEquals(Token.parse(new CodePointBuffer("")), null);
-        assertEquals(Token.isDelimiter(' '), true);
-        assertEquals(Token.isDelimiter(null), true);
-        assertEquals(Token.isDelimiter('\''), false);
-        assertEquals(Token.isSafeDelimiter(null), true);
-        assertEquals(Token.isSafeDelimiter(' '), true);
-        assertEquals(Token.isSafeDelimiter(':'), true);
-        assertEquals(Token.isSafeDelimiter(','), true);
-        assertEquals(Token.isSafeDelimiter('\''), false);
+        assertNull(Token.parse(new CodePointBuffer("")));
+        assertTrue(Token.isDelimiter(' '));
+        assertTrue(Token.isDelimiter(null));
+        assertFalse(Token.isDelimiter('\''));
+        assertTrue(Token.isSafeDelimiter(null));
+        assertTrue(Token.isSafeDelimiter(' '));
+        assertTrue(Token.isSafeDelimiter(':'));
+        assertTrue(Token.isSafeDelimiter(','));
+        assertFalse(Token.isSafeDelimiter('\''));
         assertNull(Token.doNewInstance(null, null));
         assertNull(Token.doNewInstance(Token.class, null));
     }

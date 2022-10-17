@@ -1,6 +1,8 @@
 package com.jerryio.protocol_diagram.test.config;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -12,69 +14,66 @@ public class RangeOptionTest {
     @Test
     public void testRangeOptionGet() {
         RangeOption ro = new RangeOption("test", 1, 0, 10);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.getValue(), (Integer) 1);
-        assertEquals(ro.getUsageDescription(), "min:0 max:10 default:1");
-        assertEquals(ro.getKey(), "test");
+        assertEquals((Integer) 1, ro.getDefault());
+        assertEquals((Integer) 1, ro.getValue());
+        assertEquals("min:0 max:10 default:1", ro.getUsageDescription());
+        assertEquals("test", ro.getKey());
 
     }
 
     @Test
     public void testRangeOptionSetInteger() {
         RangeOption ro = new RangeOption("test", 1, 0, 10);
-        assertEquals(ro.setValue(5).success(), true);
-        assertEquals(ro.getValue(), (Integer) 5);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(5).success(), false);
-        assertEquals(ro.setValue(5).message(), "It is already 5.");
-        assertEquals(ro.setValue(0).message(), "Set \"test\" from 5 to 0.");
-        assertEquals(ro.getValue(), (Integer) 0);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(10).message(), "Set \"test\" from 0 to 10.");
-        assertEquals(ro.getValue(), (Integer) 10);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(1).message(), "Set \"test\" from 10 to 1.");
-        assertEquals(ro.getValue(), (Integer) 1);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(9).message(), "Set \"test\" from 1 to 9.");
-        assertEquals(ro.getValue(), (Integer) 9);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(-1).success(), false);
-        assertEquals(ro.setValue(-1).message(), "The value must be between 0 and 10.");
-        assertEquals(ro.setValue(11).success(), false);
-        assertEquals(ro.setValue(11).message(), "The value must be between 0 and 10.");
+        assertTrue(ro.setValue(5).success());
+        assertEquals((Integer) 5, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertFalse(ro.setValue(5).success());
+        assertEquals("It is already 5.", ro.setValue(5).message());
+        assertEquals("Set \"test\" from 5 to 0.", ro.setValue(0).message());
+        assertEquals((Integer) 0, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertEquals("Set \"test\" from 0 to 10.", ro.setValue(10).message());
+        assertEquals((Integer) 10, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertEquals("Set \"test\" from 10 to 1.", ro.setValue(1).message());
+        assertEquals((Integer) 1, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertEquals("Set \"test\" from 1 to 9.", ro.setValue(9).message());
+        assertEquals((Integer) 9, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertFalse(ro.setValue(-1).success());
+        assertEquals("The value must be between 0 and 10.", ro.setValue(-1).message());
+        assertFalse(ro.setValue(11).success());
+        assertEquals("The value must be between 0 and 10.", ro.setValue(11).message());
     }
 
     @Test
     public void testRangeOptionSetParameter() {
         RangeOption ro = new RangeOption("test", 1, 0, 10);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("5"))).success(), true);
-        assertEquals(ro.getValue(), (Integer) 5);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("5"))).success(), false);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("5"))).message(), "It is already 5.");
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("0"))).message(), "Set \"test\" from 5 to 0.");
-        assertEquals(ro.getValue(), (Integer) 0);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("10"))).message(), "Set \"test\" from 0 to 10.");
-        assertEquals(ro.getValue(), (Integer) 10);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("1"))).message(), "Set \"test\" from 10 to 1.");
-        assertEquals(ro.getValue(), (Integer) 1);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("9"))).message(), "Set \"test\" from 1 to 9.");
-        assertEquals(ro.getValue(), (Integer) 9);
-        assertEquals(ro.getDefault(), (Integer) 1);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("-1"))).success(), false);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("-1"))).message(),
-                "The value must be between 0 and 10.");
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("11"))).success(), false);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("11"))).message(),
-                "The value must be between 0 and 10.");
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).success(), false);
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).message(),
-                "The value must be an integer.");
-        assertEquals(ro.setValue(Parameter.parse(new CodePointBuffer("a"))).message(),
-                "The value must be an integer.");
+        assertTrue(ro.setValue(Parameter.parse(new CodePointBuffer("5"))).success());
+        assertEquals((Integer) 5, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("5"))).success());
+        assertEquals("It is already 5.", ro.setValue(Parameter.parse(new CodePointBuffer("5"))).message());
+        assertEquals("Set \"test\" from 5 to 0.", ro.setValue(Parameter.parse(new CodePointBuffer("0"))).message());
+        assertEquals((Integer) 0, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertEquals("Set \"test\" from 0 to 10.", ro.setValue(Parameter.parse(new CodePointBuffer("10"))).message());
+        assertEquals((Integer) 10, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertEquals("Set \"test\" from 10 to 1.", ro.setValue(Parameter.parse(new CodePointBuffer("1"))).message());
+        assertEquals((Integer) 1, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertEquals("Set \"test\" from 1 to 9.", ro.setValue(Parameter.parse(new CodePointBuffer("9"))).message());
+        assertEquals((Integer) 9, ro.getValue());
+        assertEquals((Integer) 1, ro.getDefault());
+        assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("-1"))).success());
+        assertEquals("The value must be between 0 and 10.", ro.setValue(Parameter.parse(new CodePointBuffer("-1"))).message());
+        assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("11"))).success());
+        assertEquals("The value must be between 0 and 10.", ro.setValue(Parameter.parse(new CodePointBuffer("11"))).message());
+        assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).success());
+        assertEquals("The value must be an integer.", ro.setValue(Parameter.parse(new CodePointBuffer("1.1"))).message());
+        assertFalse(ro.setValue(Parameter.parse(new CodePointBuffer("a"))).success());
+        assertEquals("The value must be an integer.", ro.setValue(Parameter.parse(new CodePointBuffer("a"))).message());
     }
 }

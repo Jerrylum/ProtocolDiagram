@@ -1,6 +1,7 @@
 package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -13,13 +14,12 @@ public class HelpCommandTest {
     @Test
     public void testHelpCommandHandleSuccess() {
         HelpCommand hc = new HelpCommand();
-
-        assertEquals(hc.handle(CommandLine.parse(new CodePointBuffer("help"))).success(), true);
+        assertTrue(hc.handle(CommandLine.parse(new CodePointBuffer("help"))).success());
     }
 
     @Test
     public void testHelpCommandHandleFail() {
         HelpCommand hc = new HelpCommand();
-        assertEquals(hc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
+        assertEquals(HandleResult.NOT_HANDLED, hc.handle(CommandLine.parse(new CodePointBuffer("test"))));
     }
 }

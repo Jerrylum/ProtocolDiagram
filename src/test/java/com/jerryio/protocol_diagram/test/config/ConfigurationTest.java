@@ -1,6 +1,9 @@
 package com.jerryio.protocol_diagram.test.config;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +30,19 @@ public class ConfigurationTest {
         list.add(ro2);
         Configuration c = new Configuration(bo, bo2, eo, ro, ro2);
         assertEquals(c.getOptions(), list);
-        assertEquals(c.getValue("test"), true);
-        assertEquals(c.getValue("test2"), false);
-        assertEquals(c.getValue("test3"), "test");
-        assertEquals(c.getValue("test4"), 1);
-        assertEquals(c.getValue("key"), -1);
-        assertEquals(c.getValue("null"), null);
-        assertEquals(c.getOption("test"), bo);
-        assertEquals(c.getOption("test2"), bo2);
-        assertEquals(c.getOption("test3"), eo);
-        assertEquals(c.getOption("test4"), ro);
-        assertEquals(c.getOption("null"), null);
-        assertEquals(c.getOption("ke"), ro2);
-        assertEquals(c.getOption("tes"), null);
+        assertEquals(true, c.getValue("test"));
+        assertEquals(false, c.getValue("test2"));
+        assertEquals("test", c.getValue("test3"));
+        assertEquals(1, c.getValue("test4"));
+        assertEquals(-1, c.getValue("key"));
+        assertNull(c.getValue("null"));
+        assertEquals(bo, c.getOption("test"));
+        assertEquals(bo2, c.getOption("test2"));
+        assertEquals(eo, c.getOption("test3"));
+        assertEquals(ro, c.getOption("test4"));
+        assertNull(c.getOption("null"));
+        assertEquals(ro2, c.getOption("ke"));
+        assertNull(c.getOption("tes"));
     }
 
     @Test
@@ -49,11 +52,11 @@ public class ConfigurationTest {
         EnumOption eo = new EnumOption("test3", "test", "test", "test2");
         RangeOption ro = new RangeOption("test4", 1, 1, 10);
         Configuration c = new Configuration(bo, bo2, eo, ro);
-        assertEquals(c.setValue("test", Parameter.parse(new CodePointBuffer("false"))).success(), true);
-        assertEquals(c.setValue("test2", Parameter.parse(new CodePointBuffer("true"))).success(), true);
-        assertEquals(c.setValue("test3", Parameter.parse(new CodePointBuffer("test2"))).success(), true);
-        assertEquals(c.setValue("test4", Parameter.parse(new CodePointBuffer("5"))).success(), true);
-        assertEquals(c.setValue("null", Parameter.parse(new CodePointBuffer("5"))).success(), false);
+        assertTrue(c.setValue("test", Parameter.parse(new CodePointBuffer("false"))).success());
+        assertTrue(c.setValue("test2", Parameter.parse(new CodePointBuffer("true"))).success());
+        assertTrue(c.setValue("test3", Parameter.parse(new CodePointBuffer("test2"))).success());
+        assertTrue(c.setValue("test4", Parameter.parse(new CodePointBuffer("5"))).success());
+        assertFalse(c.setValue("null", Parameter.parse(new CodePointBuffer("5"))).success());
     }
 
 }

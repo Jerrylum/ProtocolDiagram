@@ -10,24 +10,24 @@ import com.jerryio.protocol_diagram.token.Parameter;
 public class ParameterTest {
     @Test
     public void testParameterValid() {
-        assertEquals(Parameter.parse(new CodePointBuffer("True")).getBoolean(), true);
-        assertEquals(Parameter.parse(new CodePointBuffer("False")).getBoolean(), false);
-        assertEquals(Parameter.parse(new CodePointBuffer("123")).getInt(), 123);
-        assertEquals(Parameter.parse(new CodePointBuffer("123.456")).getDouble(), 123.456, 0.0001);
-        assertEquals(Parameter.parse(new CodePointBuffer("Hello World")).getString(), "Hello");
-        assertEquals(Parameter.parse(new CodePointBuffer("0")).getInt(), 0);
-        assertEquals(Parameter.parse(new CodePointBuffer("0.0")).getDouble(), 0.0, 0.0001);
-        assertEquals(Parameter.parse(new CodePointBuffer("-14")).getInt(), -14);
-        assertEquals(Parameter.parse(new CodePointBuffer("-14.0")).getDouble(), -14.0, 0.0001);
-        assertEquals(Parameter.parse(new CodePointBuffer("\"14\"")).getString(), "14");
-        assertEquals(Parameter.parse(new CodePointBuffer("\"14.0\"")).getString(), "14.0");
-        assertEquals(Parameter.parse(new CodePointBuffer("\"-14\"")).getString(), "-14");
-        assertEquals(Parameter.parse(new CodePointBuffer("\"-14.0\"")).getString(), "-14.0");
-        assertEquals(Parameter.parse(new CodePointBuffer("'14'")).getString(), "14");
-        assertEquals(Parameter.parse(new CodePointBuffer("'14.0'")).getString(), "14.0");
-        assertEquals(Parameter.parse(new CodePointBuffer("'-14'")).getString(), "-14");
-        assertEquals(Parameter.parse(new CodePointBuffer("'-14.0'")).getString(), "-14.0");
-        assertEquals(Parameter.parse(new CodePointBuffer("3.14h")).toString(), "3.14h");
+        assertTrue(Parameter.parse(new CodePointBuffer("True")).getBoolean());
+        assertFalse(Parameter.parse(new CodePointBuffer("False")).getBoolean());
+        assertEquals(123, Parameter.parse(new CodePointBuffer("123")).getInt());
+        assertEquals(123.456, Parameter.parse(new CodePointBuffer("123.456")).getDouble(), 0.0001);
+        assertEquals("Hello", Parameter.parse(new CodePointBuffer("Hello World")).getString());
+        assertEquals(0, Parameter.parse(new CodePointBuffer("0")).getInt());
+        assertEquals(0.0, Parameter.parse(new CodePointBuffer("0.0")).getDouble(), 0.0001);
+        assertEquals(-14, Parameter.parse(new CodePointBuffer("-14")).getInt());
+        assertEquals(-14.0, Parameter.parse(new CodePointBuffer("-14.0")).getDouble(), 0.0001);
+        assertEquals("14", Parameter.parse(new CodePointBuffer("\"14\"")).getString());
+        assertEquals("14.0", Parameter.parse(new CodePointBuffer("\"14.0\"")).getString());
+        assertEquals("-14", Parameter.parse(new CodePointBuffer("\"-14\"")).getString());
+        assertEquals("-14.0", Parameter.parse(new CodePointBuffer("\"-14.0\"")).getString());
+        assertEquals("14", (Parameter.parse(new CodePointBuffer("'14'")).getString()));
+        assertEquals("14.0", Parameter.parse(new CodePointBuffer("'14.0'")).getString());
+        assertEquals("-14", Parameter.parse(new CodePointBuffer("'-14'")).getString());
+        assertEquals("-14.0", Parameter.parse(new CodePointBuffer("'-14.0'")).getString());
+        assertEquals("3.14h", Parameter.parse(new CodePointBuffer("3.14h")).toString());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ParameterTest {
         assertFalse(p.isNumber());
         assertFalse(p.isDouble());
         assertFalse(p.isString());
-        assertEquals(p.toString(), "true");
+        assertEquals("true", p.toString());
 
         p = Parameter.parse(new CodePointBuffer("123"));
 
@@ -81,7 +81,7 @@ public class ParameterTest {
         assertTrue(p.isNumber());
         assertFalse(p.isDouble());
         assertFalse(p.isString());
-        assertEquals(p.toString(), "123");
+        assertEquals("123", p.toString());
 
         p = Parameter.parse(new CodePointBuffer("123.456"));
 
@@ -89,7 +89,7 @@ public class ParameterTest {
         assertTrue(p.isNumber());
         assertTrue(p.isDouble());
         assertFalse(p.isString());
-        assertEquals(p.toString(), "123.456");
+        assertEquals("123.456", p.toString());
 
         p = Parameter.parse(new CodePointBuffer("'Hello'"));
 
@@ -97,6 +97,6 @@ public class ParameterTest {
         assertFalse(p.isNumber());
         assertFalse(p.isDouble());
         assertTrue(p.isString());
-        assertEquals(p.toString(), "Hello");
+        assertEquals("Hello", p.toString());
     }
 }

@@ -1,6 +1,7 @@
 package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,9 @@ public class CommandTest {
             }
         }
         TestCommand tc = new TestCommand();
-        assertEquals(tc.getName(), "test");
-        assertEquals(tc.getUsage(), "test usage");
-        assertEquals(tc.getDescription(), "test description");
-        assertEquals(tc.handle(new ArrayList<Parameter>()), null);
+        assertEquals("test", tc.getName());
+        assertEquals("test usage", tc.getUsage());
+        assertEquals("test description", tc.getDescription());
+        assertNull(tc.handle(new ArrayList<Parameter>()));
     }
 }

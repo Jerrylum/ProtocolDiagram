@@ -1,6 +1,8 @@
 package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,8 +43,8 @@ public class DiscardCommandTest {
         List<Parameter> params = new ArrayList<Parameter>();
         DiscardCommand cmd = new DiscardCommand();
         params.add(Parameter.parse(new CodePointBuffer("test")));
-        assertEquals(false, cmd.handle(params).success()); // have args
+        assertFalse(cmd.handle(params).success()); // have args
         params.clear();
-        assertEquals(true, cmd.handle(params).success()); // no args
+        assertTrue( cmd.handle(params).success()); // no args
     }
 }

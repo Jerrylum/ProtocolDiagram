@@ -10,12 +10,12 @@ import com.jerryio.protocol_diagram.token.Frac;
 public class FracTest {
     @Test
     public void testFracValid() {
-        assertEquals(Frac.parse(new CodePointBuffer(".14")), new Frac(".14"));
-        assertEquals(Frac.parse(new CodePointBuffer(".14.15")), new Frac(".14"));
-        assertEquals(Frac.parse(new CodePointBuffer(".14 ")), new Frac(".14"));
-        assertEquals(Frac.parse(new CodePointBuffer(".14abc")), new Frac(".14"));
-        assertEquals(Frac.parse(new CodePointBuffer(".14\\")), new Frac(".14"));
-        assertEquals(Frac.parse(new CodePointBuffer(".14\'")), new Frac(".14"));
+        assertEquals(new Frac(".14"), Frac.parse(new CodePointBuffer(".14")));
+        assertEquals(new Frac(".14"), Frac.parse(new CodePointBuffer(".14.15")));
+        assertEquals(new Frac(".14"), Frac.parse(new CodePointBuffer(".14 ")));
+        assertEquals(new Frac(".14"), Frac.parse(new CodePointBuffer(".14abc")));
+        assertEquals(new Frac(".14"), Frac.parse(new CodePointBuffer(".14\\")));
+        assertEquals(new Frac(".14"), Frac.parse(new CodePointBuffer(".14\'")));
     }
 
     @Test

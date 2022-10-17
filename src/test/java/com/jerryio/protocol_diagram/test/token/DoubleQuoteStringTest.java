@@ -11,22 +11,17 @@ public class DoubleQuoteStringTest {
     @Test
     public void testDoubleQuoteStringValid() {
         DoubleQuoteString t = new DoubleQuoteString("\"test\"", "test");
-        assertEquals(t.value(), "\"test\"");
-        assertEquals(t.content(), "test");
+        assertEquals("\"test\"", t.value());
+        assertEquals("test", t.content());
 
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\"")), new DoubleQuoteString("\"\\\\\"", "\\")); // \
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\"\"")), new DoubleQuoteString("\"\\\"\"", "\"")); // \"
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\"\"")),
-                new DoubleQuoteString("\"\\\\\\\"\"", "\\\"")); // \\"
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\\\"")),
-                new DoubleQuoteString("\"\\\\\\\\\"", "\\\\")); // \\
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\"")),
-                new DoubleQuoteString("\"test\\\\\"", "test\\")); // test\
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\"\"")),
-                new DoubleQuoteString("\"test\\\"\"", "test\"")); // test\"
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\\\"\"")),
-                new DoubleQuoteString("\"test\\\\\\\"\"", "test\\\"")); // test\\"
-        assertEquals(DoubleQuoteString.parse(new CodePointBuffer("\"\"")), new DoubleQuoteString("\"\"", "")); // empty
+        assertEquals(new DoubleQuoteString("\"\\\\\"", "\\"), DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\""))); // \
+        assertEquals(new DoubleQuoteString("\"\\\"\"", "\""), DoubleQuoteString.parse(new CodePointBuffer("\"\\\"\""))); // \"
+        assertEquals(new DoubleQuoteString("\"\\\\\\\"\"", "\\\""), DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\"\""))); // \\"
+        assertEquals(new DoubleQuoteString("\"\\\\\\\\\"", "\\\\"), DoubleQuoteString.parse(new CodePointBuffer("\"\\\\\\\\\""))); // \\
+        assertEquals(new DoubleQuoteString("\"test\\\\\"", "test\\"), DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\""))); // test\
+        assertEquals(new DoubleQuoteString("\"test\\\"\"", "test\""), DoubleQuoteString.parse(new CodePointBuffer("\"test\\\"\""))); // test\"
+        assertEquals(new DoubleQuoteString("\"test\\\\\\\"\"", "test\\\""), DoubleQuoteString.parse(new CodePointBuffer("\"test\\\\\\\"\""))); // test\\"
+        assertEquals(new DoubleQuoteString("\"\"", ""), DoubleQuoteString.parse(new CodePointBuffer("\"\""))); // empty
     }
 
     @Test

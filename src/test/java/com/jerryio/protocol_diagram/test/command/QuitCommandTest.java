@@ -1,6 +1,7 @@
 package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
@@ -24,9 +25,9 @@ public class QuitCommandTest {
     
         FileSystem.isModified = true;
 
-        assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit"))).success(), false);
-        assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit any"))).success(), false);
-        assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit 123"))).success(), false);
+        assertFalse(qc.handle(CommandLine.parse(new CodePointBuffer("quit"))).success());
+        assertFalse(qc.handle(CommandLine.parse(new CodePointBuffer("quit any"))).success());
+        assertFalse(qc.handle(CommandLine.parse(new CodePointBuffer("quit 123"))).success());
         assertThrows(RuntimeException.class, () -> qc.handle(CommandLine.parse(new CodePointBuffer("quit force"))));
         
         FileSystem.isModified = false;
@@ -35,7 +36,7 @@ public class QuitCommandTest {
     @Test
     public void testQuitCommandHandleFail() {
         QuitCommand qc = new QuitCommand();
-        assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("quit test test"))), HandleResult.TOO_MANY_ARGUMENTS);
-        assertEquals(qc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
+        assertEquals(HandleResult.TOO_MANY_ARGUMENTS, qc.handle(CommandLine.parse(new CodePointBuffer("quit test test"))));
+        assertEquals(HandleResult.NOT_HANDLED, qc.handle(CommandLine.parse(new CodePointBuffer("test"))));
     }
 }
