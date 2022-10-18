@@ -1,5 +1,7 @@
 package com.jerryio.protocol_diagram.util;
 
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,8 +12,6 @@ import java.nio.file.Paths;
 
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Diagram;
-
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class FileUtils {
 

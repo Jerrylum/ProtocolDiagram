@@ -6,12 +6,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.command.ListCommand;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.command.commands.ListCommand;
 
 public class ListCommandTest {
     @Before

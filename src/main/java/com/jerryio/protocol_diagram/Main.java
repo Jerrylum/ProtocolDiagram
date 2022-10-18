@@ -2,18 +2,19 @@ package com.jerryio.protocol_diagram;
 
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
+
 import java.util.Scanner;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import com.jerryio.protocol_diagram.command.CancellableCommand;
 import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
-import com.jerryio.protocol_diagram.command.ICancellable;
-import com.jerryio.protocol_diagram.command.IDiagramModifier;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.diagram.IDiagramModifier;
 import com.jerryio.protocol_diagram.token.*;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class Main {
 
@@ -33,7 +34,7 @@ public class Main {
             if (result == NOT_HANDLED)
                 continue;
             if (result.success()) {
-                if (cmd instanceof ICancellable cb) {
+                if (cmd instanceof CancellableCommand cb) {
                     // ICancellable modifies the diagram and can be cancelled, it should be added to
                     // timeline.
                     handler.operate(cb);

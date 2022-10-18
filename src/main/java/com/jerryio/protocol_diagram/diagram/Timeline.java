@@ -2,13 +2,11 @@ package com.jerryio.protocol_diagram.diagram;
 
 import java.util.Stack;
 
-import com.jerryio.protocol_diagram.command.ICancellable;
-
-public class Timeline {
+public class Timeline<T extends ICancellable> {
     private Diagram diagram;
     private Diagram.Memento latest;
-    private Stack<Snapshot> undoStack;
-    private Stack<ICancellable> redoStack;
+    private Stack<Snapshot<T>> undoStack;
+    private Stack<T> redoStack;
 
     public Timeline(Diagram diagram) {
         this.diagram = diagram;
@@ -31,32 +29,32 @@ public class Timeline {
         latest = getDiagram().createMemento();
     }
 
-    public void operate(ICancellable command) {
-        undoStack.push(new Snapshot(latest, command));
+    public void operate(T modifier) {
+        undoStack.push(new Snapshot<T>(latest, modifier));
         redoStack.clear();
         latest = getDiagram().createMemento();
     }
 
-    public ICancellable undo() {
+    public T undo() {
         if (undoStack.isEmpty())
             return null;
 
-        Snapshot snapshot = undoStack.pop();
-        redoStack.push(snapshot.command());
+        Snapshot<T> snapshot = undoStack.pop();
+        redoStack.push(snapshot.modifier());
         getDiagram().restoreFromMemento(latest = snapshot.origin());
 
-        return snapshot.command();
+        return snapshot.modifier();
     }
 
-    public ICancellable redo() {
+    public T redo() {
         if (redoStack.isEmpty())
             return null;
 
-        ICancellable command = redoStack.pop();
-        command.execute();
-        undoStack.push(new Snapshot(latest, command));
+        T modifier = redoStack.pop();
+        modifier.execute();
+        undoStack.push(new Snapshot<T>(latest, modifier));
         latest = getDiagram().createMemento();
 
-        return command;
+        return modifier;
     }
 }

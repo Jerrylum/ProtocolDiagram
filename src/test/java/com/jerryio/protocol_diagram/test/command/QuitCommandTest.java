@@ -11,7 +11,7 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
-import com.jerryio.protocol_diagram.command.QuitCommand;
+import com.jerryio.protocol_diagram.command.commands.QuitCommand;
 
 public class QuitCommandTest {
     @Before

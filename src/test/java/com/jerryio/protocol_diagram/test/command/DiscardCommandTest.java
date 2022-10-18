@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.jerryio.protocol_diagram.Main;
-import com.jerryio.protocol_diagram.command.DiscardCommand;
+import com.jerryio.protocol_diagram.command.commands.DiscardCommand;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Parameter;

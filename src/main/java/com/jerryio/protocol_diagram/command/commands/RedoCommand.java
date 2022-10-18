@@ -1,10 +1,14 @@
-package com.jerryio.protocol_diagram.command;
+package com.jerryio.protocol_diagram.command.commands;
+
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.util.List;
 
 import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.command.CancellableCommand;
+import com.jerryio.protocol_diagram.command.Command;
+import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class RedoCommand extends Command {
     
@@ -17,11 +21,11 @@ public class RedoCommand extends Command {
         if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
         
-        ICancellable command = Main.handler.redo();
+        CancellableCommand command = Main.handler.redo();
         if (command == null)
             return fail("Nothing to redo");
         else
-            return success("Redo " + ((Command)command).getName());
+            return success("Redo " + command.getName());
     }
     
 }

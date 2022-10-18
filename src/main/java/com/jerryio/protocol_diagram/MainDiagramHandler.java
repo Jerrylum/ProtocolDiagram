@@ -1,13 +1,14 @@
 package com.jerryio.protocol_diagram;
 
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
+
+import com.jerryio.protocol_diagram.command.CancellableCommand;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Timeline;
 import com.jerryio.protocol_diagram.util.FileUtils;
 
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
-
-public final class MainDiagramHandler extends Timeline {
+public final class MainDiagramHandler extends Timeline<CancellableCommand> {
 
     // non-normalized path input by user, null means no file is mounted
     private String sourceFilePath;

@@ -1,8 +1,9 @@
 package com.jerryio.protocol_diagram.config;
 
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
+
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class BooleanOption extends Option {
 

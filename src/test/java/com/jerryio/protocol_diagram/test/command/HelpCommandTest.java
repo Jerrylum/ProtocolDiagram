@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.command.HelpCommand;
+import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.command.commands.HelpCommand;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
-import com.jerryio.protocol_diagram.command.HandleResult;
 
 public class HelpCommandTest {
     @Test

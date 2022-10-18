@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.command.ConfigCommand;
+import com.jerryio.protocol_diagram.command.commands.ConfigCommand;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 
