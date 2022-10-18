@@ -8,15 +8,18 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.command.ICancellable;
 import com.jerryio.protocol_diagram.command.IDiagramModifier;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.diagram.Timeline;
 import com.jerryio.protocol_diagram.token.*;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class Main {
 
     public static Diagram diagram = new Diagram();
+    public static final Timeline timeline = new MainTimeline();
 
     public static String doHandleCommand(String input) {
         CodePointBuffer buffer = new CodePointBuffer(input);
@@ -31,7 +34,14 @@ public class Main {
             if (result == NOT_HANDLED)
                 continue;
             if (result.success()) {
-                if (cmd instanceof IDiagramModifier) {
+                if (cmd instanceof ICancellable cb) {
+                    // ICancellable modifies the diagram and can be cancelled, it should be added to
+                    // timeline.
+                    timeline.add(cb);
+                } else if (cmd instanceof IDiagramModifier) { // IDiagramModifier but not ICancellable
+                    // IDiagramModifier modifies the diagram but cannot be undone, for example,
+                    // config changes. It should not be added to timeline. However, it counts as a
+                    // modification, so the diagram should be marked as modified.
                     FileSystem.isModified = true;
                 }
             }
@@ -107,7 +117,9 @@ public class Main {
                 System.out.println("Failed to load diagram from " + args.source);
                 return;
             }
+            timeline.reset();
             FileSystem.mountedFile = args.source;
+            FileSystem.fileMemento = Main.timeline.getLatestMemento();
         }
 
         if (args.print) {

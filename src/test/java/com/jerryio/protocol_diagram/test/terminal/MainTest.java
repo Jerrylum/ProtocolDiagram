@@ -26,7 +26,9 @@ public class MainTest {
     @Before
     public void setup() {
         Main.diagram = new Diagram();
+        Main.timeline.reset();
         FileSystem.mountedFile = null;
+        FileSystem.fileMemento = null;
         FileSystem.isModified = false;
 
         defaultIn = System.in;

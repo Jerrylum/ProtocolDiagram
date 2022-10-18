@@ -16,7 +16,12 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 public class FileSystem {
 
     public static String mountedFile = null;
+    public static Diagram.Memento fileMemento = null;
     public static boolean isModified = false;
+
+    public static boolean isChanged() {
+        return isModified || (fileMemento != null && fileMemento != Main.timeline.getLatestMemento());
+    }
 
     public static File resolvePath(String path, String suggestedExt) {
         if (path.isEmpty())

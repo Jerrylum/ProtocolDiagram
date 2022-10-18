@@ -41,6 +41,7 @@ public class SaveCommand extends Command {
         HandleResult result = FileSystem.save(path, Main.diagram);
         if (result.success()) {
             FileSystem.mountedFile = path;
+            FileSystem.fileMemento = Main.timeline.getLatestMemento();
             FileSystem.isModified = false;
         }
 

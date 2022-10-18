@@ -39,7 +39,9 @@ public class LoadCommand extends Command {
             return fail("Failed to load diagram from " + path);
         } else {
             Main.diagram = diagram;
+            Main.timeline.reset();
             FileSystem.mountedFile = path;
+            FileSystem.fileMemento = Main.timeline.getLatestMemento();
             FileSystem.isModified = false;
             return success("Now editing " + path + "\n\n" + diagram.toString());
         }

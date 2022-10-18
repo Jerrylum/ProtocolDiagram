@@ -55,9 +55,11 @@ public abstract class Command {
                 new LoadCommand(),
                 new MoveCommand(),
                 new QuitCommand(),
+                new RedoCommand(),
                 new RenameCommand(),
                 new ResizeCommand(),
                 new SaveCommand(),
+                new UndoCommand(),
                 new ViewCommand());
     }
 

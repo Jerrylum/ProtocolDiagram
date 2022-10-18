@@ -93,7 +93,7 @@ public class Diagram {
         }
     }
 
-    public Memento saveToMemento() {
+    public Memento createMemento() {
         return new Memento(this);
     }
 

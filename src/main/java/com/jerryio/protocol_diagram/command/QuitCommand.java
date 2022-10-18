@@ -21,7 +21,7 @@ public class QuitCommand extends Command {
                 params.get(0).isString() &&
                 params.get(0).getString().equals("force");
 
-        if (!FileSystem.isModified || isForceQuit)
+        if (!FileSystem.isChanged() || isForceQuit)
             throw new RuntimeException(); // Quit the program
         else
             return fail("Unsaved changes. Please save the diagram first or use \"quit force\" to quit without saving.");
