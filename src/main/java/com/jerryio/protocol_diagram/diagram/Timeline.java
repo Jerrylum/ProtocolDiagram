@@ -14,6 +14,7 @@ public class Timeline {
         this.diagram = diagram;
         this.undoStack = new Stack<>();
         this.redoStack = new Stack<>();
+        reset();
     }
 
     public Diagram getDiagram() {
