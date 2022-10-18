@@ -12,7 +12,7 @@ public class MarkableRow extends Row {
 		this.children = new ArrayList<MarkableSegment>();
 
 		for (int i = 0, length = 0; length < row.getLength(); i++) {
-			final MarkableSegment seg = new MarkableSegment(this.get(i), false);
+			final MarkableSegment seg = new MarkableSegment(row.get(i), false);
 
 			this.children.add(seg);
 			length += seg.getLength();

@@ -92,13 +92,15 @@ public class Diagram {
 
         // TODO: assign/arrange field name into segment
         // add dividers/membranes between segments
-        final var m = MixedMatrix.create(
-            // chunk fields into segments by row
-            new Matrix(width) {{
-                for (Field f: fields) {
-                    this.add(f);
-                }
-            }}
+        final var m = MarkableMatrix.create(
+            MixedMatrix.create(
+                // chunk fields into segments by row
+                new Matrix(width) {{
+                    for (Field f: fields) {
+                        this.add(f);
+                    }
+                }}
+            )
         );
 
         return m.toString();
