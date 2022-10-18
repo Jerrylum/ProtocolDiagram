@@ -2,10 +2,8 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.token.Parameter;
-import com.jerryio.protocol_diagram.util.FileUtils;
 
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
@@ -32,22 +30,15 @@ public class SaveCommand extends Command {
         }
 
         if (path == null) {
-            if (FileSystem.mountedFile == null)
+            if (Main.handler.getSourceFilePath() == null)
                 return fail("You are not editing a file. Please specify a path to save the file.");
 
-            path = FileSystem.mountedFile;
+            path = Main.handler.getSourceFilePath();
         }
 
         this.paramPath = path;
 
-        HandleResult result = FileUtils.save(path, Main.diagram);
-        if (result.success()) {
-            FileSystem.mountedFile = path;
-            FileSystem.fileMemento = Main.timeline.getLatestMemento();
-            FileSystem.isModified = false;
-        }
-
-        return result;
+        return Main.handler.save(path);
     }
 
 }

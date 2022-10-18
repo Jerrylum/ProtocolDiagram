@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.jerryio.protocol_diagram.command.RenameCommand;
-import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
@@ -17,7 +16,7 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 public class RenameCommandTest {
     @Before
     public void setUp() {
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
     }
 
     @Test

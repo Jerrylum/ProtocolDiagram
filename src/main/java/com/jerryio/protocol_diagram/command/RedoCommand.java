@@ -17,7 +17,7 @@ public class RedoCommand extends Command {
         if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
         
-        ICancellable command = Main.timeline.redo();
+        ICancellable command = Main.handler.redo();
         if (command == null)
             return fail("Nothing to redo");
         else

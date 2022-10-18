@@ -1,7 +1,6 @@
 package com.jerryio.protocol_diagram;
 
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
-import com.jerryio.protocol_diagram.util.FileUtils;
 
 import java.util.Scanner;
 
@@ -13,14 +12,13 @@ import com.jerryio.protocol_diagram.command.ICancellable;
 import com.jerryio.protocol_diagram.command.IDiagramModifier;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
-import com.jerryio.protocol_diagram.diagram.Timeline;
 import com.jerryio.protocol_diagram.token.*;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class Main {
 
     public static Diagram diagram = new Diagram();
-    public static final Timeline timeline = new MainTimeline();
+    public static final MainDiagramHandler handler = new MainDiagramHandler();
 
     public static String doHandleCommand(String input) {
         CodePointBuffer buffer = new CodePointBuffer(input);
@@ -38,12 +36,12 @@ public class Main {
                 if (cmd instanceof ICancellable cb) {
                     // ICancellable modifies the diagram and can be cancelled, it should be added to
                     // timeline.
-                    timeline.add(cb);
+                    handler.operate(cb);
                 } else if (cmd instanceof IDiagramModifier) { // IDiagramModifier but not ICancellable
                     // IDiagramModifier modifies the diagram but cannot be undone, for example,
                     // config changes. It should not be added to timeline. However, it counts as a
                     // modification, so the diagram should be marked as modified.
-                    FileSystem.isModified = true;
+                    handler.setModified(true);
                 }
             }
 
@@ -113,14 +111,11 @@ public class Main {
                 return;
             }
         } else if (args.source != null) {
-            diagram = FileUtils.load(args.source);
-            if (diagram == null) {
-                System.out.println("Failed to load diagram from " + args.source);
+            HandleResult result = handler.load(args.source);
+            if (!result.success()) {
+                System.out.println(result.message());
                 return;
             }
-            timeline.reset();
-            FileSystem.mountedFile = args.source;
-            FileSystem.fileMemento = Main.timeline.getLatestMemento();
         }
 
         if (args.print) {

@@ -14,7 +14,7 @@ public class Timeline {
         this.diagram = diagram;
         this.undoStack = new Stack<>();
         this.redoStack = new Stack<>();
-        reset();
+        resetHistory();
     }
 
     public Diagram getDiagram() {
@@ -25,13 +25,13 @@ public class Timeline {
         return latest;
     }
 
-    public void reset() {
+    public void resetHistory() {
         undoStack.clear();
         redoStack.clear();
         latest = getDiagram().createMemento();
     }
 
-    public void add(ICancellable command) {
+    public void operate(ICancellable command) {
         undoStack.push(new Snapshot(latest, command));
         redoStack.clear();
         latest = getDiagram().createMemento();

@@ -1,4 +1,4 @@
-package com.jerryio.protocol_diagram.test;
+package com.jerryio.protocol_diagram.test.util;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
@@ -18,10 +17,9 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Parameter;
 import com.jerryio.protocol_diagram.util.FileUtils;
 
-public class FileSystemTest {
+public class FileUtilsTest {
     @Before
     public void setUp() {
-        new FileSystem();
         new FileUtils(); // dummy
 
         new File("test.txt").delete();

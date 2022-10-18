@@ -11,13 +11,12 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
-import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 
 public class DeleteCommandTest {
     @Before
     public void setUp() {
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.jerryio.protocol_diagram.test.token;
+package com.jerryio.protocol_diagram.test.util;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Token;
 import com.jerryio.protocol_diagram.util.TokenUtils;
 
-public class TokenTest {
+public class TokenUtilsTest {
     @Test
     public void testTokenDelimiterMethods() {
         assertNull(Token.parse(new CodePointBuffer("")));

@@ -17,7 +17,7 @@ public class UndoCommand extends Command {
         if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
 
-        ICancellable command = Main.timeline.undo();
+        ICancellable command = Main.handler.undo();
         if (command == null)
             return fail("Nothing to undo");
         else
