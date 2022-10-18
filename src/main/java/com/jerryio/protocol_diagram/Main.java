@@ -1,6 +1,7 @@
 package com.jerryio.protocol_diagram;
 
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
+import com.jerryio.protocol_diagram.util.FileUtils;
 
 import java.util.Scanner;
 
@@ -112,7 +113,7 @@ public class Main {
                 return;
             }
         } else if (args.source != null) {
-            diagram = FileSystem.load(args.source);
+            diagram = FileUtils.load(args.source);
             if (diagram == null) {
                 System.out.println("Failed to load diagram from " + args.source);
                 return;

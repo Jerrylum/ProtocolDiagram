@@ -17,6 +17,7 @@ import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Parameter;
+import com.jerryio.protocol_diagram.util.FileUtils;
 
 public class LoadCommandTest {
     @Before
@@ -31,7 +32,7 @@ public class LoadCommandTest {
         d.addField(new Field("test1", 1));
         d.addField(new Field("test2", 2));
         d.addField(new Field("test3", 3));
-        FileSystem.save("test.json", d);
+        FileUtils.save("test.json", d);
     }
 
     @After

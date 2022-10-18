@@ -2,9 +2,10 @@ package com.jerryio.protocol_diagram.command;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.token.Parameter;
+import com.jerryio.protocol_diagram.util.FileUtils;
+
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class ExportCommand extends Command {
@@ -28,7 +29,7 @@ public class ExportCommand extends Command {
 
         this.paramPath = paramPath.getString();
 
-        return FileSystem.export(this.paramPath, Main.diagram);
+        return FileUtils.export(this.paramPath, Main.diagram);
     }
 
 }

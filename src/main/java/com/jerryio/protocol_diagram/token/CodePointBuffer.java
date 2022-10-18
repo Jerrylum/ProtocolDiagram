@@ -2,6 +2,8 @@ package com.jerryio.protocol_diagram.token;
 
 import java.util.Stack;
 
+import com.jerryio.protocol_diagram.util.TokenUtils;
+
 public class CodePointBuffer {
     private String target;
     private int index;
@@ -65,7 +67,7 @@ public class CodePointBuffer {
 
     public int readDelimiter() {
         int count = 0;
-        while (hasNext() && Token.isDelimiter(peek())) {
+        while (hasNext() && TokenUtils.isDelimiter(peek())) {
             count++;
             next();
         }
@@ -74,7 +76,7 @@ public class CodePointBuffer {
 
     public String readChunk() {
         StringBuilder sb = new StringBuilder();
-        while (hasNext() && !Token.isDelimiter(peek())) {
+        while (hasNext() && !TokenUtils.isDelimiter(peek())) {
             sb.append(next());
         }
         return sb.toString(); // might be empty
@@ -82,7 +84,7 @@ public class CodePointBuffer {
 
     public String readSafeChunk() {
         StringBuilder sb = new StringBuilder();
-        while (hasNext() && !Token.isSafeDelimiter(peek())) {
+        while (hasNext() && !TokenUtils.isSafeDelimiter(peek())) {
             sb.append(next());
         }
         return sb.toString(); // might be empty

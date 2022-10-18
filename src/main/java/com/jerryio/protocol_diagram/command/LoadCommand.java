@@ -6,6 +6,8 @@ import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.token.Parameter;
+import com.jerryio.protocol_diagram.util.FileUtils;
+
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class LoadCommand extends Command {
@@ -34,7 +36,7 @@ public class LoadCommand extends Command {
         String path = paramPath.getString();
         this.paramPath = path;
 
-        Diagram diagram = FileSystem.load(path);
+        Diagram diagram = FileUtils.load(path);
         if (diagram == null) {
             return fail("Failed to load diagram from " + path);
         } else {
