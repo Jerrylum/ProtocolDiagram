@@ -86,50 +86,63 @@ public class Diagram {
         // return value
         final StringBuilder ret = new StringBuilder();
         // canvas props
-        final int length = fields.stream().map((e) -> e.getLength()).reduce(0, (a, b) -> a + b);
+        // final int length = fields.stream().map((e) -> e.getLength()).reduce(0, (a, b) -> a + b);
         final int width = (int) this.config.getValue("bit");
-        final int height = (int) Math.ceil((double) length / (int) this.config.getValue("bit"));
+        // final int height = (int) Math.ceil((double) length / (int) this.config.getValue("bit"));
 
-        // preprocess the list of fields
-        final Canvas canvas = new Canvas(width, height);
+        // TODO: assign/arrange field name into segment
+        // add dividers/membranes between segments
+        final var m = MixedMatrix.create(
+            // chunk fields into segments by row
+            new Matrix(width) {{
+                for (Field f: fields) {
+                    this.add(f);
+                }
+            }}
+        );
 
-        // create list of dependencies
-        final Map<Class, Object> dependencies = new HashMap<>(){{
-            put(Configuration.class, config);
-            put(SplitService.class, new SplitService(config));
-        }};
+        return m.toString();
 
-        // draw header
-        HeaderStyleContext context = new HeaderStyleContext();
+        // // preprocess the list of fields
+        // final Canvas canvas = new Canvas(width, height);
 
-        switch(this.config.getValue("header-style").toString()) {
-            case "none": context.setStrategy(new NoneHeaderStyleStrategy(dependencies)); break;
-            case "trim": context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
-            case "full": context.setStrategy(new FullHeaderStyleStrategy(dependencies)); break;
-            default: context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
-        }
+        // // create list of dependencies
+        // final Map<Class, Object> dependencies = new HashMap<>(){{
+        //     put(Configuration.class, config);
+        //     put(SplitService.class, new SplitService(config));
+        // }};
 
-        // draw canvas
-        List<IMiddleware> middlewares = new ArrayList<>() {{
-            add(new RectangleRenderer(dependencies));
-            add(new CollisionEliminator(dependencies));
-            add(new BorderCornerGenerator(dependencies));
-            add(new FieldNameRender(dependencies));
-            add(new LeftSpacePlaceholderVisualizer(dependencies));
-            add(new BorderStyleTransformer(dependencies));
-        }};
+        // // draw header
+        // HeaderStyleContext context = new HeaderStyleContext();
 
-        for (IMiddleware middleware: middlewares) {
-            middleware.execute(canvas, fields);
-        }
+        // switch(this.config.getValue("header-style").toString()) {
+        //     case "none": context.setStrategy(new NoneHeaderStyleStrategy(dependencies)); break;
+        //     case "trim": context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
+        //     case "full": context.setStrategy(new FullHeaderStyleStrategy(dependencies)); break;
+        //     default: context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
+        // }
 
-        // append canvas
-        ret.append(context.execute(width).toString());
-        // append canvas
-        ret.append(canvas.toString());
+        // // draw canvas
+        // List<IMiddleware> middlewares = new ArrayList<>() {{
+        //     add(new RectangleRenderer(dependencies));
+        //     add(new CollisionEliminator(dependencies));
+        //     add(new BorderCornerGenerator(dependencies));
+        //     add(new FieldNameRender(dependencies));
+        //     add(new LeftSpacePlaceholderVisualizer(dependencies));
+        //     add(new BorderStyleTransformer(dependencies));
+        // }};
 
-        // ret.append(buf);
-        return ret.toString();
+        // for (IMiddleware middleware: middlewares) {
+        //     middleware.execute(canvas, fields);
+        // }
+
+        // // append canvas
+        // ret.append(context.execute(width).toString());
+        // // append canvas
+        // ret.append(canvas.toString());
+
+        // // ret.append(buf);
+        // return ret.toString();
     }
 
 }
