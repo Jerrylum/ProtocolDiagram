@@ -50,11 +50,15 @@ public class Segment extends AbstractSegment {
 	
 	@Override
 	public String toString() {
+		String tmp;
+		if (this.parent == null) tmp = "null";
+		else tmp = this.parent.toString().split("@")[1];
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("Segment ");
 		sb.append("[ ");
 		sb.append("length: " + this.getLength());
-		sb.append(", parent: " + this.parent.toString().split("@")[1]);
+		sb.append(", parent: " + tmp);
 		sb.append(" ]");
 
 		return sb.toString();

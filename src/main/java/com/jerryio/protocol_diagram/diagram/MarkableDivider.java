@@ -1,6 +1,6 @@
 package com.jerryio.protocol_diagram.diagram;
 
-public class MarkableDivider extends Divider implements IMarkable {
+public class MarkableDivider extends Divider implements IConcreteMarkable {
 
 	private final String name;
 
@@ -13,5 +13,5 @@ public class MarkableDivider extends Divider implements IMarkable {
 	public String getName() {
 		return this.name;
 	}
-	
+
 }

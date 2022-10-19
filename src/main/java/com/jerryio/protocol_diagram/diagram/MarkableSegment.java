@@ -1,6 +1,6 @@
 package com.jerryio.protocol_diagram.diagram;
 
-public class MarkableSegment extends Segment implements IDisplayable, IMarkable {
+public class MarkableSegment extends Segment implements IConcreteMarkable {
 
 	private final boolean isDisplay;
 

@@ -63,23 +63,28 @@ public class MarkableMatrix extends Matrix {
 		AbstractSegment newHead = null;
 		int idx = 0;
 		for (final Row<AbstractSegment> r: m.list) {
-			final var newRow = new Row<MarkableSegment>(ret.width);
+			final var newRow = new Row<IConcreteMarkable>(ret.width);
 
-			for (int i = 0, length = 0; length < r.getLength(); i++, idx++) {
+			for (int i = 0, length = 0; length < r.getLength(); i++) {
 				final AbstractSegment current = r.get(i);
 				length += current.getLength();
 
-				if (!current.equals(newHead) && current instanceof Segment) {
+				if (!current.equals(newHead) && !(current instanceof Divider)) {
 					newHead = current;
+					idx = 0;
 				}
 
+				boolean isDisplay = idx++ == indexMap.get(newHead).intValue();
+
 				if (current instanceof Segment) {
-					newRow.add(new MarkableSegment(current, false));
+					newRow.add(new MarkableSegment(current, isDisplay));
 				}
 				if (current instanceof Divider) {
-					// newRow.add(new MarkableDivider((Divider) current, new MarkableSegment(newHead, false).getName()));
+					newRow.add(new MarkableDivider((Divider) current, new MarkableSegment(newHead, isDisplay).getName()));
 				}
 			}
+
+			ret.list.add(newRow);
 		}
 
 		return ret;
@@ -94,7 +99,7 @@ public class MarkableMatrix extends Matrix {
 		sb.append(", height: " + this.getHeight());
 		sb.append(" ]");
 
-		for (Row e: this.list) {
+		for (Row<IConcreteMarkable> e: this.list) {
 			sb.append("\n" + e.toString());
 		}
 
