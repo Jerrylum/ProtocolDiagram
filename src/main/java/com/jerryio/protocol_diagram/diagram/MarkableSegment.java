@@ -5,7 +5,7 @@ public class MarkableSegment extends Segment implements IDisplayable, IMarkable 
 	private final boolean isDisplay;
 
 	public MarkableSegment(AbstractSegment seg, boolean isDisplay) {
-		super(seg.parent);
+		super(seg.getLength(), seg.parent);
 		this.isDisplay = false;
 	}
 

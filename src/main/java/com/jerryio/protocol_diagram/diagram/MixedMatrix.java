@@ -8,7 +8,8 @@ public class MixedMatrix extends Matrix {
 
 	public static MixedMatrix create(Matrix m) {
 		MixedMatrix e = new MixedMatrix(m.width);
-		for (Row r: m.list) {
+
+		for (Row<AbstractSegment> r: m.list) {
 			e.list.add(r);
 		}
 
@@ -16,16 +17,16 @@ public class MixedMatrix extends Matrix {
 
 		for (int i = 0, idx = 1; i < size - 1; i++, idx += 2) {
 			// divider row
-			final Row dividerRow = new Row(e.width);
+			final Row<AbstractSegment> dividerRow = new Row<AbstractSegment>(e.width);
 			// the adjacency rows, top and bottom
-			final Row top = e.list.get(idx - 1);
-			final Row bottom = e.list.get(idx);
+			final Row<AbstractSegment> top = e.list.get(idx - 1);
+			final Row<AbstractSegment> bottom = e.list.get(idx);
 			// the length of the divider has to be drawn
 			final int length = Math.max(top.getLength(), bottom.getLength());
 
 			for (int tidx = 0, tstart = 0, tend = 0, bidx = 0, bstart = 0, bend = 0; dividerRow.getLength() < length;) {
-				final ISegment ts = top.get(tidx);
-				final ISegment bs = bottom.get(bidx);
+				final AbstractSegment ts = top.get(tidx);
+				final AbstractSegment bs = bottom.get(bidx);
 
 				// indexing based on present-length-only segment
 				tstart = tend;

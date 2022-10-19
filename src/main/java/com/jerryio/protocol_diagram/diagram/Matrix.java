@@ -6,7 +6,7 @@ import java.util.List;
 public class Matrix {
 
 	protected final int width;
-	protected final List<Row> list;
+	protected final List<Row<AbstractSegment>> list;
 
 	public Matrix(int width) {
 		this.list = new ArrayList<>();
@@ -21,18 +21,18 @@ public class Matrix {
 		return this.list.size();
 	}
 
-	public Row getLastRow() {
+	public Row<AbstractSegment> getLastRow() {
 		return this.list.get(this.list.size() - 1);
 	}
 
 	public void add(Field field) {
 		if (this.list.size() == 0) {
-			this.list.add(new Row(width));
+			this.list.add(new Row<AbstractSegment>(width));
 		}
 
 		for (Segment seg = new Segment(field); seg != null;) {
 			if (this.getLastRow().isFull()) {
-				this.list.add(new Row(this.width));
+				this.list.add(new Row<AbstractSegment>(this.width));
 			}
 
 			final int len = Math.min(width - this.getLastRow().getLength(), seg.getLength());
@@ -50,7 +50,7 @@ public class Matrix {
 		sb.append(", height: " + this.getHeight());
 		sb.append(" ]");
 
-		for (Row e: this.list) {
+		for (Row<AbstractSegment> e: this.list) {
 			sb.append("\n" + e.toString());
 		}
 

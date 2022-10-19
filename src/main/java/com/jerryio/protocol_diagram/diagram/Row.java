@@ -3,10 +3,10 @@ package com.jerryio.protocol_diagram.diagram;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Row {
+public class Row<T extends ISegment> {
 
 	private final int width;
-	private final List<AbstractSegment> children;
+	private final List<T> children;
 
 	public Row(int width) {
 		this.width = width;
@@ -17,14 +17,14 @@ public class Row {
 		return this.width;
 	}
 
-	public void add(AbstractSegment seg) {
+	public void add(T seg) {
 		assert seg != null;
 		assert seg.getLength() + this.getLength() <= width;
 
 		this.children.add(seg);
 	}
 
-	public AbstractSegment get(int index) {
+	public T get(int index) {
 		if (index >= this.children.size()) {
 			return null;
 		}
