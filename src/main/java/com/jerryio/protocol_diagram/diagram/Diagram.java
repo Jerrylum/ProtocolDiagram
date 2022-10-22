@@ -91,8 +91,8 @@ public class Diagram {
         // final int height = (int) Math.ceil((double) length / (int) this.config.getValue("bit"));
 
         // TODO: assign/arrange field name into segment
-        // add dividers/membranes between segments
         final var m = MarkableMatrix.create(
+        // add dividers/membranes between segments
             MixedMatrix.create(
                 // chunk fields into segments by row
                 new Matrix(width) {{

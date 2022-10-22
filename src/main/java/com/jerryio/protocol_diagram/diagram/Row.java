@@ -3,7 +3,7 @@ package com.jerryio.protocol_diagram.diagram;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Row<T extends ISegment> {
+public class Row<T extends IElement> {
 
 	private final int width;
 	private final List<T> children;
@@ -48,7 +48,7 @@ public class Row<T extends ISegment> {
 		sb.append("length: " + this.getLength());
 		sb.append(" ]");
 
-		for (ISegment e: this.children) {
+		for (IElement e: this.children) {
 			sb.append("\n" + e.toString());
 		}
 

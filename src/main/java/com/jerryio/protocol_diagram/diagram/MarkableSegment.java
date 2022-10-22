@@ -1,22 +1,25 @@
 package com.jerryio.protocol_diagram.diagram;
 
-public class MarkableSegment extends Segment implements IConcreteMarkable {
+public class MarkableSegment extends MarkableElement {
 
-	private final boolean isDisplay;
-
-	public MarkableSegment(AbstractSegment seg, boolean isDisplay) {
-		super(seg.getLength(), seg.parent);
-		this.isDisplay = false;
+	public MarkableSegment(Segment seg, boolean isDisplay) {
+		super(seg.getLength(), seg.parent, isDisplay, seg.parent.getName());
 	}
 
 	@Override
-	public String getName() {
-		return this.parent.getName();
-	}
+	public String toString() {
+		final String tmp = this.parent != null ? "null" : this.parent.toString().split("@")[1];
 
-	@Override
-	public boolean isDisplay() {
-		return this.isDisplay;
+		StringBuilder sb = new StringBuilder();
+		sb.append("MarkableSegment ");
+		sb.append("[ ");
+		sb.append("length: " + this.getLength());
+		sb.append(", parent: " + tmp);
+		sb.append(", is display: " + this.isTextDisplay());
+		sb.append(", name: " + this.getName());
+		sb.append(" ]");
+
+		return sb.toString();
 	}
 	
 }

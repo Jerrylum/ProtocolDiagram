@@ -5,14 +5,24 @@ import java.util.List;
 
 public class Matrix {
 
-	protected final int width;
-	protected final List<Row<AbstractSegment>> list;
+	private final int width;
+	private final List<Row<AbstractElement>> list;
 
 	public Matrix(int width) {
 		this.list = new ArrayList<>();
 		this.width = width;
 	}
 
+	/**
+	 * utility functions, for getting the last row of a matrix
+	 */
+	private static Row<AbstractElement> getLastRow(Matrix m) {
+		return m.list.get(m.list.size() - 1);
+	}
+
+	/**
+	 * instance variable accessor
+	 */
 	public int getWidth() {
 		return this.width;
 	}
@@ -21,23 +31,23 @@ public class Matrix {
 		return this.list.size();
 	}
 
-	public Row<AbstractSegment> getLastRow() {
-		return this.list.get(this.list.size() - 1);
+	public Row<AbstractElement> get(int i) {
+		return this.list.get(i);
 	}
 
 	public void add(Field field) {
 		if (this.list.size() == 0) {
-			this.list.add(new Row<AbstractSegment>(width));
+			this.list.add(new Row<AbstractElement>(width));
 		}
 
-		for (Segment seg = new Segment(field); seg != null;) {
-			if (this.getLastRow().isFull()) {
-				this.list.add(new Row<AbstractSegment>(this.width));
+		for (Element seg = new Segment(field); seg != null;) {
+			if (getLastRow(this).isFull()) {
+				this.list.add(new Row<AbstractElement>(this.width));
 			}
 
-			final int len = Math.min(width - this.getLastRow().getLength(), seg.getLength());
-			this.getLastRow().add(seg.chunk(len));
-			seg = seg.slice(len);
+			final int len = Math.min(width - getLastRow(this).getLength(), seg.getLength());
+			getLastRow(this).add((Segment) seg.chunk(len));
+			seg = (Segment) seg.slice(len);
 		}
 	}
 
@@ -50,7 +60,7 @@ public class Matrix {
 		sb.append(", height: " + this.getHeight());
 		sb.append(" ]");
 
-		for (Row<AbstractSegment> e: this.list) {
+		for (Row<AbstractElement> e: this.list) {
 			sb.append("\n" + e.toString());
 		}
 
