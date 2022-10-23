@@ -62,6 +62,7 @@ public class MainTest {
         assertTrue(Main.doHandleCommand("unknown 'something'").startsWith(unknownCommand));
 
         assertNotNull(Main.doHandleCommand("add 5 c"));
+        assertNotNull(Main.doHandleCommand("config bit 16"));
         assertNotNull(Main.doHandleCommand("view"));
 
         assertEquals(1, Main.diagram.getFields().size());

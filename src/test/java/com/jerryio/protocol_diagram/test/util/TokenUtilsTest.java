@@ -11,6 +11,7 @@ import com.jerryio.protocol_diagram.util.TokenUtils;
 public class TokenUtilsTest {
     @Test
     public void testTokenDelimiterMethods() {
+        new TokenUtils(); // dummy
         assertNull(Token.parse(new CodePointBuffer("")));
         assertTrue(TokenUtils.isDelimiter(' '));
         assertTrue(TokenUtils.isDelimiter(null));
