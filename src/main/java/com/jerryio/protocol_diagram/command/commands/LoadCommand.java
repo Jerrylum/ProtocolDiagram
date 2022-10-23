@@ -1,12 +1,13 @@
-package com.jerryio.protocol_diagram.command;
+package com.jerryio.protocol_diagram.command.commands;
+
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
-import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.command.Command;
+import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class LoadCommand extends Command {
 
@@ -27,21 +28,18 @@ public class LoadCommand extends Command {
         if (!paramPath.isString())
             return fail("Path must be a string.");
 
-        if (FileSystem.isModified) {
+        if (Main.handler.isModified()) {
             return fail("Unsaved changes. Please save the diagram first or use \"discard\" before the operation.");
         }
 
         String path = paramPath.getString();
         this.paramPath = path;
 
-        Diagram diagram = FileSystem.load(path);
-        if (diagram == null) {
-            return fail("Failed to load diagram from " + path);
+        HandleResult result = Main.handler.load(path);
+        if (!result.success()) {
+            return result;
         } else {
-            Main.diagram = diagram;
-            FileSystem.mountedFile = path;
-            FileSystem.isModified = false;
-            return success("Now editing " + path + "\n\n" + diagram.toString());
+            return success("Now editing " + path + "\n\n" + Main.diagram.toString());
         }
     }
 }

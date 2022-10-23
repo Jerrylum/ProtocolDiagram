@@ -1,11 +1,13 @@
 package com.jerryio.protocol_diagram.command;
 
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
+
 import java.util.Arrays;
 import java.util.List;
 
+import com.jerryio.protocol_diagram.command.commands.*;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public abstract class Command {
 
@@ -55,9 +57,11 @@ public abstract class Command {
                 new LoadCommand(),
                 new MoveCommand(),
                 new QuitCommand(),
+                new RedoCommand(),
                 new RenameCommand(),
                 new ResizeCommand(),
                 new SaveCommand(),
+                new UndoCommand(),
                 new ViewCommand());
     }
 

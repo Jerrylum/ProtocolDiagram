@@ -18,6 +18,7 @@ import com.jerryio.protocol_diagram.config.EnumOption;
 import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.config.RangeOption;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
+import com.jerryio.protocol_diagram.token.Pair;
 import com.jerryio.protocol_diagram.token.Parameter;
 
 public class Diagram {
@@ -79,6 +80,28 @@ public class Diagram {
     public void moveField(int from, int to) {
         Field field = fields.remove(from);
         fields.add(to, field);
+    }
+
+    public static class Memento {
+        private List<Pair<String, Integer>> fields;
+
+        private Memento(Diagram d) {
+            fields = new ArrayList<>();
+            for (Field f : d.getFields()) {
+                fields.add(new Pair<String, Integer>(f.getName(), f.getLength()));
+            }
+        }
+    }
+
+    public Memento createMemento() {
+        return new Memento(this);
+    }
+
+    public void restoreFromMemento(Memento m) {
+        fields.clear();
+        for (Pair<String, Integer> p : m.fields) {
+            fields.add(new Field(p));
+        }
     }
 
     public String toJson() {

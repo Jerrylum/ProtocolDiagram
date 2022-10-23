@@ -12,10 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
-import com.jerryio.protocol_diagram.command.DiscardCommand;
-import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.command.commands.DiscardCommand;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Parameter;
@@ -23,8 +21,8 @@ import com.jerryio.protocol_diagram.token.Parameter;
 public class DiscardCommandTest {
     @Before
     public void setUp() throws Exception {
-        FileSystem.mountedFile = null;
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
+
         new File("test.txt").delete();
         new File("test.json").delete();
         Main.diagram.addField(new Field("test1", 1));
@@ -45,6 +43,8 @@ public class DiscardCommandTest {
         params.add(Parameter.parse(new CodePointBuffer("test")));
         assertFalse(cmd.handle(params).success()); // have args
         params.clear();
-        assertTrue( cmd.handle(params).success()); // no args
+        assertEquals(3, Main.diagram.getFields().size());
+        assertTrue(cmd.handle(params).success()); // no args
+        assertEquals(0, Main.diagram.getFields().size());
     }
 }

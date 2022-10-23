@@ -6,17 +6,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.command.AddCommand;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.command.HandleResult;
-import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.command.commands.AddCommand;
 
 public class AddCommandTest {
     @Before
     public void setUp() {
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
     }
 
     @Test

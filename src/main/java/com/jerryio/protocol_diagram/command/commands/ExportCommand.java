@@ -1,11 +1,14 @@
-package com.jerryio.protocol_diagram.command;
+package com.jerryio.protocol_diagram.command.commands;
+
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.command.Command;
+import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
+import com.jerryio.protocol_diagram.util.FileUtils;
 
 public class ExportCommand extends Command {
     
@@ -28,7 +31,7 @@ public class ExportCommand extends Command {
 
         this.paramPath = paramPath.getString();
 
-        return FileSystem.export(this.paramPath, Main.diagram);
+        return FileUtils.export(this.paramPath, Main.diagram);
     }
 
 }

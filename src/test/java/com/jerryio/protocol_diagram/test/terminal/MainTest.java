@@ -6,10 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.util.FileUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -25,9 +25,7 @@ public class MainTest {
 
     @Before
     public void setup() {
-        Main.diagram = new Diagram();
-        FileSystem.mountedFile = null;
-        FileSystem.isModified = false;
+        Main.handler.newDiagram();
 
         defaultIn = System.in;
 
@@ -36,7 +34,7 @@ public class MainTest {
 
         Diagram d = new Diagram();
         d.addField(new Field("anything", 1));
-        FileSystem.save("test.json", d);
+        FileUtils.save("test.json", d);
     }
 
     @After
@@ -64,6 +62,7 @@ public class MainTest {
         assertTrue(Main.doHandleCommand("unknown 'something'").startsWith(unknownCommand));
 
         assertNotNull(Main.doHandleCommand("add 5 c"));
+        assertNotNull(Main.doHandleCommand("config bit 16"));
         assertNotNull(Main.doHandleCommand("view"));
 
         assertEquals(1, Main.diagram.getFields().size());
