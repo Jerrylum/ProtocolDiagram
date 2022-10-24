@@ -10,19 +10,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
-import com.jerryio.protocol_diagram.command.LoadCommand;
+import com.jerryio.protocol_diagram.command.commands.LoadCommand;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Parameter;
+import com.jerryio.protocol_diagram.util.FileUtils;
 
 public class LoadCommandTest {
     @Before
     public void setUp() throws Exception {
-        FileSystem.mountedFile = null;
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
 
         new File("test.txt").delete();
         new File("test.json").delete();
@@ -31,7 +30,7 @@ public class LoadCommandTest {
         d.addField(new Field("test1", 1));
         d.addField(new Field("test2", 2));
         d.addField(new Field("test3", 3));
-        FileSystem.save("test.json", d);
+        FileUtils.save("test.json", d);
     }
 
     @After
@@ -58,11 +57,11 @@ public class LoadCommandTest {
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
         assertTrue(cmd.handle(params).success());
 
-        FileSystem.isModified = true;
+        Main.handler.setModified(true);
 
         assertFalse(cmd.handle(params).success()); // file un-save changes
 
-        FileSystem.isModified = false;
+        Main.handler.setModified(false);
 
         params.clear();
         params.add(Parameter.parse(new CodePointBuffer("test2.json")));

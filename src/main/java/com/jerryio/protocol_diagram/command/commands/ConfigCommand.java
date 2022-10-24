@@ -1,11 +1,15 @@
-package com.jerryio.protocol_diagram.command;
+package com.jerryio.protocol_diagram.command.commands;
+
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.util.List;
 
 import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.command.Command;
+import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.config.Option;
+import com.jerryio.protocol_diagram.diagram.IDiagramModifier;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class ConfigCommand extends Command implements IDiagramModifier {
 

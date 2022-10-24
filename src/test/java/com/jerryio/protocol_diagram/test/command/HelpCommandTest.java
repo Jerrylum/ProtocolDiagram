@@ -1,25 +1,25 @@
 package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.command.HelpCommand;
+import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.command.commands.HelpCommand;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
-import com.jerryio.protocol_diagram.command.HandleResult;
 
 public class HelpCommandTest {
     @Test
     public void testHelpCommandHandleSuccess() {
         HelpCommand hc = new HelpCommand();
-
-        assertEquals(hc.handle(CommandLine.parse(new CodePointBuffer("help"))).success(), true);
+        assertTrue(hc.handle(CommandLine.parse(new CodePointBuffer("help"))).success());
     }
 
     @Test
     public void testHelpCommandHandleFail() {
         HelpCommand hc = new HelpCommand();
-        assertEquals(hc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
+        assertEquals(HandleResult.NOT_HANDLED, hc.handle(CommandLine.parse(new CodePointBuffer("test"))));
     }
 }

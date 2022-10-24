@@ -11,16 +11,16 @@ public class BooleanTTest {
     @Test
     public void testBooleanTValid() {
         BooleanT t = new BooleanT("True", true);
-        assertEquals(t.value(), "True");
-        assertEquals(t.bool(), true);
+        assertEquals("True", t.value());
+        assertEquals(true, t.bool());
 
-        assertEquals(BooleanT.parse(new CodePointBuffer("True")), new BooleanT("True", true));
-        assertEquals(BooleanT.parse(new CodePointBuffer("true")), new BooleanT("true", true));
-        assertEquals(BooleanT.parse(new CodePointBuffer("False")), new BooleanT("False", false));
-        assertEquals(BooleanT.parse(new CodePointBuffer("false")), new BooleanT("false", false));
-        assertEquals(BooleanT.parse(new CodePointBuffer("True ")), new BooleanT("True", true));
-        assertEquals(BooleanT.parse(new CodePointBuffer("TrUe ")), new BooleanT("TrUe", true));
-        assertEquals(BooleanT.parse(new CodePointBuffer("fAlse")), new BooleanT("fAlse", false));
+        assertEquals(new BooleanT("True", true), BooleanT.parse(new CodePointBuffer("True")));
+        assertEquals(new BooleanT("true", true), BooleanT.parse(new CodePointBuffer("true")));
+        assertEquals(new BooleanT("False", false), BooleanT.parse(new CodePointBuffer("False")));
+        assertEquals(new BooleanT("false", false), BooleanT.parse(new CodePointBuffer("false")));
+        assertEquals(new BooleanT("True", true), BooleanT.parse(new CodePointBuffer("True ")));
+        assertEquals(new BooleanT("TrUe", true), BooleanT.parse(new CodePointBuffer("TrUe ")));
+        assertEquals(new BooleanT("fAlse", false), BooleanT.parse(new CodePointBuffer("fAlse")));
     }
 
     @Test

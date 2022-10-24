@@ -10,10 +10,10 @@ import com.jerryio.protocol_diagram.token.DecimalPoint;
 public class DecimalPointTest {
     @Test
     public void testDecimalPointValid() {
-        assertEquals(DecimalPoint.parse(new CodePointBuffer(".")), new DecimalPoint('.'));
-        assertEquals(DecimalPoint.parse(new CodePointBuffer(". ")), new DecimalPoint('.'));
-        assertEquals(DecimalPoint.parse(new CodePointBuffer(".a")), new DecimalPoint('.'));
-        assertEquals(DecimalPoint.parse(new CodePointBuffer(".123")), new DecimalPoint('.'));
+        assertEquals(new DecimalPoint('.'), DecimalPoint.parse(new CodePointBuffer(".")));
+        assertEquals(new DecimalPoint('.'), DecimalPoint.parse(new CodePointBuffer(". ")));
+        assertEquals(new DecimalPoint('.'), DecimalPoint.parse(new CodePointBuffer(".a")));
+        assertEquals(new DecimalPoint('.'), DecimalPoint.parse(new CodePointBuffer(".123")));
     }
 
     @Test

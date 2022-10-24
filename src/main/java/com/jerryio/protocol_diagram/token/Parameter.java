@@ -2,6 +2,8 @@ package com.jerryio.protocol_diagram.token;
 
 import java.util.Objects;
 
+import com.jerryio.protocol_diagram.util.TokenUtils;
+
 public class Parameter implements Token {
     private BooleanT bool = null;
     private NumberT number = null;
@@ -11,7 +13,7 @@ public class Parameter implements Token {
         buffer.savepoint();
 
         int i = 0;
-        while (!Token.isDelimiter(buffer.peek(i)))
+        while (!TokenUtils.isDelimiter(buffer.peek(i)))
             i++;
 
         int firstStop = buffer.getIndex() + i;

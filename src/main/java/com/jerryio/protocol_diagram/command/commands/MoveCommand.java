@@ -1,13 +1,16 @@
-package com.jerryio.protocol_diagram.command;
+package com.jerryio.protocol_diagram.command.commands;
+
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.util.List;
 
 import com.jerryio.protocol_diagram.Main;
+import com.jerryio.protocol_diagram.command.CancellableCommand;
+import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
-public class MoveCommand extends Command implements ICancellable {
+public class MoveCommand extends CancellableCommand {
 
     public int paramIndex;
     public int paramTargetIndex;

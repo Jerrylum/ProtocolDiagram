@@ -1,13 +1,14 @@
 package com.jerryio.protocol_diagram.test.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.jerryio.protocol_diagram.command.ConfigListCommand;
+import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.command.commands.ConfigListCommand;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
-import com.jerryio.protocol_diagram.command.HandleResult;
 
 public class ConfigListCommandTest {
 
@@ -15,13 +16,13 @@ public class ConfigListCommandTest {
     public void testConfigListCommandHandleSuccess() {
         ConfigListCommand clc = new ConfigListCommand();
 
-        assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("config"))).success(), true);
+        assertTrue(clc.handle(CommandLine.parse(new CodePointBuffer("config"))).success());
     }
 
     @Test
     public void testConfigListCommandHandleFail() {
         ConfigListCommand clc = new ConfigListCommand();
-        assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("config test"))), HandleResult.NOT_HANDLED);
-        assertEquals(clc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
+        assertEquals(HandleResult.NOT_HANDLED, clc.handle(CommandLine.parse(new CodePointBuffer("config test"))));
+        assertEquals(HandleResult.NOT_HANDLED, clc.handle(CommandLine.parse(new CodePointBuffer("test"))));
     }
 }

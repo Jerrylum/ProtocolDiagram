@@ -1,4 +1,6 @@
-package com.jerryio.protocol_diagram;
+package com.jerryio.protocol_diagram.util;
+
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -11,12 +13,7 @@ import java.nio.file.Paths;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
-
-public class FileSystem {
-
-    public static String mountedFile = null;
-    public static boolean isModified = false;
+public class FileUtils {
 
     public static File resolvePath(String path, String suggestedExt) {
         if (path.isEmpty())

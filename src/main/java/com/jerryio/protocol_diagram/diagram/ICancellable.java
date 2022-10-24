@@ -1,7 +1,5 @@
-package com.jerryio.protocol_diagram.command;
+package com.jerryio.protocol_diagram.diagram;
 
 public interface ICancellable extends IDiagramModifier {
     public void execute();
-
-    // public void undo(); // TODO
 }

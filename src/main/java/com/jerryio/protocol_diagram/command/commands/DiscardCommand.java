@@ -1,12 +1,13 @@
-package com.jerryio.protocol_diagram.command;
+package com.jerryio.protocol_diagram.command.commands;
+
+import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.FileSystem;
 import com.jerryio.protocol_diagram.Main;
-import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.command.Command;
+import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
-import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 public class DiscardCommand extends Command {
 
@@ -19,9 +20,7 @@ public class DiscardCommand extends Command {
         if (params.size() > 0)
             return TOO_MANY_ARGUMENTS;
 
-        FileSystem.mountedFile = null;
-        FileSystem.isModified = false;
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
 
         return success("Now editing a new diagram.");
     }
