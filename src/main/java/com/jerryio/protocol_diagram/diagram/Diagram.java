@@ -92,7 +92,7 @@ public class Diagram {
 
         // TODO: assign/arrange field name into segment
         final var m = MarkableMatrix.create(
-        // add dividers/membranes between segments
+            // add dividers/membranes between segments
             MixedMatrix.create(
                 // chunk fields into segments by row
                 new Matrix(width) {{
@@ -103,9 +103,116 @@ public class Diagram {
             )
         );
 
-        return m.toString();
+        for (int rowidx = 0; rowidx < m.getHeight(); rowidx++) {
+            final Row<IConcreteMarkable> row = m.get(rowidx);
 
-        // // preprocess the list of fields
+            // top, right, bottom, left
+            int flag = 0b0000;
+
+            for (int colidx = 0, length = 0; length < row.getLength(); colidx++) {
+
+                final var current = row.get(colidx);
+                current.getName();
+                current.getLength();
+                current.isTextDisplay();
+
+                if (current instanceof IMembraneDisplayable) {
+                    final IMembraneDisplayable v = (IMembraneDisplayable) current;
+
+                    // set flag
+                    if (rowidx == 0) {
+                        flag &= 0b0111; 
+                    } else {
+                        int _length = 0;
+                        for (int i = 0; _length < m.get(rowidx - 1).getLength() && _length < length; i++) {
+                            _length += m.get(rowidx - 1).get(i).getLength();
+                        }
+                        // both start is equal
+                        if (length == _length) {
+                            flag |= 0b1000;
+                        }
+                    }
+
+                    if (rowidx == m.getHeight() - 1) {
+                        flag &= 0b1101; 
+                    } else {
+                        int _length = 0;
+                        for (int i = 0; _length < m.get(rowidx + 1).getLength() && _length < length; i++) {
+                            _length += m.get(rowidx + 1).get(i).getLength();
+                        }
+                        // both start is equal
+                        if (length == _length) {
+                            flag |= 0b0010;
+                        }
+                    }
+
+                    if (v.isMembraneDisplay()) flag |= 0b0100;
+
+                    // 4 edges
+                    if ((flag & 0b1111) == 0b1111) ret.append(GridType.ALL); // cross
+                    // 3 edges
+                    else if ((flag & 0b1110) == 0b1110) ret.append(GridType.NON_LEFT); // top right bottom
+                    else if ((flag & 0b0111) == 0b0111) ret.append(GridType.NON_TOP); // left top right
+                    else if ((flag & 0b1011) == 0b1011) ret.append(GridType.NON_RIGHT); // bottom left top
+                    else if ((flag & 0b1101) == 0b1101) ret.append(GridType.NON_BOTTOM); // right bottom left
+                    // 2 edges
+                    else if ((flag & 0b1001) == 0b1001) ret.append(GridType.TOP_LEFT); // top left
+                    else if ((flag & 0b1100) == 0b1100) ret.append(GridType.TOP_RIGHT); // top right
+                    else if ((flag & 0b0011) == 0b0011) ret.append(GridType.BOTTOM_LEFT); // bottom left
+                    else if ((flag & 0b0110) == 0b0110) ret.append(GridType.BOTTOM_RIGHT); // bottom right
+
+                    flag = 0b0;
+
+                    if (!current.isTextDisplay()) {
+                        for (int i = 0; i < current.getLength() * 2 - 1; i++) {
+                            ret.append(v.isMembraneDisplay() ? '-' : ' ');
+                        }
+                    } else {
+                        final String str = current.getName().substring(0, Math.min(current.getLength() * 2 - 1, current.getName().length()));
+                        final int test = (current.getLength() * 2 - 1 - str.length()) / 2;
+
+                        for (int i = 0; i < test; i++) {
+                            ret.append(' ');
+                        }
+                        for (int i = 0; i < str.length(); i++) {
+                            ret.append(str.charAt(i));
+                        }
+                        for (int i = test + str.length(); i < current.getLength() * 2 - 1; i++) {
+                            ret.append(' ');
+                        }
+                    }
+                    if (v.isMembraneDisplay()) flag |= 0b0001;
+                } else {
+                    if (!current.isTextDisplay()) {
+                        for (int i = 0; i < current.getLength() * 2 - 1; i++) {
+                            ret.append(' ');
+                        }
+                    } else {
+                        final String str = current.getName().substring(0, Math.min(current.getLength() * 2 - 1, current.getName().length()));
+                        final int test = (current.getLength() * 2 - 1 - str.length()) / 2;
+
+                        for (int i = 0; i < test; i++) {
+                            ret.append(' ');
+                        }
+                        for (int i = 0; i < str.length(); i++) {
+                            ret.append(str.charAt(i));
+                        }
+                        for (int i = test + str.length(); i < current.getLength() * 2 - 1; i++) {
+                            ret.append(' ');
+                        }
+                    }
+                }
+
+                length += current.getLength();
+            }
+
+            if (rowidx < m.getHeight() - 1) {
+                ret.append("\n");
+            }
+        }
+
+        return ret.toString();
+        // preprocess the list of fields
         // final Canvas canvas = new Canvas(width, height);
 
         // // create list of dependencies
@@ -124,12 +231,8 @@ public class Diagram {
         //     default: context.setStrategy(new TrimmedHeaderStyleStrategy(dependencies)); break;
         // }
 
-        // // draw canvas
+        // draw canvas
         // List<IMiddleware> middlewares = new ArrayList<>() {{
-        //     add(new RectangleRenderer(dependencies));
-        //     add(new CollisionEliminator(dependencies));
-        //     add(new BorderCornerGenerator(dependencies));
-        //     add(new FieldNameRender(dependencies));
         //     add(new LeftSpacePlaceholderVisualizer(dependencies));
         //     add(new BorderStyleTransformer(dependencies));
         // }};
