@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Diagram;
@@ -84,12 +85,14 @@ public class FileUtils {
             return null;
 
         try {
-            FileReader reader = new FileReader(file, StandardCharsets.UTF_8);
-            char[] buffer = new char[(int) file.length()];
-            reader.read(buffer);
-            reader.close();
+            Scanner sc = new Scanner(file, StandardCharsets.UTF_8);
+            String str = "";
+            while (sc.hasNextLine()) {
+                str += sc.nextLine() + "\n";
+            }
+            sc.close();
 
-            return Diagram.fromJson(new String(buffer));
+            return Diagram.fromJson(str);
         } catch (IOException e) {
             return null;
         }
