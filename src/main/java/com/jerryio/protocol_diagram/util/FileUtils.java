@@ -3,7 +3,6 @@ package com.jerryio.protocol_diagram.util;
 import static com.jerryio.protocol_diagram.command.HandleResult.*;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
