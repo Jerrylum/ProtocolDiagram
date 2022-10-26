@@ -18,6 +18,9 @@ import com.jerryio.protocol_diagram.config.Configuration;
 import com.jerryio.protocol_diagram.config.EnumOption;
 import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.config.RangeOption;
+import com.jerryio.protocol_diagram.diagram.element.Divider;
+import com.jerryio.protocol_diagram.diagram.element.Row;
+import com.jerryio.protocol_diagram.diagram.element.Segment;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Pair;
 import com.jerryio.protocol_diagram.token.Parameter;
@@ -118,8 +121,8 @@ public class Diagram {
         final int bit = (int) config.getValue("bit");
 
         final List<Row> rows = DiagramUtils.convertFieldsToRow(bit, fields);
-        final List<Floor> floors = DiagramUtils.spliceFloors(bit, rows);
-        final List<Segment> segments = DiagramUtils.mergeRowsAndFloors(rows, floors);
+        final List<Divider> dividers = DiagramUtils.spliceDividers(bit, rows);
+        final List<Segment> segments = DiagramUtils.mergeRowsAndDividers(rows, dividers);
 
         DiagramUtils.setDisplayNameForAllFields(segments, fields);
 
@@ -129,8 +132,8 @@ public class Diagram {
             System.out.println(row.getSegments());
         }
 
-        for (Floor floor : floors) {
-            System.out.println(floor.getSegments());
+        for (Divider divider : dividers) {
+            System.out.println(divider.getSegments());
         }
 
 

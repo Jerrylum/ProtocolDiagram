@@ -1,19 +1,21 @@
-package com.jerryio.protocol_diagram.diagram;
+package com.jerryio.protocol_diagram.diagram.element;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Floor {
+import com.jerryio.protocol_diagram.diagram.Field;
+
+public class Divider {
     private final int bit;
-    private final List<FloorSegment> segments;
+    private final List<DividerSegment> segments;
 
     private int used;
 
-    public Floor(int bit) {
+    public Divider(int bit) {
         this.bit = bit;
-        this.segments = new ArrayList<FloorSegment>();
+        this.segments = new ArrayList<DividerSegment>();
         this.used = 0;
     }
 
@@ -21,7 +23,7 @@ public class Floor {
         return bit;
     }
 
-    public Collection<FloorSegment> getSegments() {
+    public Collection<DividerSegment> getSegments() {
         return Collections.unmodifiableCollection(segments);
     }
 
@@ -31,7 +33,7 @@ public class Floor {
             Field represent = null;
             if (before.getRepresent().equals(after.getRepresent()) && before.getEndIndex() > after.getStartIndex())
                 represent = before.getRepresent();
-            segments.add(new FloorSegment(represent, used, length));
+            segments.add(new DividerSegment(represent, used, length));
             used += length;
         }
     }

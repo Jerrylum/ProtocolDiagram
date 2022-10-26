@@ -10,10 +10,14 @@ public class Field {
     private int length;
     private int uid;
 
-    public Field(String name, int length) {
+    private Field(String name, int length, int uid) {
         this.name = name;
         this.length = length;
-        this.uid = uidCount++;
+        this.uid = uid;
+    }
+
+    public Field(String name, int length) {
+        this(name, length, uidCount++);
     }
 
     public Field(Pair<String, Integer> pair) {
@@ -48,6 +52,10 @@ public class Field {
         }
 
         return false;
+    }
+
+    public Field clone() {
+        return new Field(name, length, uid);
     }
 
 }

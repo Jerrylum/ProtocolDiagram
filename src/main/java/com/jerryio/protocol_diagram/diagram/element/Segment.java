@@ -1,4 +1,6 @@
-package com.jerryio.protocol_diagram.diagram;
+package com.jerryio.protocol_diagram.diagram.element;
+
+import com.jerryio.protocol_diagram.diagram.Field;
 
 public abstract class Segment extends Element {
     private Field represent;

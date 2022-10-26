@@ -1,6 +1,6 @@
-package com.jerryio.protocol_diagram.diagram;
+package com.jerryio.protocol_diagram.diagram.element;
 
-public class Corner {
+public class Corner extends Element {
     // bit mask
     public static final byte TOP = 0b1000;
     public static final byte RIGHT = 0b0100;
@@ -8,8 +8,4 @@ public class Corner {
     public static final byte LEFT = 0b0001;
 
     public byte value;
-
-    public Corner(byte value) {
-        this.value = value;
-    }
 }

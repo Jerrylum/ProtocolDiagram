@@ -1,9 +1,11 @@
-package com.jerryio.protocol_diagram.diagram;
+package com.jerryio.protocol_diagram.diagram.element;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import com.jerryio.protocol_diagram.diagram.Field;
 
 public class Row {
     private final int bit;

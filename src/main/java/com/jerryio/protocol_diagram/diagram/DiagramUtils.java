@@ -3,6 +3,11 @@ package com.jerryio.protocol_diagram.diagram;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jerryio.protocol_diagram.diagram.element.Divider;
+import com.jerryio.protocol_diagram.diagram.element.Row;
+import com.jerryio.protocol_diagram.diagram.element.RowSegment;
+import com.jerryio.protocol_diagram.diagram.element.Segment;
+
 public class DiagramUtils {
     
 
@@ -11,6 +16,7 @@ public class DiagramUtils {
 
         Row currentRow = new Row(bit);
         for (Field f : fields) {
+            f = f.clone();
             while (f.getLength() != 0) {
                 currentRow.addField(f);
                 if (currentRow.getUsed() == bit) {
@@ -29,7 +35,7 @@ public class DiagramUtils {
         return rows;
     }
 
-    public static class SpliceFloorService {
+    public static class SpliceDividerService {
         public int bit;
         public List<Row> rows;
 
@@ -38,7 +44,7 @@ public class DiagramUtils {
         public int topSegmentIndex;
         public int bottomSegmentIndex;
 
-        public SpliceFloorService(int bit, List<Row> rows) {
+        public SpliceDividerService(int bit, List<Row> rows) {
             this.bit = bit;
             this.rows = rows;
         }
@@ -75,10 +81,10 @@ public class DiagramUtils {
             return bottomSegmentIndex < getBottomRow().getCount();
         }
 
-        public List<Floor> splice() {
+        public List<Divider> splice() {
             assert rows.size() >= 2;
 
-            final List<Floor> floors = new ArrayList<>();
+            final List<Divider> dividers = new ArrayList<>();
 
             for (index = 0; index < rows.size() - 1; index++) {
                 assert getTopRow().getCount() > 0;
@@ -87,46 +93,46 @@ public class DiagramUtils {
                 topSegmentIndex = 0;
                 bottomSegmentIndex = 0;
 
-                Floor floor = new Floor(bit);
+                Divider divider = new Divider(bit);
 
                 while (topRowHasNext() || bottomRowHasNext()) {
                     if (topRowHasNext() && bottomRowHasNext()) {
                         if (getTopSegment().getEndIndex() < getBottomSegment().getEndIndex()) {
-                            floor.addSplice(getTopSegment(), getBottomSegment());
+                            divider.addSplice(getTopSegment(), getBottomSegment());
                             topSegmentIndex++;
                         } else if (getTopSegment().getEndIndex() == getBottomSegment().getEndIndex()) {
-                            floor.addSplice(getTopSegment(), getBottomSegment());
+                            divider.addSplice(getTopSegment(), getBottomSegment());
                             topSegmentIndex++;
                             bottomSegmentIndex++;
                         } else {
-                            floor.addSplice(getBottomSegment(), getTopSegment());
+                            divider.addSplice(getBottomSegment(), getTopSegment());
                             bottomSegmentIndex++;
                         }
                     } else if (topRowHasNext()) {
-                        floor.addSplice(getTopSegment(), getLastBottomSegment());
+                        divider.addSplice(getTopSegment(), getLastBottomSegment());
                         topSegmentIndex++;
                     } else {
-                        floor.addSplice(getBottomSegment(), getLastTopSegment());
+                        divider.addSplice(getBottomSegment(), getLastTopSegment());
                         bottomSegmentIndex++;
                     }
                 }
-                floors.add(floor);
+                dividers.add(divider);
             }
-            return floors;
+            return dividers;
         }
     }
 
-    public static List<Floor> spliceFloors(int bit, List<Row> rows) {
-        return new SpliceFloorService(bit, rows).splice();
+    public static List<Divider> spliceDividers(int bit, List<Row> rows) {
+        return new SpliceDividerService(bit, rows).splice();
     }
 
-    public static List<Segment> mergeRowsAndFloors(List<Row> rows, List<Floor> floors) {
+    public static List<Segment> mergeRowsAndDividers(List<Row> rows, List<Divider> dividers) {
         final List<Segment> segments = new ArrayList<>();
 
         for (int i = 0; i < rows.size(); i++) {
             segments.addAll(rows.get(i).getSegments());
-            if (i < floors.size())
-                segments.addAll(floors.get(i).getSegments());
+            if (i < dividers.size())
+                segments.addAll(dividers.get(i).getSegments());
         }
 
         return segments;
@@ -147,7 +153,8 @@ public class DiagramUtils {
                 }
             }
 
-            related.get(related.size() / 2).setDisplayName(true);
+            if (related.size() != 0)
+                related.get(related.size() / 2 - (related.size() + 1) % 2).setDisplayName(true);
         }
     }
 
