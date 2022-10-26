@@ -22,7 +22,11 @@ import com.jerryio.protocol_diagram.diagram.element.Divider;
 import com.jerryio.protocol_diagram.diagram.element.Matrix;
 import com.jerryio.protocol_diagram.diagram.element.Row;
 import com.jerryio.protocol_diagram.diagram.element.Segment;
+import com.jerryio.protocol_diagram.diagram.style.AsciiStyle;
+import com.jerryio.protocol_diagram.diagram.style.AsciiVerboseStyle;
 import com.jerryio.protocol_diagram.diagram.style.Style;
+import com.jerryio.protocol_diagram.diagram.style.UTF8CornerStyle;
+import com.jerryio.protocol_diagram.diagram.style.UTF8HeaderStyle;
 import com.jerryio.protocol_diagram.diagram.style.UTF8Style;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Pair;
@@ -130,11 +134,20 @@ public class Diagram {
 
         final Matrix matrix = new Matrix(segments);
         matrix.process();
-        matrix.process(); // process twice to make sure all the corner are processed
+        matrix.process(); // process twice to make sure all the corners are processed
 
-        Style s = new UTF8Style(matrix.getElements());
+        String style = (String) config.getOption("diagram-style").getValue();
 
-        return s.toString();
+        if (style.equals("utf8"))
+            return new UTF8Style(matrix.getElements()).toString();
+        else if (style.equals("utf8-header"))
+            return new UTF8HeaderStyle(matrix.getElements()).toString();
+        else if (style.equals("utf8-corner"))
+            return new UTF8CornerStyle(matrix.getElements()).toString();
+        else if (style.equals("ascii"))
+            return new AsciiStyle(matrix.getElements()).toString();
+        else
+            return new AsciiVerboseStyle(matrix.getElements()).toString();
     }
 
     public static class GsonTypeAdapter extends TypeAdapter<Diagram> {

@@ -14,6 +14,10 @@ public class Corner extends Element {
         return value;
     }
 
+    public void setValue(byte value) {
+        this.value = value;
+    }
+
     public boolean isIndividual() {
         return individual;
     }

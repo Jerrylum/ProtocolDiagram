@@ -11,7 +11,7 @@ import com.jerryio.protocol_diagram.diagram.element.RowTail;
 import com.jerryio.protocol_diagram.diagram.element.Segment;
 
 public abstract class Style {
-    private List<Element> elements;
+    protected List<Element> elements;
 
     public Style(List<Element> elements) {
         this.elements = elements;
