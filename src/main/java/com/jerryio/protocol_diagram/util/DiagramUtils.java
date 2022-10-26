@@ -166,16 +166,16 @@ public class DiagramUtils {
         }
     }
 
-    public static String generateHeader(List<Element> elements, String headerStyle) {
+    public static String generateHeader(List<Element> elements, int bit, String headerStyle) {
         StringBuilder sb = new StringBuilder();
 
-        int maximumEndIndex = 0; // visible item only
+        int maximumEndIndex = headerStyle.equals("full") ? bit : 0; // visible item only
 
         for (Element e : elements)
             if (e instanceof IVisible i && e instanceof Segment s && i.isVisible())
                 maximumEndIndex = Math.max(maximumEndIndex, s.getEndIndex());
 
-        if (maximumEndIndex == 0)
+        if (maximumEndIndex == 0 || headerStyle.equals("none"))
             return "";
 
         for (int i = 0; i < maximumEndIndex; i++)

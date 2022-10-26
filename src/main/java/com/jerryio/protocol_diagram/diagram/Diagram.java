@@ -143,7 +143,7 @@ public class Diagram {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append(DiagramUtils.generateHeader(elements, headerStyle));
+        sb.append(DiagramUtils.generateHeader(elements, bit, headerStyle));
 
         if (style.equals("utf8"))
             sb.append(new UTF8Style(elements).output());
