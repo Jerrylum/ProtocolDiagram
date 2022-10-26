@@ -23,5 +23,5 @@ public class AsciiVerboseStyle extends AsciiStyle {
                 return output(' ', ' ', e.getLength());
         }
     }
-    
+
 }

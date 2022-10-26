@@ -28,7 +28,7 @@ public abstract class Style {
     }
 
     public String output(RowSegment e) {
-        return output((Segment)e);
+        return output((Segment) e);
     }
 
     public String output(Segment e) {

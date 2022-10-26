@@ -8,5 +8,5 @@ public class NextLine extends Element {
     public void process(Matrix m, int x, int y) {
         // Nothing to do
     }
-    
+
 }

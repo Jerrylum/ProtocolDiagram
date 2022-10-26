@@ -35,7 +35,7 @@ public class Matrix {
             matrix.add(new Connector());
             matrix.add(segment);
             for (int i = 1; i < segment.getLength(); i++) {
-                matrix.add(segment);                
+                matrix.add(segment);
                 matrix.add(segment);
             }
         }

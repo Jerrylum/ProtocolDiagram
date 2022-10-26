@@ -13,7 +13,7 @@ public class Row extends SegmentGroup<RowSegment> {
     public Row addField(Field field) {
         int consume = Math.min(field.getLength(), bit - used);
         field.setLength(field.getLength() - consume);
-        
+
         if (consume != 0)
             segments.add(new RowSegment(field, used, consume));
         used += consume;

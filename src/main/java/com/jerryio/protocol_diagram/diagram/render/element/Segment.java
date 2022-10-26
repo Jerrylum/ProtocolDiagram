@@ -39,5 +39,4 @@ public abstract class Segment extends Element {
         return displayName;
     }
 
-
 }
