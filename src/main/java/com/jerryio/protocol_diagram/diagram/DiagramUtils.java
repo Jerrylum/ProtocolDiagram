@@ -159,8 +159,4 @@ public class DiagramUtils {
         }
     }
 
-    // public static void addCornerAndMembraneBetweenSegments(List<Segment> segments) {
-
-    // }
-
 }

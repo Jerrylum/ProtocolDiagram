@@ -16,8 +16,10 @@ public class DividerSegment extends Segment {
     @Override
     public void process(Matrix m, int x, int y) {
         Element up = m.get(x, y - 1);
-        if (up == null || up instanceof RowTail)
-            isVisible = false;
+        Element down = m.get(x, y + 1);
+        boolean isUp = up != null && !(up instanceof RowTail);
+        boolean isDown = down != null && !(down instanceof RowTail);
+        isVisible = isUp || isDown;
     }
 
     @Override
@@ -25,7 +27,8 @@ public class DividerSegment extends Segment {
         if (getRepresent() == null)
             return "DividerSegment [length=" + getLength() + ", display=" + isDisplayName() + "]";
         else
-            return "DividerSegment [name=" + getRepresent().getName() + ", length=" + getLength() + ", display=" + isDisplayName() + "]";
+            return "DividerSegment [name=" + getRepresent().getName() + ", length=" + getLength() + ", display="
+                    + isDisplayName() + "]";
     }
 
 }

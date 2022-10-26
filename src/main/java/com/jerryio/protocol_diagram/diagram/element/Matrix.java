@@ -1,6 +1,7 @@
 package com.jerryio.protocol_diagram.diagram.element;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Matrix {
@@ -23,8 +24,11 @@ public class Matrix {
             }
 
             matrix.add(new Corner());
-            for (int i = 0; i < segment.getLength(); i++)
+            matrix.add(segment);
+            for (int i = 1; i < segment.getLength(); i++) {
+                matrix.add(segment);                
                 matrix.add(segment);
+            }
         }
 
         matrix.add(new Corner());
@@ -40,6 +44,10 @@ public class Matrix {
         return height;
     }
 
+    public List<Element> getElements() {
+        return Collections.unmodifiableList(matrix);
+    }
+
     public Element get(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height)
             return null;
@@ -47,9 +55,14 @@ public class Matrix {
     }
 
     public void process() {
+        Element last = null;
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                get(x, y).process(this, x, y);
+                Element e = get(x, y);
+                if (last != e) {
+                    e.process(this, x, y);
+                    last = e;
+                }
             }
         }
     }

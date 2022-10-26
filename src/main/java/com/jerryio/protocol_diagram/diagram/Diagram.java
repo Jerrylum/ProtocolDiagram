@@ -22,6 +22,8 @@ import com.jerryio.protocol_diagram.diagram.element.Divider;
 import com.jerryio.protocol_diagram.diagram.element.Matrix;
 import com.jerryio.protocol_diagram.diagram.element.Row;
 import com.jerryio.protocol_diagram.diagram.element.Segment;
+import com.jerryio.protocol_diagram.diagram.style.Style;
+import com.jerryio.protocol_diagram.diagram.style.UTF8Style;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Pair;
 import com.jerryio.protocol_diagram.token.Parameter;
@@ -129,19 +131,11 @@ public class Diagram {
 
         Matrix matrix = new Matrix(segments);
         matrix.process();
+        matrix.process(); // process twice to make sure all the corner are processed
 
-        System.out.println(matrix);
+        Style s = new UTF8Style(matrix.getElements());
 
-        // for (Row row : rows) {
-        //     System.out.println(row.getSegments());
-        // }
-
-        // for (Divider divider : dividers) {
-        //     System.out.println(divider.getSegments());
-        // }
-
-
-        return "";
+        return s.toString();
     }
 
     public static class GsonTypeAdapter extends TypeAdapter<Diagram> {
