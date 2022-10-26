@@ -6,17 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.jerryio.protocol_diagram.Main;
-import com.jerryio.protocol_diagram.command.ClearCommand;
-import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.command.HandleResult;
+import com.jerryio.protocol_diagram.command.commands.ClearCommand;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.CommandLine;
-import com.jerryio.protocol_diagram.command.HandleResult;
 
 public class ClearCommandTest {
     @Before
     public void setUp() {
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
     }
 
     @Test
@@ -25,14 +24,14 @@ public class ClearCommandTest {
         Main.diagram.addField(new Field("test2", 2));
         assertEquals(2, Main.diagram.size());
         ClearCommand cc = new ClearCommand();
-        assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("clear"))).message(), "Removed all fields.");
-        assertEquals(Main.diagram.size(), 0);
+        assertEquals("Removed all fields.", cc.handle(CommandLine.parse(new CodePointBuffer("clear"))).message());
+        assertEquals(0, Main.diagram.size());
     }
 
     @Test
     public void testClearCommandHandleFail() {
         ClearCommand cc = new ClearCommand();
-        assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("clear test"))), HandleResult.TOO_MANY_ARGUMENTS);
-        assertEquals(cc.handle(CommandLine.parse(new CodePointBuffer("test"))), HandleResult.NOT_HANDLED);
+        assertEquals(HandleResult.TOO_MANY_ARGUMENTS, cc.handle(CommandLine.parse(new CodePointBuffer("clear test"))));
+        assertEquals(HandleResult.NOT_HANDLED, cc.handle(CommandLine.parse(new CodePointBuffer("test"))));
     }
 }

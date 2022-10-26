@@ -10,17 +10,17 @@ import com.jerryio.protocol_diagram.token.Digit;
 public class DigitTest {
     @Test
     public void testDigitValid() {
-        assertEquals(Digit.parse(new CodePointBuffer("0")), new Digit('0'));
-        assertEquals(Digit.parse(new CodePointBuffer("1")), new Digit('1'));
-        assertEquals(Digit.parse(new CodePointBuffer("2")), new Digit('2'));
-        assertEquals(Digit.parse(new CodePointBuffer("3")), new Digit('3'));
-        assertEquals(Digit.parse(new CodePointBuffer("4")), new Digit('4'));
-        assertEquals(Digit.parse(new CodePointBuffer("5")), new Digit('5'));
-        assertEquals(Digit.parse(new CodePointBuffer("6")), new Digit('6'));
-        assertEquals(Digit.parse(new CodePointBuffer("7")), new Digit('7'));
-        assertEquals(Digit.parse(new CodePointBuffer("8")), new Digit('8'));
-        assertEquals(Digit.parse(new CodePointBuffer("9")), new Digit('9'));
-        assertEquals(Digit.parse(new CodePointBuffer("1 ")), new Digit('1'));
+        assertEquals(new Digit('0'), Digit.parse(new CodePointBuffer("0")));
+        assertEquals(new Digit('1'), Digit.parse(new CodePointBuffer("1")));
+        assertEquals(new Digit('2'), Digit.parse(new CodePointBuffer("2")));
+        assertEquals(new Digit('3'), Digit.parse(new CodePointBuffer("3")));
+        assertEquals(new Digit('4'), Digit.parse(new CodePointBuffer("4")));
+        assertEquals(new Digit('5'), Digit.parse(new CodePointBuffer("5")));
+        assertEquals(new Digit('6'), Digit.parse(new CodePointBuffer("6")));
+        assertEquals(new Digit('7'), Digit.parse(new CodePointBuffer("7")));
+        assertEquals(new Digit('8'), Digit.parse(new CodePointBuffer("8")));
+        assertEquals(new Digit('9'), Digit.parse(new CodePointBuffer("9")));
+        assertEquals(new Digit('1'), Digit.parse(new CodePointBuffer("1 ")));
     }
 
     @Test

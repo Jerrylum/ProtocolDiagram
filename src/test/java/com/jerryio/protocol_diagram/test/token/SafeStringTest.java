@@ -13,13 +13,13 @@ public class SafeStringTest {
         SafeString s = new SafeString("test");
         assertEquals(s.content(), "test");
 
-        assertEquals(SafeString.parse(new CodePointBuffer("test")), new SafeString("test")); // test
-        assertEquals(SafeString.parse(new CodePointBuffer("test test")), new SafeString("test test")); // test
-        assertEquals(SafeString.parse(new CodePointBuffer("test:123")), new SafeString("test")); // test123
-        assertEquals(SafeString.parse(new CodePointBuffer("test,123")), new SafeString("test")); // test123
-        assertEquals(SafeString.parse(new CodePointBuffer("test:123,456")), new SafeString("test")); // test123456
-        assertEquals(SafeString.parse(new CodePointBuffer("test,123:456")), new SafeString("test")); // test123456
-        assertEquals(SafeString.parse(new CodePointBuffer("test:123,456:789")), new SafeString("test")); // test123456789
+        assertEquals(new SafeString("test"), SafeString.parse(new CodePointBuffer("test"))); // test
+        assertEquals(new SafeString("test test"), SafeString.parse(new CodePointBuffer("test test"))); // test
+        assertEquals(new SafeString("test"), SafeString.parse(new CodePointBuffer("test:123"))); // test123
+        assertEquals(new SafeString("test"), SafeString.parse(new CodePointBuffer("test,123"))); // test123
+        assertEquals(new SafeString("test"), SafeString.parse(new CodePointBuffer("test:123,456"))); // test123456
+        assertEquals(new SafeString("test"), SafeString.parse(new CodePointBuffer("test,123:456"))); // test123456
+        assertEquals(new SafeString("test"), SafeString.parse(new CodePointBuffer("test:123,456:789"))); // test123456789
     }
 
     @Test

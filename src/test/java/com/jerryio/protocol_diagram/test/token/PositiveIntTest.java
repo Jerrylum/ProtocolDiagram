@@ -10,11 +10,11 @@ import com.jerryio.protocol_diagram.token.PositiveInt;
 public class PositiveIntTest {
     @Test
     public void testPositiveIntValid() {
-        assertEquals(PositiveInt.parse(new CodePointBuffer("123")), new PositiveInt("123"));
-        assertEquals(PositiveInt.parse(new CodePointBuffer("123abc")), new PositiveInt("123"));
-        assertEquals(PositiveInt.parse(new CodePointBuffer("123 ")), new PositiveInt("123"));
-        assertEquals(PositiveInt.parse(new CodePointBuffer("123 456")), new PositiveInt("123"));
-        assertEquals(PositiveInt.parse(new CodePointBuffer("3.14")), new PositiveInt("3"));
+        assertEquals(new PositiveInt("123"), PositiveInt.parse(new CodePointBuffer("123")));
+        assertEquals(new PositiveInt("123"), PositiveInt.parse(new CodePointBuffer("123abc")));
+        assertEquals(new PositiveInt("123"), PositiveInt.parse(new CodePointBuffer("123 ")));
+        assertEquals(new PositiveInt("123"), PositiveInt.parse(new CodePointBuffer("123 456")));
+        assertEquals(new PositiveInt("3"), PositiveInt.parse(new CodePointBuffer("3.14")));
     }
 
     @Test

@@ -10,17 +10,17 @@ import com.jerryio.protocol_diagram.token.StringT;
 public class StringTTest {
     @Test
     public void testBooleanTValid() {
-        assertEquals(StringT.parse(new CodePointBuffer("test")), new StringT("test"));// test
-        assertEquals(StringT.parse(new CodePointBuffer(" ")), new StringT(""));// empty
-        assertEquals(StringT.parse(new CodePointBuffer("test test")), new StringT("test"));// test
-        assertEquals(StringT.parse(new CodePointBuffer("'test'")), new StringT("test")); // 'test'
-        assertEquals(StringT.parse(new CodePointBuffer("\"test\"")), new StringT("test")); // "test"
-        assertEquals(StringT.parse(new CodePointBuffer("'\\\\'")), new StringT("\\")); // '\\'
-        assertEquals(StringT.parse(new CodePointBuffer("'\\''")), new StringT("'")); // '\''
-        assertEquals(StringT.parse(new CodePointBuffer("\"\\\\\"")), new StringT("\\")); // "\\"
-        assertEquals(StringT.parse(new CodePointBuffer("'\\\"'")), new StringT("\"")); // '\"'
-        assertEquals(StringT.parse(new CodePointBuffer("'\\\\test'")), new StringT("\\test")); // '\\test'
-        assertEquals(StringT.parse(new CodePointBuffer("\"\\\\test\"")), new StringT("\\test")); // "\\test"
+        assertEquals(new StringT("test"), StringT.parse(new CodePointBuffer("test")));// test
+        assertEquals(new StringT(""), StringT.parse(new CodePointBuffer(" ")));// empty
+        assertEquals(new StringT("test"), StringT.parse(new CodePointBuffer("test test")));// test
+        assertEquals(new StringT("test"), StringT.parse(new CodePointBuffer("'test'"))); // 'test'
+        assertEquals(new StringT("test"), StringT.parse(new CodePointBuffer("\"test\""))); // "test"
+        assertEquals(new StringT("\\"), StringT.parse(new CodePointBuffer("'\\\\'"))); // '\\'
+        assertEquals(new StringT("'"), StringT.parse(new CodePointBuffer("'\\''"))); // '\''
+        assertEquals(new StringT("\\"), StringT.parse(new CodePointBuffer("\"\\\\\""))); // "\\"
+        assertEquals(new StringT("\""), StringT.parse(new CodePointBuffer("'\\\"'"))); // '\"'
+        assertEquals(new StringT("\\test"), StringT.parse(new CodePointBuffer("'\\\\test'"))); // '\\test'
+        assertEquals(new StringT("\\test"), StringT.parse(new CodePointBuffer("\"\\\\test\""))); // "\\test"
     }
 
     @Test

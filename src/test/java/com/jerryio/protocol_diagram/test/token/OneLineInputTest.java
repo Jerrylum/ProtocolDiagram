@@ -14,17 +14,17 @@ public class OneLineInputTest {
     @Test
     public void testOneLineInputValid() {
         OneLineInput i = new OneLineInput(Arrays.asList(new Pair<String, Integer>("test", 123)));
-        assertEquals(i.params().get(0).first(), "test");
-        assertEquals(i.params().get(0).second(), Integer.valueOf(123));
+        assertEquals("test", i.params().get(0).first());
+        assertEquals(Integer.valueOf(123), i.params().get(0).second());
 
-        assertEquals(OneLineInput.parse(new CodePointBuffer("")).getClass(), OneLineInput.class);
-        assertEquals(OneLineInput.parse(new CodePointBuffer("test:123")).getClass(), OneLineInput.class);
-        assertEquals(OneLineInput.parse(new CodePointBuffer("test test:123")).getClass(), OneLineInput.class);
-        assertEquals(OneLineInput.parse(new CodePointBuffer("test:123,")).getClass(), OneLineInput.class);
-        assertEquals(OneLineInput.parse(new CodePointBuffer("test:123, ")).getClass(), OneLineInput.class);
-        assertEquals(OneLineInput.parse(new CodePointBuffer("test : 123,test2:456")).getClass(), OneLineInput.class);
-        assertEquals(OneLineInput.parse(new CodePointBuffer("test : 123, test2: 456,")).getClass(), OneLineInput.class);
-        assertEquals(OneLineInput.parse(new CodePointBuffer(" test:123")).getClass(), OneLineInput.class);
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer("")).getClass());
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer("test:123")).getClass());
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer("test test:123")).getClass());
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer("test:123,")).getClass());
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer("test:123, ")).getClass());
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer("test : 123,test2:456")).getClass());
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer("test : 123, test2: 456,")).getClass());
+        assertEquals(OneLineInput.class, OneLineInput.parse(new CodePointBuffer(" test:123")).getClass());
     }
 
     @Test

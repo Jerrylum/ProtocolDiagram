@@ -11,31 +11,31 @@ public class NumberTTest {
     @Test
     public void testNumberTValid() {
         NumberT number = NumberT.parse(new CodePointBuffer("0"));
-        assertEquals(number.value(), "0");
-        assertEquals(number.isPositive(), true);
-        assertEquals(number.isDouble(), false);
-
-        assertEquals(NumberT.parse(new CodePointBuffer("0")), new NumberT("0", true, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("-14")), new NumberT("-14", false, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("14")), new NumberT("14", true, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("3.14 ")), new NumberT("3.14", true, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("-3.14")), new NumberT("-3.14", false, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("14\\")), new NumberT("14", true, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("14\'")), new NumberT("14", true, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("14\"")), new NumberT("14", true, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("14 ")), new NumberT("14", true, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("-14\\")), new NumberT("-14", false, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("-14\'")), new NumberT("-14", false, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("-14\"")), new NumberT("-14", false, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("-14 ")), new NumberT("-14", false, false));
-        assertEquals(NumberT.parse(new CodePointBuffer("3.14\\")), new NumberT("3.14", true, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("3.14\'")), new NumberT("3.14", true, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("3.14\"")), new NumberT("3.14", true, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("3.14 ")), new NumberT("3.14", true, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("-3.14\\")), new NumberT("-3.14", false, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("-3.14\'")), new NumberT("-3.14", false, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("-3.14\"")), new NumberT("-3.14", false, true));
-        assertEquals(NumberT.parse(new CodePointBuffer("-3.14 ")), new NumberT("-3.14", false, true));
+        assertEquals("0", number.value());
+        assertTrue(number.isPositive());
+        assertFalse(number.isDouble());
+        assertEquals(14, NumberT.parse(new CodePointBuffer("14a")).toInt());
+        assertEquals(new NumberT("0", true, false), NumberT.parse(new CodePointBuffer("0")));
+        assertEquals(new NumberT("-14", false, false), NumberT.parse(new CodePointBuffer("-14")));
+        assertEquals(new NumberT("14", true, false), NumberT.parse(new CodePointBuffer("14")));
+        assertEquals(new NumberT("3.14", true, true), NumberT.parse(new CodePointBuffer("3.14 ")));
+        assertEquals(new NumberT("-3.14", false, true), NumberT.parse(new CodePointBuffer("-3.14")));
+        assertEquals(new NumberT("14", true, false), NumberT.parse(new CodePointBuffer("14\\")));
+        assertEquals(new NumberT("14", true, false), NumberT.parse(new CodePointBuffer("14\'")));
+        assertEquals(new NumberT("14", true, false), NumberT.parse(new CodePointBuffer("14\"")));
+        assertEquals(new NumberT("14", true, false), NumberT.parse(new CodePointBuffer("14 ")));
+        assertEquals(new NumberT("-14", false, false), NumberT.parse(new CodePointBuffer("-14\\")));
+        assertEquals(new NumberT("-14", false, false), NumberT.parse(new CodePointBuffer("-14\'")));
+        assertEquals(new NumberT("-14", false, false), NumberT.parse(new CodePointBuffer("-14\"")));
+        assertEquals(new NumberT("-14", false, false), NumberT.parse(new CodePointBuffer("-14 ")));
+        assertEquals(new NumberT("3.14", true, true), NumberT.parse(new CodePointBuffer("3.14\\")));
+        assertEquals(new NumberT("3.14", true, true), NumberT.parse(new CodePointBuffer("3.14\'")));
+        assertEquals(new NumberT("3.14", true, true), NumberT.parse(new CodePointBuffer("3.14\"")));
+        assertEquals(new NumberT("3.14", true, true), NumberT.parse(new CodePointBuffer("3.14 ")));
+        assertEquals(new NumberT("-3.14", false, true), NumberT.parse(new CodePointBuffer("-3.14\\")));
+        assertEquals(new NumberT("-3.14", false, true), NumberT.parse(new CodePointBuffer("-3.14\'")));
+        assertEquals(new NumberT("-3.14", false, true), NumberT.parse(new CodePointBuffer("-3.14\"")));
+        assertEquals(new NumberT("-3.14", false, true), NumberT.parse(new CodePointBuffer("-3.14 ")));
     }
 
     @Test

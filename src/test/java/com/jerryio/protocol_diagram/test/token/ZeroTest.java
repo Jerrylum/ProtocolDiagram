@@ -10,8 +10,8 @@ import com.jerryio.protocol_diagram.token.Zero;
 public class ZeroTest {
     @Test
     public void testZeroValid() {
-        assertEquals(Zero.parse(new CodePointBuffer("0")), new Zero('0'));
-        assertEquals(Zero.parse(new CodePointBuffer("0 ")), new Zero('0'));
+        assertEquals(new Zero('0'), Zero.parse(new CodePointBuffer("0")));
+        assertEquals(new Zero('0'), Zero.parse(new CodePointBuffer("0 ")));
     }
 
     @Test

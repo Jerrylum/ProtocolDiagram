@@ -8,9 +8,12 @@ import org.junit.Test;
 
 import com.jerryio.protocol_diagram.Main;
 import com.jerryio.protocol_diagram.diagram.Diagram;
+import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.util.FileUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -22,18 +25,24 @@ public class MainTest {
 
     @Before
     public void setup() {
-        Main.diagram = new Diagram();
+        Main.handler.newDiagram();
 
         defaultIn = System.in;
 
         defaultOut = System.out;
         System.setOut(new java.io.PrintStream(out = new ByteArrayOutputStream()));
+
+        Diagram d = new Diagram();
+        d.addField(new Field("anything", 1));
+        FileUtils.save("test.json", d);
     }
 
     @After
     public void tearDown() {
         System.setIn(defaultIn);
         System.setOut(defaultOut);
+
+        new File("test.json").delete();
     }
 
     public void setInput(String input) {
@@ -52,7 +61,9 @@ public class MainTest {
         assertTrue(Main.doHandleCommand("unknown").startsWith(unknownCommand));
         assertTrue(Main.doHandleCommand("unknown 'something'").startsWith(unknownCommand));
 
-        assertTrue(Main.doHandleCommand("add 5 c") != null);
+        assertNotNull(Main.doHandleCommand("add 5 c"));
+        assertNotNull(Main.doHandleCommand("config bit 16"));
+        assertNotNull(Main.doHandleCommand("view"));
 
         assertEquals(1, Main.diagram.getFields().size());
     }
@@ -69,29 +80,29 @@ public class MainTest {
     }
 
     @Test
-    public void testTerminalFailedToParseArgument() {
+    public void testTerminalFailedToContinue() {
         Main.main(new String[] { "unknown" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "unknown", "word" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Only one main parameter allowed but found several"));
 
         out.reset();
 
         Main.main(new String[] { "unknown word" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "--unknown" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
 
         out.reset();
 
         Main.main(new String[] { "--s" });
-        assertTrue(out.toString().startsWith("Was passed main parameter"));
+        assertTrue(out.toString().startsWith("Failed to load diagram from"));
     }
 
     @Test
@@ -103,6 +114,26 @@ public class MainTest {
 
         Main.main(new String[] { "-h" });
         assertTrue(out.toString().startsWith("Usage: java -jar protocol_diagram.jar [options]"));
+    }
+
+    @Test
+    public void testTerminalTemplateFlag() {
+        Main.main(new String[] { "--template" });
+        assertTrue(out.toString().startsWith("Expected a value after parameter --template"));
+
+        out.reset();
+
+        Main.main(new String[] { "-t" });
+        assertTrue(out.toString().startsWith("Expected a value after parameter -t"));
+
+        out.reset();
+
+        Main.main(new String[] { "-t", "a" });
+        assertTrue(out.toString().startsWith("Unknown template"));
+
+        out.reset();
+
+        Main.main(new String[] { "-t", "tcp", "-p" });
     }
 
     @Test
@@ -123,6 +154,11 @@ public class MainTest {
         out.reset();
 
         Main.main(new String[] { "-s", "a:3", "-p" });
+    }
+
+    @Test
+    public void testTerminalLoadSource() {
+        Main.main(new String[] { "test.json", "-p" });
     }
 
     @Test
