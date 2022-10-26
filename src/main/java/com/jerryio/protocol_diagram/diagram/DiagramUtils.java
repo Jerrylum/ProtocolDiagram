@@ -72,7 +72,7 @@ public class DiagramUtils {
         public Row getBottomRow() {
             return rows.get(index + 1);
         }
-        
+
         public boolean topRowHasNext() {
             return topSegmentIndex < getTopRow().getCount();
         }
@@ -150,7 +150,9 @@ public class DiagramUtils {
                         highest = s.getLength();
                         related.clear();
                     }
-                    related.add(s);
+                    if (highest == s.getLength()) {
+                        related.add(s);
+                    }
                 }
             }
 

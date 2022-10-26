@@ -19,7 +19,7 @@ public class DividerSegment extends Segment {
         Element down = m.get(x, y + 1);
         boolean isUp = up != null && !(up instanceof RowTail);
         boolean isDown = down != null && !(down instanceof RowTail);
-        isVisible = isUp || isDown;
+        isVisible = (isUp || isDown) && getRepresent() == null;
     }
 
     @Override

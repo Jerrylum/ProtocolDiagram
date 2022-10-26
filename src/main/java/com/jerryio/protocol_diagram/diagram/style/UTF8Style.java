@@ -6,6 +6,7 @@ import com.jerryio.protocol_diagram.diagram.element.Corner;
 import com.jerryio.protocol_diagram.diagram.element.DividerSegment;
 import com.jerryio.protocol_diagram.diagram.element.Element;
 import com.jerryio.protocol_diagram.diagram.element.RowTail;
+import com.jerryio.protocol_diagram.diagram.element.Segment;
 
 public class UTF8Style extends Style {
 
@@ -36,28 +37,17 @@ public class UTF8Style extends Style {
 
     @Override
     public String output(DividerSegment e) {
+        if (e.isDisplayName())
+            return output((Segment) e);
+
         char c = e.isVisible() ? '─' : ' ';
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(c);
-        for (int i = 1; i < e.getLength(); i++) {
-            sb.append(c);
-            sb.append(c);
-        }
-        return sb.toString();
+        return output(c, c, e.getLength());
     }
 
     @Override
     public String output(RowTail e) {
-        char c = 'A';
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(c);
-        for (int i = 1; i < e.getLength(); i++) {
-            sb.append(c);
-            sb.append(c);
-        }
-        return sb.toString();
+        return output("Reserved", '─', e.getLength());
     }
 
 }

@@ -126,10 +126,9 @@ public class Diagram {
         final List<Row> rows = DiagramUtils.convertFieldsToRow(bit, fields);
         final List<Divider> dividers = DiagramUtils.spliceDividers(bit, rows);
         final List<Segment> segments = DiagramUtils.mergeRowsAndDividers(rows, dividers);
-
         DiagramUtils.setDisplayNameForAllFields(segments, fields);
 
-        Matrix matrix = new Matrix(segments);
+        final Matrix matrix = new Matrix(segments);
         matrix.process();
         matrix.process(); // process twice to make sure all the corner are processed
 
