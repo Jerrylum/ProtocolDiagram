@@ -1,4 +1,4 @@
-package com.jerryio.protocol_diagram.diagram.element;
+package com.jerryio.protocol_diagram.diagram.render;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.diagram.render.element.DividerSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
 
 public class Divider {
     private final int bit;

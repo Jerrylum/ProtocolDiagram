@@ -1,16 +1,20 @@
-package com.jerryio.protocol_diagram.diagram;
+package com.jerryio.protocol_diagram.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jerryio.protocol_diagram.diagram.element.Divider;
-import com.jerryio.protocol_diagram.diagram.element.Row;
-import com.jerryio.protocol_diagram.diagram.element.RowSegment;
-import com.jerryio.protocol_diagram.diagram.element.Segment;
+import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.diagram.render.Divider;
+import com.jerryio.protocol_diagram.diagram.render.IVisible;
+import com.jerryio.protocol_diagram.diagram.render.Row;
+import com.jerryio.protocol_diagram.diagram.render.element.DividerSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.Element;
+import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
 public class DiagramUtils {
 
-    public static List<Row> convertFieldsToRow(int bit, List<Field> fields) {
+    public static List<Row> convertFieldsToRow(int bit, List<Field> fields, boolean hasTail) {
         final List<Row> rows = new ArrayList<>();
 
         Row currentRow = new Row(bit);
@@ -26,7 +30,7 @@ public class DiagramUtils {
         }
 
         if (currentRow.getUsed() != 0) {
-            currentRow.addTail();
+            currentRow.addTail(hasTail);
             rows.add(currentRow);
         }
 
@@ -159,6 +163,28 @@ public class DiagramUtils {
             if (related.size() != 0)
                 related.get(related.size() / 2 - (related.size() + 1) % 2).setDisplayName(true);
         }
+    }
+
+    public static String generateHeader(List<Element> elements, String headerStyle) {
+        StringBuilder sb = new StringBuilder();
+
+        int maximumEndIndex = 0; // visible item only
+
+        for (Element e : elements)
+            if (e instanceof IVisible i && e instanceof Segment s && i.isVisible())
+                maximumEndIndex = Math.max(maximumEndIndex, s.getEndIndex());
+
+        for (int i = 0; i < maximumEndIndex; i++)
+            sb.append(" " + (i % 10 == 0 ? i / 10 : " "));
+
+        sb.append("\n");
+
+        for (int i = 0; i < maximumEndIndex; i++)
+            sb.append(" " + (i % 10));
+
+        sb.append("\n");
+
+        return sb.toString();
     }
 
 }

@@ -1,6 +1,9 @@
-package com.jerryio.protocol_diagram.diagram.element;
+package com.jerryio.protocol_diagram.diagram.render.element;
 
-public class Corner extends Element {
+import com.jerryio.protocol_diagram.diagram.render.IVisible;
+import com.jerryio.protocol_diagram.diagram.render.Matrix;
+
+public class Connector extends Element {
     // bit mask
     public static final byte TOP = 0b1000; // 8
     public static final byte RIGHT = 0b0100; // 4
@@ -25,10 +28,10 @@ public class Corner extends Element {
     public boolean isConnected(Element e) {
         if (e == null)
             return false;
-        else if (e instanceof Corner c)
+        else if (e instanceof Connector c)
             return !c.isIndividual();
-        else if (e instanceof DividerSegment d)
-            return d.isVisible();
+        else if (e instanceof IVisible v)
+            return v.isVisible();
         else
             return false;
     }
@@ -37,15 +40,19 @@ public class Corner extends Element {
     public void process(Matrix m, int x, int y) {
         value = 0;
         value |= isConnected(m.get(x, y - 1)) ? TOP : 0;
-        value |= isConnected(m.get(x + 1, y)) || m.get(x + 1, y) instanceof RowTail ? RIGHT : 0;
+        value |= isConnected(m.get(x + 1, y)) ? RIGHT : 0;
         value |= isConnected(m.get(x, y + 1)) ? BOTTOM : 0;
-        value |= isConnected(m.get(x - 1, y)) || m.get(x - 1, y) instanceof RowTail ? LEFT : 0;
-    
+        value |= isConnected(m.get(x - 1, y)) ? LEFT : 0;
+
         // Special case
 
-        // if a row tail is on the left hand side, then the corner should be individual
-        if (m.get(x - 1, y) instanceof RowTail)
+        // if a row tail is on the left hand side, then the connector should be
+        // individual
+        if (m.get(x - 1, y) instanceof RowTail t) {
             individual = true;
+            if (!t.isVisible())
+                value = 0;
+        }
     }
 
 }

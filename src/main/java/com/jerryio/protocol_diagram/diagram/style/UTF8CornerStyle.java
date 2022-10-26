@@ -2,8 +2,8 @@ package com.jerryio.protocol_diagram.diagram.style;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.diagram.element.Corner;
-import com.jerryio.protocol_diagram.diagram.element.Element;
+import com.jerryio.protocol_diagram.diagram.render.element.Connector;
+import com.jerryio.protocol_diagram.diagram.render.element.Element;
 
 public class UTF8CornerStyle extends UTF8Style {
 
@@ -12,7 +12,7 @@ public class UTF8CornerStyle extends UTF8Style {
     }
 
     @Override
-    public String output(Corner e) {
+    public String output(Connector e) {
         return new char[] {
                 ' ', // 0
                 ' ', // 1

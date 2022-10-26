@@ -1,8 +1,10 @@
-package com.jerryio.protocol_diagram.diagram.element;
+package com.jerryio.protocol_diagram.diagram.render.element;
 
 import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.diagram.render.IVisible;
+import com.jerryio.protocol_diagram.diagram.render.Matrix;
 
-public class DividerSegment extends Segment {
+public class DividerSegment extends Segment implements IVisible {
     private boolean isVisible = true;
 
     public DividerSegment(Field represent, int start, int length) {

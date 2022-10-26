@@ -2,11 +2,11 @@ package com.jerryio.protocol_diagram.diagram.style;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.diagram.element.Corner;
-import com.jerryio.protocol_diagram.diagram.element.DividerSegment;
-import com.jerryio.protocol_diagram.diagram.element.Element;
-import com.jerryio.protocol_diagram.diagram.element.RowTail;
-import com.jerryio.protocol_diagram.diagram.element.Segment;
+import com.jerryio.protocol_diagram.diagram.render.element.Connector;
+import com.jerryio.protocol_diagram.diagram.render.element.DividerSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.Element;
+import com.jerryio.protocol_diagram.diagram.render.element.RowTail;
+import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
 public class AsciiStyle extends Style {
 
@@ -15,7 +15,7 @@ public class AsciiStyle extends Style {
     }
 
     @Override
-    public String output(Corner e) {
+    public String output(Connector e) {
         return new char[] {
                 ' ', // 0
                 ' ', // 1
@@ -48,7 +48,10 @@ public class AsciiStyle extends Style {
 
     @Override
     public String output(RowTail e) {
-        return output("Reserved", '-', e.getLength());
+        if (e.isVisible())
+            return output("Reserved", '-', e.getLength());
+        else
+            return output(' ', ' ', e.getLength());
     }
 
 }

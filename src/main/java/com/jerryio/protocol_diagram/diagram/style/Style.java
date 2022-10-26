@@ -2,13 +2,13 @@ package com.jerryio.protocol_diagram.diagram.style;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.diagram.element.Corner;
-import com.jerryio.protocol_diagram.diagram.element.DividerSegment;
-import com.jerryio.protocol_diagram.diagram.element.Element;
-import com.jerryio.protocol_diagram.diagram.element.NextLine;
-import com.jerryio.protocol_diagram.diagram.element.RowSegment;
-import com.jerryio.protocol_diagram.diagram.element.RowTail;
-import com.jerryio.protocol_diagram.diagram.element.Segment;
+import com.jerryio.protocol_diagram.diagram.render.element.Connector;
+import com.jerryio.protocol_diagram.diagram.render.element.DividerSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.Element;
+import com.jerryio.protocol_diagram.diagram.render.element.NextLine;
+import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.RowTail;
+import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
 public abstract class Style {
     protected List<Element> elements;
@@ -17,7 +17,7 @@ public abstract class Style {
         this.elements = elements;
     }
 
-    public abstract String output(Corner e);
+    public abstract String output(Connector e);
 
     public abstract String output(DividerSegment e);
 
@@ -36,7 +36,7 @@ public abstract class Style {
     }
 
     public String output(Element e) {
-        if (e instanceof Corner f)
+        if (e instanceof Connector f)
             return output(f);
         else if (e instanceof DividerSegment f)
             return output(f);
@@ -80,8 +80,7 @@ public abstract class Style {
         return sb.toString();
     }
 
-    @Override
-    public String toString() {
+    public String output() {
         StringBuilder sb = new StringBuilder();
         Element last = null;
         for (Element e : elements) {

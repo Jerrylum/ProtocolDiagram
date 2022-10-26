@@ -1,4 +1,4 @@
-package com.jerryio.protocol_diagram.diagram.element;
+package com.jerryio.protocol_diagram.diagram.render;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.jerryio.protocol_diagram.diagram.Field;
+import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.RowTail;
 
 public class Row {
     private final int bit;
@@ -42,9 +44,9 @@ public class Row {
         return this;
     }
 
-    public void addTail() {
+    public void addTail(boolean isVisible) {
         if (used != bit)
-            segments.add(new RowTail(used, bit - used));
+            segments.add(new RowTail(used, bit - used, isVisible));
         used = bit;
     }
 

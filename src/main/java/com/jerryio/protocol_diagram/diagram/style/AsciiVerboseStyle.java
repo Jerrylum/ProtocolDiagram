@@ -2,9 +2,9 @@ package com.jerryio.protocol_diagram.diagram.style;
 
 import java.util.List;
 
-import com.jerryio.protocol_diagram.diagram.element.DividerSegment;
-import com.jerryio.protocol_diagram.diagram.element.Element;
-import com.jerryio.protocol_diagram.diagram.element.Segment;
+import com.jerryio.protocol_diagram.diagram.render.element.DividerSegment;
+import com.jerryio.protocol_diagram.diagram.render.element.Element;
+import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
 public class AsciiVerboseStyle extends AsciiStyle {
 
