@@ -9,7 +9,6 @@ import com.jerryio.protocol_diagram.diagram.element.RowSegment;
 import com.jerryio.protocol_diagram.diagram.element.Segment;
 
 public class DiagramUtils {
-    
 
     public static List<Row> convertFieldsToRow(int bit, List<Field> fields) {
         final List<Row> rows = new ArrayList<>();
@@ -26,11 +25,10 @@ public class DiagramUtils {
             }
         }
 
-        if (currentRow.getUsed() != 0)
+        if (currentRow.getUsed() != 0) {
+            currentRow.addTail();
             rows.add(currentRow);
-
-        rows.add(0, new Row(bit).addField(new Field(null, bit)));
-        rows.add(rows.size(), new Row(bit).addField(new Field(null, bit)));
+        }
 
         return rows;
     }
@@ -46,7 +44,9 @@ public class DiagramUtils {
 
         public SpliceDividerService(int bit, List<Row> rows) {
             this.bit = bit;
-            this.rows = rows;
+            this.rows = new ArrayList<>(rows);
+            this.rows.add(0, new Row(bit).addField(new Field(null, bit)));
+            this.rows.add(this.rows.size(), new Row(bit).addField(new Field(null, bit)));
         }
 
         public RowSegment getTopSegment() {
@@ -130,10 +130,11 @@ public class DiagramUtils {
         final List<Segment> segments = new ArrayList<>();
 
         for (int i = 0; i < rows.size(); i++) {
+            segments.addAll(dividers.get(i).getSegments());
             segments.addAll(rows.get(i).getSegments());
-            if (i < dividers.size())
-                segments.addAll(dividers.get(i).getSegments());
         }
+
+        segments.addAll(dividers.get(dividers.size() - 1).getSegments());
 
         return segments;
     }
@@ -157,5 +158,9 @@ public class DiagramUtils {
                 related.get(related.size() / 2 - (related.size() + 1) % 2).setDisplayName(true);
         }
     }
+
+    // public static void addCornerAndMembraneBetweenSegments(List<Segment> segments) {
+
+    // }
 
 }

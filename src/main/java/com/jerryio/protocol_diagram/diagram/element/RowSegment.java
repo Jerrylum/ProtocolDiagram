@@ -9,6 +9,11 @@ public class RowSegment extends Segment {
     }
 
     @Override
+    public void process(Matrix m, int x, int y) {
+        // Nothing to do
+    }
+
+    @Override
     public String toString() {
         return "RowSegment [name=" + getRepresent().getName() + ", start=" + getStartIndex() + ", end=" + getEndIndex() + ", display=" + isDisplayName() + "]";
     }

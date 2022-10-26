@@ -7,5 +7,29 @@ public class Corner extends Element {
     public static final byte BOTTOM = 0b0010;
     public static final byte LEFT = 0b0001;
 
-    public byte value;
+    private byte value = 0;
+
+    public byte getValue() {
+        return value;
+    }
+
+    public boolean isConnected(Element e) {
+        if (e == null)
+            return false;
+        else if (e instanceof Corner)
+            return true;
+        else if (e instanceof DividerSegment d)
+            return d.isVisible();
+        else
+            return false;
+    }
+
+    @Override
+    public void process(Matrix m, int x, int y) {
+        value |= isConnected(m.get(x, y + 1)) ? TOP : 0;
+        value |= isConnected(m.get(x + 1, y)) ? RIGHT : 0;
+        value |= isConnected(m.get(x, y - 1)) ? BOTTOM : 0;
+        value |= isConnected(m.get(x - 1, y)) ? LEFT : 0;
+    }
+
 }

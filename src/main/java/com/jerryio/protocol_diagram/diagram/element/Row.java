@@ -42,6 +42,12 @@ public class Row {
         return this;
     }
 
+    public void addTail() {
+        if (used != bit)
+            segments.add(new RowTail(used, bit - used));
+        used = bit;
+    }
+
     public int getUsed() {
         return used;
     }

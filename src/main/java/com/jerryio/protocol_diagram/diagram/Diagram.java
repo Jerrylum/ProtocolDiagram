@@ -19,6 +19,7 @@ import com.jerryio.protocol_diagram.config.EnumOption;
 import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.config.RangeOption;
 import com.jerryio.protocol_diagram.diagram.element.Divider;
+import com.jerryio.protocol_diagram.diagram.element.Matrix;
 import com.jerryio.protocol_diagram.diagram.element.Row;
 import com.jerryio.protocol_diagram.diagram.element.Segment;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
@@ -126,15 +127,18 @@ public class Diagram {
 
         DiagramUtils.setDisplayNameForAllFields(segments, fields);
 
-        // System.out.println(rows.size());
+        Matrix matrix = new Matrix(segments);
+        matrix.process();
 
-        for (Row row : rows) {
-            System.out.println(row.getSegments());
-        }
+        System.out.println(matrix);
 
-        for (Divider divider : dividers) {
-            System.out.println(divider.getSegments());
-        }
+        // for (Row row : rows) {
+        //     System.out.println(row.getSegments());
+        // }
+
+        // for (Divider divider : dividers) {
+        //     System.out.println(divider.getSegments());
+        // }
 
 
         return "";
