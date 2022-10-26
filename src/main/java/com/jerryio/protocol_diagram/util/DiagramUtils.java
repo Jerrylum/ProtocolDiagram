@@ -7,7 +7,6 @@ import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.diagram.render.Divider;
 import com.jerryio.protocol_diagram.diagram.render.IVisible;
 import com.jerryio.protocol_diagram.diagram.render.Row;
-import com.jerryio.protocol_diagram.diagram.render.element.DividerSegment;
 import com.jerryio.protocol_diagram.diagram.render.element.Element;
 import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
 import com.jerryio.protocol_diagram.diagram.render.element.Segment;
@@ -49,24 +48,26 @@ public class DiagramUtils {
         public SpliceDividerService(int bit, List<Row> rows) {
             this.bit = bit;
             this.rows = new ArrayList<>(rows);
+
+            // HACK: Fake two rows to make our life easier
             this.rows.add(0, new Row(bit).addField(new Field(null, bit)));
             this.rows.add(this.rows.size(), new Row(bit).addField(new Field(null, bit)));
         }
 
         public RowSegment getTopSegment() {
-            return getTopRow().getSegment(topSegmentIndex);
+            return getTopRow().get(topSegmentIndex);
         }
 
         public RowSegment getBottomSegment() {
-            return getBottomRow().getSegment(bottomSegmentIndex);
+            return getBottomRow().get(bottomSegmentIndex);
         }
 
         public RowSegment getLastTopSegment() {
-            return getTopRow().getSegment(getTopRow().getCount() - 1);
+            return getTopRow().get(getTopRow().getCount() - 1);
         }
 
         public RowSegment getLastBottomSegment() {
-            return getBottomRow().getSegment(getBottomRow().getCount() - 1);
+            return getBottomRow().get(getBottomRow().getCount() - 1);
         }
 
         public Row getTopRow() {
@@ -173,6 +174,9 @@ public class DiagramUtils {
         for (Element e : elements)
             if (e instanceof IVisible i && e instanceof Segment s && i.isVisible())
                 maximumEndIndex = Math.max(maximumEndIndex, s.getEndIndex());
+
+        if (maximumEndIndex == 0)
+            return "";
 
         for (int i = 0; i < maximumEndIndex; i++)
             sb.append(" " + (i % 10 == 0 ? i / 10 : " "));

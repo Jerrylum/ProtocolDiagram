@@ -85,8 +85,7 @@ public abstract class Style {
         Element last = null;
         for (Element e : elements) {
             if (last != e) {
-                sb.append(output(e));
-                last = e;
+                sb.append(output(last = e));
             }
         }
         return sb.toString();
