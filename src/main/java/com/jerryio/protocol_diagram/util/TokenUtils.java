@@ -5,20 +5,43 @@ import com.jerryio.protocol_diagram.token.Token;
 
 public class TokenUtils {
 
+    /**
+     * a utility function that check whether the character is delimiter (null | ' ')
+     * @param c
+     * @return
+     */
     public static boolean isDelimiter(Character c) {
         return c == null || c == ' ';
     }
 
+    /**
+     * a utility function that check whether the character is safe delimiter (null | ' ' | ':' | ',')
+     * @param c
+     * @return
+     */
     public static boolean isSafeDelimiter(Character c) {
         return c == null || c == ' ' || c == ':' || c == ',';
     }
 
     /* Start internal functions */
 
+    /**
+     * a utility function that transform a arguments of classes to an array of classes
+     * @param clazz
+     * @return
+     */
     public static Class<?>[] doGetClasses(Class<?>... clazz) {
         return clazz;
     }
 
+    /**
+     * a utility function that create new instance T via the inputted parameter class T, an array of parameter types of the T's constructor, and an array of parameter values of the T's constructor
+     * @param <T>
+     * @param token_class
+     * @param args_types
+     * @param args
+     * @return
+     */
     public static <T extends Token> T doNewInstance(Class<T> token_class, Class<?>[] args_types, Object... args) {
         // This is equivalent to "return new TokenClass(a, b, c, d);"
         try {
@@ -29,6 +52,15 @@ public class TokenUtils {
         }
     }
 
+    /**
+     * a utility function that read the code point buffer, return a Token instance typed with T which given by the parameter class T
+     * if the code point buffer does match one of our specified acceptable characters, else return null
+     * @param <T>
+     * @param buffer
+     * @param accepts
+     * @param token_class
+     * @return
+     */
     public static <T extends Token> T doParseCodepoint(CodePointBuffer buffer, char[] accepts, Class<T> token_class) {
         buffer.savepoint();
 
@@ -41,6 +73,14 @@ public class TokenUtils {
         return buffer.rollbackAndReturn(null);
     }
 
+    /**
+     * an utility function that read the code point buffer and return a Token instance usually typed with SingleQuotedString or DoubleQuotedString
+     * @param <T>
+     * @param buffer
+     * @param quote
+     * @param token_class
+     * @return
+     */
     public static <T extends Token> T doParseQuoteString(CodePointBuffer buffer, char quote, Class<T> token_class) {
         buffer.savepoint();
 
