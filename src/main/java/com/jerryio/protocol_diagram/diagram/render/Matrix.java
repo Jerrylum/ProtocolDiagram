@@ -20,7 +20,7 @@ public class Matrix {
     public Matrix(List<Segment> segments) {
         matrix = new ArrayList<>();
 
-        if (segments.size() < 6)
+        if (segments.size() < 3)
             return;
 
         boolean isDivider = true;
