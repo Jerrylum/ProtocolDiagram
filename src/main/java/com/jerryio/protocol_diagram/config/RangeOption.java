@@ -20,6 +20,10 @@ public class RangeOption extends Option {
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * a wrapper method that sets the value of this range option, the value of the parameter is required to be an integer
+     * @return HandleResult
+     */
     @Override
     public HandleResult setValue(Parameter value) {
         if (value.isNumber() && !value.isDouble()) {
@@ -29,6 +33,14 @@ public class RangeOption extends Option {
         }
     }
 
+    /**
+     * a method that sets the value of this range option, note that if the value is out of range
+     * such as less than our minimum requirement or greater than our maximum requirement,
+     * a handling failure will be returned, and if the value is set with same value of the old value
+     * a failure will also be returned
+     * @param value
+     * @return HandleResult
+     */
     public HandleResult setValue(int value) {
         int oldValue = this.value;
         if (oldValue == value) {
@@ -41,15 +53,27 @@ public class RangeOption extends Option {
         }
     }
 
+    /**
+     * a getter method that retrieve the value of this range option
+     * @return Integer
+     */
     public Integer getValue() {
         return value;
     }
 
+    /**
+     * a getter method that return the default value of this range option
+     * @return Integer
+     */
     @Override
     public Integer getDefault() {
         return defaultValue;
     }
 
+    /**
+     * a method that return a manual statement.
+     * @return String
+     */
     @Override
     public String getUsageDescription() {
         return "min:" + min + " max:" + max + " default:" + defaultValue;
