@@ -18,6 +18,12 @@ public class Configuration {
         this.options = Arrays.asList(options);
     }
 
+    /**
+     * a method that sets the value of specified option from this configuration by the given key and value
+     * @param key
+     * @param value
+     * @return HandleResult
+     */
     public HandleResult setValue(String key, Parameter value) {
         Option option = getOption(key);
         if (option == null) {
@@ -27,6 +33,11 @@ public class Configuration {
         }
     }
 
+    /**
+     * a getter method that retrieve the value of option by the specified key
+     * @param key
+     * @return Object
+     */
     public Object getValue(String key) {
         Option option = getOption(key);
         if (option == null) {
@@ -36,6 +47,11 @@ public class Configuration {
         }
     }
 
+    /**
+     * a find method that lookup the matching option based on the given key
+     * @param key
+     * @return Option
+     */
     public Option getOption(String key) {
         Option selected = null;
         for (Option option : options) {
@@ -54,6 +70,10 @@ public class Configuration {
         return selected;
     }
 
+    /**
+     * a pure function that return a readonly clone of the options list
+     * @return Collection<Option>
+     */
     public Collection<Option> getOptions() {
         return Collections.unmodifiableList(options);
     }
