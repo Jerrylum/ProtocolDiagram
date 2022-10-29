@@ -60,10 +60,20 @@ public class ExistingProtocol {
             "dnp3", "Start:16,Length:8,Control:8,Destination Address:16,Source Address:16,CRC:16," +
                     "User Data 1:128,CRC 1:16,User Data 2:112,CRC 2:16");
 
+    /**
+     * an utility function that retrieves the diagram constructing commands via the given protocol name
+     * @param name
+     * @return String
+     */
     public static String getProtocol(String name) {
         return protocols.getOrDefault(name, null);
     }
 
+    /**
+     * an utility function that return a readonly map<string, string>, the first one will be the protocol name,
+     * the latter one is the diagram constructing commands
+     * @return Map<String, String>
+     */
     public static Map<String, String> getProtocols() {
         return Collections.unmodifiableMap(protocols);
     }
