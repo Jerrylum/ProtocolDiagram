@@ -62,14 +62,6 @@ public class DiagramUtils {
             return getBottomRow().get(bottomSegmentIndex);
         }
 
-        public RowSegment getLastTopSegment() {
-            return getTopRow().get(getTopRow().getCount() - 1);
-        }
-
-        public RowSegment getLastBottomSegment() {
-            return getBottomRow().get(getBottomRow().getCount() - 1);
-        }
-
         public Row getTopRow() {
             return rows.get(index);
         }
@@ -82,42 +74,34 @@ public class DiagramUtils {
             return topSegmentIndex < getTopRow().getCount();
         }
 
-        public boolean bottomRowHasNext() {
-            return bottomSegmentIndex < getBottomRow().getCount();
-        }
+        // public boolean bottomRowHasNext() {
+        //     return bottomSegmentIndex < getBottomRow().getCount();
+        // }
 
         public List<Divider> splice() {
-            assert rows.size() >= 2;
+            //assert rows.size() >= 2;
 
             final List<Divider> dividers = new ArrayList<>();
 
             for (index = 0; index < rows.size() - 1; index++) {
-                assert getTopRow().getCount() > 0;
-                assert getBottomRow().getCount() > 0;
+                //assert getTopRow().getCount() > 0;
+                //assert getBottomRow().getCount() > 0;
 
                 topSegmentIndex = 0;
                 bottomSegmentIndex = 0;
 
                 Divider divider = new Divider(bit);
 
-                while (topRowHasNext() || bottomRowHasNext()) {
-                    if (topRowHasNext() && bottomRowHasNext()) {
-                        if (getTopSegment().getEndIndex() < getBottomSegment().getEndIndex()) {
-                            divider.addSplice(getTopSegment(), getBottomSegment());
-                            topSegmentIndex++;
-                        } else if (getTopSegment().getEndIndex() == getBottomSegment().getEndIndex()) {
-                            divider.addSplice(getTopSegment(), getBottomSegment());
-                            topSegmentIndex++;
-                            bottomSegmentIndex++;
-                        } else {
-                            divider.addSplice(getBottomSegment(), getTopSegment());
-                            bottomSegmentIndex++;
-                        }
-                    } else if (topRowHasNext()) {
-                        divider.addSplice(getTopSegment(), getLastBottomSegment());
+                while (topRowHasNext()) {// && bottomRowHasNext()
+                    if (getTopSegment().getEndIndex() < getBottomSegment().getEndIndex()) {
+                        divider.addSplice(getTopSegment(), getBottomSegment());
                         topSegmentIndex++;
+                    } else if (getTopSegment().getEndIndex() == getBottomSegment().getEndIndex()) {
+                        divider.addSplice(getTopSegment(), getBottomSegment());
+                        topSegmentIndex++;
+                        bottomSegmentIndex++;
                     } else {
-                        divider.addSplice(getBottomSegment(), getLastTopSegment());
+                        divider.addSplice(getBottomSegment(), getTopSegment());
                         bottomSegmentIndex++;
                     }
                 }
@@ -160,9 +144,7 @@ public class DiagramUtils {
                     }
                 }
             }
-
-            if (related.size() != 0)
-                related.get(related.size() / 2 - (related.size() + 1) % 2).setDisplayName(true);
+            related.get(related.size() / 2 - (related.size() + 1) % 2).setDisplayName(true);
         }
     }
 
