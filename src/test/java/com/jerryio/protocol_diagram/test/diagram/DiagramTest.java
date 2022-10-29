@@ -154,6 +154,12 @@ public class DiagramTest {
         d1.getConfig().setValue("diagram-style", Parameter.parse(new CodePointBuffer("ascii-verbose")));
         assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
 
+        d1.getConfig().setValue("diagram-style", Parameter.parse(new CodePointBuffer("utf8-header")));
+        assertEquals(Diagram.fromJson(d1.toJson()).toString(), d1.toString());
+
+        d1.getConfig().setValue("diagram-style", Parameter.parse(new CodePointBuffer("ascii")));
+        assertEquals(Diagram.fromJson(d1.toJson()).toString(), d1.toString());
+
         d1.getConfig().setValue("header-style", Parameter.parse(new CodePointBuffer("full")));
         assertEquals(Diagram.fromJson(d1.toJson()).toJson(), d1.toJson());
 
