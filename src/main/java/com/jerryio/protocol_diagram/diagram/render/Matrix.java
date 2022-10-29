@@ -75,25 +75,4 @@ public class Matrix {
             }
         }
     }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (Element e : matrix) {
-            if (e instanceof NextLine)
-                sb.append("\n");
-            else if (e instanceof Connector)
-                sb.append("c");
-            else if (e instanceof DividerSegment)
-                sb.append("d");
-            else if (e instanceof RowTail)
-                sb.append("t");
-            else if (e instanceof RowSegment)
-                sb.append("r");
-            else
-                sb.append("?");
-        }
-        return sb.toString();
-    }
 }
