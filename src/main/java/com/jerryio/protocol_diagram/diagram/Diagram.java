@@ -47,6 +47,7 @@ public class Diagram {
 
     /**
      * a getter method that returns the configuration instance of the diagram
+     * 
      * @return Configuration
      */
     public Configuration getConfig() {
@@ -54,7 +55,9 @@ public class Diagram {
     }
 
     /**
-     * a getter method that returns a readonly clone of the list of fields of the diagram
+     * a getter method that returns a readonly clone of the list of fields of the
+     * diagram
+     * 
      * @return Collection<Field>
      */
     public Collection<Field> getFields() {
@@ -63,6 +66,7 @@ public class Diagram {
 
     /**
      * a getter method that returns the field by specified index
+     * 
      * @param index
      * @return Field
      */
@@ -72,6 +76,7 @@ public class Diagram {
 
     /**
      * a method that clears all of the fields of the diagram
+     * 
      * @return void
      */
     public void clear() {
@@ -80,6 +85,7 @@ public class Diagram {
 
     /**
      * a getter method that returns the amount of fields of the diagram
+     * 
      * @return int
      */
     public int size() {
@@ -88,6 +94,7 @@ public class Diagram {
 
     /**
      * a method that appends the field to the diagram
+     * 
      * @param field
      * @return void
      */
@@ -97,6 +104,7 @@ public class Diagram {
 
     /**
      * a method that inserts the field into specified location to the diagram
+     * 
      * @param index
      * @param field
      * @return void
@@ -107,6 +115,7 @@ public class Diagram {
 
     /**
      * a method that removes the field via given index
+     * 
      * @param index
      * @return void
      */
@@ -115,7 +124,8 @@ public class Diagram {
     }
 
     /**
-     * a method that move the field from the `from` index to the `to` index
+     * a method that moves the field from the `from` index to the `to` index
+     * 
      * @param from
      * @param to
      * @return void
@@ -141,7 +151,8 @@ public class Diagram {
     }
 
     /**
-     * a factory pattern that create the `Memento` typed instance
+     * a factory pattern that creates the `Memento` typed instance
+     * 
      * @return Memento
      */
     public Memento createMemento() {
@@ -150,6 +161,7 @@ public class Diagram {
 
     /**
      * a method that restores the diagram to the memento recorded state
+     * 
      * @param m
      * @return void
      */
@@ -161,7 +173,8 @@ public class Diagram {
     }
 
     /**
-     * a method that transform the current diagram into a JSON formatted string
+     * a method that transforms the current diagram into a JSON formatted string
+     * 
      * @return String
      */
     public String toJson() {
@@ -169,7 +182,9 @@ public class Diagram {
     }
 
     /**
-     * a utility function that creates a diagram instance based on the content of the JSON formatted string
+     * a utility function that creates a diagram instance based on the content of
+     * the JSON formatted string
+     * 
      * @param input
      * @return Diagram
      */
@@ -178,7 +193,9 @@ public class Diagram {
     }
 
     /**
-     * a internally object representation toString method, it returns a simple format of the diagram
+     * a internally object representation toString method, it returns a simple
+     * format of the diagram
+     * 
      * @return String
      */
     @Override
@@ -197,13 +214,15 @@ public class Diagram {
     }
 
     /**
-     * a customized gson type adapter, as the default conversion is not appropriate for our diagram
+     * a customized gson type adapter, as the default conversion is not appropriate
+     * for our diagram
      */
     public static class GsonTypeAdapter extends TypeAdapter<Diagram> {
         private static final Gson INTERNAL_GSON_BUILDER = new GsonBuilder().serializeNulls().create();
 
         /**
-         * a method that read JSON and return a diagram instance
+         * a method that reads JSON and returns a diagram instance
+         * 
          * @param reader
          * @return Diagram
          */
@@ -232,7 +251,9 @@ public class Diagram {
         }
 
         /**
-         * a method that read the diagram, and write the appropriate key-value pairs into the JSON
+         * a method that reads the diagram, and writes the appropriate key-value pairs
+         * into the JSON
+         * 
          * @param writer
          * @param d
          * @return void

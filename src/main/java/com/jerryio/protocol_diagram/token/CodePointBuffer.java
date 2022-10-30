@@ -9,6 +9,11 @@ public class CodePointBuffer {
     private int index;
     private Stack<Integer> history;
 
+    /**
+     * a constructor that takes a string as the input
+     * 
+     * @param target
+     */
     public CodePointBuffer(String target) {
         this.target = target;
         this.index = 0;
@@ -17,6 +22,7 @@ public class CodePointBuffer {
 
     /**
      * a method to retrieve the length of the internally stored string
+     * 
      * @return
      */
     public int length() {
@@ -25,7 +31,8 @@ public class CodePointBuffer {
 
     /**
      * a method to get the current cursor index
-     * @return
+     * 
+     * @return int
      */
     public int getIndex() {
         return index;
@@ -33,8 +40,9 @@ public class CodePointBuffer {
 
     /**
      * a method to lookup the character by specified index
+     * 
      * @param index
-     * @return
+     * @return Character
      */
     public Character at(int index) {
         return index < length() ? target.charAt(index) : null;
@@ -48,18 +56,21 @@ public class CodePointBuffer {
     }
 
     /**
-     * a method to retrieve the last saved cursor position, and restore the cursor from that position
+     * a method to retrieve the last saved cursor position, and restore the cursor
+     * from that position
      */
     public void rollback() {
         this.index = history.pop();
     }
 
     /**
-     * a wrapper function that receive and return the value without performing any operation on top of that value
+     * a wrapper function that receives and returns the value without performing any
+     * operation on top of that value
      * and rollback behind the scene
+     * 
      * @param <T>
      * @param value
-     * @return
+     * @return T
      */
     public <T> T rollbackAndReturn(T value) {
         rollback();
@@ -74,11 +85,13 @@ public class CodePointBuffer {
     }
 
     /**
-     * a wrapper function that receive and return the value without performing any operation on top of that value
+     * a wrapper function that receives and returns the value without performing any
+     * operation on top of that value
      * and commit behind the scene
+     * 
      * @param <T>
      * @param value
-     * @return
+     * @return T
      */
     public <T> T commitAndReturn(T value) {
         commit();
@@ -86,8 +99,10 @@ public class CodePointBuffer {
     }
 
     /**
-     * a method to lookup the cursor pointing character and move the cursor to the right
-     * @return
+     * a method to lookup the cursor pointing character and move the cursor to the
+     * right
+     * 
+     * @return Character
      */
     public Character next() {
         return at(index++);
@@ -95,8 +110,9 @@ public class CodePointBuffer {
 
     /**
      * a method to lookup the cursor pointing character
+     * 
      * @param offset
-     * @return
+     * @return Character
      */
     public Character peek() {
         return at(index);
@@ -104,8 +120,9 @@ public class CodePointBuffer {
 
     /**
      * a method to look a head character by given offset
+     * 
      * @param offset
-     * @return
+     * @return Character
      */
     public Character peek(int offset) {
         return at(index + offset);
@@ -113,16 +130,17 @@ public class CodePointBuffer {
 
     /**
      * a method to determine whether the string could be further consumed
-     * @return
+     * 
+     * @return boolean
      */
     public boolean hasNext() {
         return index < length();
     }
 
     /**
-     * a method that read every delimiter and stop once it bumps into a non-delimiter character
-     * and return a integer denoting the number of delimiter has read
-     * @return
+     * a method that reads every delimiter and stops once it bumps into a
+     * non-delimiter character and return
+     * @return int a integer denoting the number of delimiter has read
      */
     public int readDelimiter() {
         int count = 0;
@@ -134,8 +152,9 @@ public class CodePointBuffer {
     }
 
     /**
-     * a method that read every character and stop once it bumps into a delimiter
-     * @return
+     * a method that reads every character and stops once it bumps into a delimiter
+     * 
+     * @return String
      */
     public String readChunk() {
         StringBuilder sb = new StringBuilder();
@@ -146,9 +165,11 @@ public class CodePointBuffer {
     }
 
     /**
-     * a method that read every character and stop once it bumps into a safe delimiter, which,
-     * is a superset of delimiter, it contains (null | ' ' | ':' | ',')
-     * @return
+     * a method that reads every character and stops once it bumps into a safe
+     * delimiter, which, is a superset of delimiter, it contains
+     * (null | ' ' | ':' | ',')
+     * 
+     * @return String
      */
     public String readSafeChunk() {
         StringBuilder sb = new StringBuilder();

@@ -22,7 +22,8 @@ public abstract class Command {
     }
 
     /**
-     * a getter method that return the name of this command
+     * a getter method that returns the name of this command
+     * 
      * @return String
      */
     public String getName() {
@@ -30,7 +31,8 @@ public abstract class Command {
     }
 
     /**
-     * a getter method that return the usage of this command
+     * a getter method that returns the usage of this command
+     * 
      * @return String
      */
     public String getUsage() {
@@ -38,7 +40,8 @@ public abstract class Command {
     }
 
     /**
-     * a getter method that return the description of this command
+     * a getter method that returns the description of this command
+     * 
      * @return String
      */
     public String getDescription() {
@@ -46,9 +49,13 @@ public abstract class Command {
     }
 
     /**
-     * a method that determines whether the current command instance matches the prefix of the line,
-     * if yes, then a list of parameters will be created and will be passed to the abstract function `handle`
-     * that will be implemented by the descendent classes, if no, then return a `HandleResult` not_handled
+     * a method that determines whether the current command instance matches the
+     * prefix of the line,
+     * if yes, then a list of parameters will be created and will be passed to the
+     * abstract function `handle` that will be implemented by the descendent
+     * classes,
+     * if no, then return a `HandleResult` not_handled
+     * 
      * @param line
      * @return HandleResult
      */
@@ -60,17 +67,22 @@ public abstract class Command {
     }
 
     /**
-     * a abstract method that will be implemented later on by the descendent classes, by the logic of the command handling,
-     * this method would only be invoked when the command instance matches the prefix of the input command, it will be passed
-     * a list of parameters for providing the context for the command handling, once it is finished, it is required to return
+     * a abstract method that will be implemented later on by the descendent
+     * classes, by the logic of the command handling,
+     * this method would only be invoked when the command instance matches the
+     * prefix of the input command, it will be passed
+     * a list of parameters for providing the context for the command handling, once
+     * it is finished, it is required to return
      * a `HandleResult` instance for indicating the state of the command outcome
+     * 
      * @param params
      * @return HandleResult
      */
     public abstract HandleResult handle(List<Parameter> params);
 
     /**
-     * a utility method that get all of the available commands in the program
+     * a utility method that returns a list of all available commands in the program
+     * 
      * @return List<Command>
      */
     public static List<Command> getAvailableCommands() {

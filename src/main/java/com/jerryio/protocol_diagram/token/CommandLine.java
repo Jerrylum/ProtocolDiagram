@@ -5,10 +5,14 @@ import java.util.List;
 
 public record CommandLine(String name, List<Parameter> params) implements Token {
     /**
-     * a static utility function that parses the CodePointBuffer, which is a wrapper of a string,
-     * and return a CommandLine object, which is a wrapper that separated from the raw CodePointBuffer
-     * to two stuff, a command prefix and the params right after the command prefix.
-     * via this process, it could assist the program to distinguish each commands and tell the differences.
+     * a static utility function that parses the CodePointBuffer, which is a wrapper
+     * of a string, and returns a CommandLine object, which is a wrapper that
+     * separated from the raw CodePointBuffer to two stuff, a command prefix and the
+     * params right after the command prefix.
+     * 
+     * via this process, it could assist the program to distinguish each commands
+     * and tell the differences.
+     * 
      * @param buffer
      * @return
      */

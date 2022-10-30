@@ -22,11 +22,16 @@ public class Main {
     public static final MainDiagramHandler handler = new MainDiagramHandler();
 
     /**
-     * a static function that takes one string input, the input would be the form of our defined command,
-     * the function return a string object, if the command parsed from the input is valid, then
-     * the returned string value will be the processed outcome of the command,
-     * else, if no command matches the input, hence no command is executed, the returned value will be our defined string
-     * that tells the user no command was found, please type help for more information.
+     * a static function that takes one string input and returns a string object,
+     * the input would be the form of our defined command,
+     * 
+     * if the command parsed from the input is valid, then the returned string
+     * value will be the processed outcome of the command,
+     * 
+     * else, if no command matches the input, hence no command is executed, the
+     * returned value will be our defined string that tells the user no command was
+     * found, please type help for more information.
+     * 
      * @param input
      * @return String
      */
@@ -62,8 +67,9 @@ public class Main {
     }
 
     /**
-     * a static function that requires one string input, from the arguments received basically,
-     * parse the string that yields multiple fields, foreach field, append them into our single diagram instance
+     * a static function that requires one line input, parse it, and append all
+     * fields into the single diagram instance in the Main class,
+     * 
      * @param input
      * @return
      */
@@ -82,8 +88,9 @@ public class Main {
     }
 
     /**
-     * a static function that instantiates a scanner that receive standard input,
-     * interpret every lines issued by the user, and pass the retrieved string to the doHandleCommand function
+     * a static function that instantiates a scanner that receives standard input
+     * interprets every line issued by the user, and passes the retrieved string to
+     * the doHandleCommand function
      */
     public static void doStartScanner() {
         Scanner scan = new Scanner(System.in);
@@ -100,12 +107,19 @@ public class Main {
     }
 
     /**
-     * the program entry point, allow three modes of input, arguments, JSON file and in-program scanner.
-     * When executing the command from cli, if there the flag of `singleLine` is being specified, then
-     * it will allow the input from the cli arguments; else, if the flag of `source` is being specified, then
-     * the the program will goto the specified path and read the file, reconstruct the diagram based on the specification,
-     * lastly, if the arguments does not specify anything/just leave empty, then the program will handle input
-     * from the scanner, and blocking the current cli until the user leave the TUI.
+     * the program entry point, allow three modes of input, arguments, JSON file and
+     * in-program scanner.
+     * 
+     * when executing the command from cli, if there the flag of `singleLine` is
+     * being specified, then it will allow the input from the cli arguments;
+     * 
+     * else, if the flag of `source` is being specified, then the the program will
+     * goto the specified path and read the file, reconstruct the diagram based on
+     * the specification,
+     * 
+     * lastly, if the arguments does not specify anything/just leave empty, then the
+     * program will handle input from the scanner, and blocking the current cli
+     * until the user leave the TUI.
      */
     public static void main(String[] argv) {
         TerminalArguments args = new TerminalArguments();

@@ -13,7 +13,9 @@ public class Field {
     }
 
     /**
-     * this constructor will transform a pair of value into then field name and the length of the field
+     * this constructor will transform a pair of value into then field name and the
+     * length of the field
+     * 
      * @param pair
      */
     public Field(Pair<String, Integer> pair) {
@@ -21,7 +23,8 @@ public class Field {
     }
 
     /**
-     * a getter method that get the name of this diagram field
+     * a getter method that returns the name of this diagram field
+     * 
      * @return
      */
     public String getName() {
@@ -29,7 +32,7 @@ public class Field {
     }
 
     /**
-     * a getter method that get the length of this diagram field
+     * a getter method that returns the length of this diagram field
      */
     public int getLength() {
         return length;
@@ -37,6 +40,7 @@ public class Field {
 
     /**
      * a setter method that sets the name of this diagram field
+     * 
      * @param name
      */
     public void setName(String name) {
@@ -45,6 +49,7 @@ public class Field {
 
     /**
      * a setter method that sets the length of this diagram field
+     * 
      * @param length
      */
     public void setLength(int length) {

@@ -19,7 +19,9 @@ public class Configuration {
     }
 
     /**
-     * a method that sets the value of specified option from this configuration by the given key and value
+     * a method that sets the value of specified option from this configuration by
+     * the given key and value
+     * 
      * @param key
      * @param value
      * @return HandleResult
@@ -34,7 +36,8 @@ public class Configuration {
     }
 
     /**
-     * a getter method that retrieve the value of option by the specified key
+     * a getter method that retrieves the value of option by the specified key
+     * 
      * @param key
      * @return Object
      */
@@ -48,7 +51,8 @@ public class Configuration {
     }
 
     /**
-     * a find method that lookup the matching option based on the given key
+     * a find method that lookups the matching option based on the given key
+     * 
      * @param key
      * @return Option
      */
@@ -71,7 +75,8 @@ public class Configuration {
     }
 
     /**
-     * a pure function that return a readonly clone of the options list
+     * a pure function that returns a readonly clone of the options list
+     * 
      * @return Collection<Option>
      */
     public Collection<Option> getOptions() {

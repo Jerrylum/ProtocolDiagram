@@ -16,7 +16,8 @@ public class Timeline<T extends ICancellable> {
     }
 
     /**
-     * a getter method that return the diagram it stored
+     * a getter method that returns the diagram it stored
+     * 
      * @return
      */
     public Diagram getDiagram() {
@@ -24,7 +25,8 @@ public class Timeline<T extends ICancellable> {
     }
 
     /**
-     * a getter method that return the latest memento
+     * a getter method that returns the latest memento
+     * 
      * @return
      */
     public Diagram.Memento getLatestMemento() {
@@ -32,7 +34,8 @@ public class Timeline<T extends ICancellable> {
     }
 
     /**
-     * a method that eliminates all undo history and redo history, and generates a new memento
+     * a method that eliminates all undo history and redo history, and generates a
+     * new memento
      */
     public void resetHistory() {
         undoStack.clear();
@@ -41,7 +44,9 @@ public class Timeline<T extends ICancellable> {
     }
 
     /**
-     * a method that pushes a modifier into the undo history, and resets the stack of redo.
+     * a method that pushes a modifier into the undo history, and resets the stack
+     * of redo.
+     * 
      * @param modifier
      */
     public void operate(T modifier) {
@@ -51,8 +56,9 @@ public class Timeline<T extends ICancellable> {
     }
 
     /**
-     * a method that pops the top of the undo stack, pushes that popped history into the redo stack,
-     * and restore the diagram based on the popped snapshot.
+     * a method that pops the top of the undo stack, pushes that popped history into
+     * the redo stack, and restore the diagram based on the popped snapshot.
+     * 
      * @return
      */
     public T undo() {
@@ -67,8 +73,9 @@ public class Timeline<T extends ICancellable> {
     }
 
     /**
-     * a method that pops the top of the redo stack, pushes that popped history into the undo stack,
-     * and execute the popped command from the redo stack.
+     * a method that pops the top of the redo stack, pushes that popped history into
+     * the undo stack, and execute the popped command from the redo stack.
+     * 
      * @return
      */
     public T redo() {

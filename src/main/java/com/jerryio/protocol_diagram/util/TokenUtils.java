@@ -6,7 +6,9 @@ import com.jerryio.protocol_diagram.token.Token;
 public class TokenUtils {
 
     /**
-     * a utility function that check whether the character is delimiter (null | ' ')
+     * a utility function that checks whether the character is delimiter
+     * (null | ' ')
+     * 
      * @param c
      * @return
      */
@@ -15,7 +17,9 @@ public class TokenUtils {
     }
 
     /**
-     * a utility function that check whether the character is safe delimiter (null | ' ' | ':' | ',')
+     * a utility function that checks whether the character is safe delimiter
+     * (null | ' ' | ':' | ',')
+     * 
      * @param c
      * @return
      */
@@ -26,7 +30,9 @@ public class TokenUtils {
     /* Start internal functions */
 
     /**
-     * a utility function that transform a arguments of classes to an array of classes
+     * a utility function that transforms a arguments of classes to an array of
+     * classes
+     * 
      * @param clazz
      * @return
      */
@@ -35,7 +41,10 @@ public class TokenUtils {
     }
 
     /**
-     * a utility function that create new instance T via the inputted parameter class T, an array of parameter types of the T's constructor, and an array of parameter values of the T's constructor
+     * a utility function that creates new instance T via the inputted parameter
+     * class T, an array of parameter types of the T's constructor, and an array of
+     * parameter values of the T's constructor
+     * 
      * @param <T>
      * @param token_class
      * @param args_types
@@ -53,8 +62,10 @@ public class TokenUtils {
     }
 
     /**
-     * a utility function that read the code point buffer, return a Token instance typed with T which given by the parameter class T
-     * if the code point buffer does match one of our specified acceptable characters, else return null
+     * a utility function that reads the code point buffer, returns a Token instance
+     * typed with T which given by the parameter class T if the code point buffer
+     * does match one of our specified acceptable characters, else return null
+     * 
      * @param <T>
      * @param buffer
      * @param accepts
@@ -74,7 +85,9 @@ public class TokenUtils {
     }
 
     /**
-     * an utility function that read the code point buffer and return a Token instance usually typed with SingleQuotedString or DoubleQuotedString
+     * an utility function that reads the code point buffer and return a Token
+     * instance usually typed with SingleQuotedString or DoubleQuotedString
+     * 
      * @param <T>
      * @param buffer
      * @param quote

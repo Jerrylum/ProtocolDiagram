@@ -17,7 +17,9 @@ public class BooleanOption extends Option {
     }
 
     /**
-     * a wrapper method that sets the value of this boolean option, the value of the parameter is required to be an boolean
+     * a wrapper method that sets the value of this boolean option, the value of the
+     * parameter is required to be an boolean
+     * 
      * @return HandleResult
      */
     @Override
@@ -32,6 +34,7 @@ public class BooleanOption extends Option {
     /**
      * a method that sets the value of this boolean option, note that if the value
      * is repetitively set with the same value, a failure will be returned
+     * 
      * @param value
      * @return HandleResult
      */
@@ -46,7 +49,8 @@ public class BooleanOption extends Option {
     }
 
     /**
-     * a getter method that read the value of this boolean option and return.
+     * a getter method that reads the value of this boolean option and returns it
+     * 
      * @return Boolean
      */
     public Boolean getValue() {
@@ -55,6 +59,7 @@ public class BooleanOption extends Option {
 
     /**
      * a getter method that returns the default value of this boolean option
+     * 
      * @return String
      */
     @Override
@@ -64,6 +69,7 @@ public class BooleanOption extends Option {
 
     /**
      * a method that returns a manual statement
+     * 
      * @return String
      */
     @Override

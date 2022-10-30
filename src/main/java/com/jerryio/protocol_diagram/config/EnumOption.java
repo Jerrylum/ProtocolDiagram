@@ -19,7 +19,9 @@ public class EnumOption extends Option {
     }
 
     /**
-     * a wrapper method that sets the value of the parameters, the value of the parameter is requires to be string
+     * a wrapper method that sets the value of the parameters, the value of the
+     * parameter is required to be string
+     * 
      * @param Parameter
      * @return HandleResult
      */
@@ -33,9 +35,11 @@ public class EnumOption extends Option {
     }
 
     /**
-     * a method that takes the hint from user, auto-complete the hint with the most accurate-accepted value,
-     * it will fail when the hint is too ambiguous that shares the prefix more than one accepted values,
-     * cannot predict the value, and already set with the same value.
+     * a method that takes the hint from user, auto-completes the hint with the most
+     * accurate-accepted value, it will fail when the hint is too ambiguous that
+     * shares the prefix more than one accepted values, cannot predict the value,
+     * and already set with the same value.
+     * 
      * @param hint
      * @return HandleResult
      */
@@ -68,7 +72,8 @@ public class EnumOption extends Option {
     }
 
     /**
-     * a getter method that retrieve the value of this enum option
+     * a getter method that retrieves the value of this enum option
+     * 
      * @return String
      */
     public String getValue() {
@@ -76,7 +81,8 @@ public class EnumOption extends Option {
     }
 
     /**
-     * a getter method that retrieve the default value of this enum option
+     * a getter method that retrieves the default value of this enum option
+     * 
      * @return String
      */
     @Override
@@ -85,7 +91,8 @@ public class EnumOption extends Option {
     }
 
     /**
-     * a method that retrieve a manual statement for this enum option
+     * a method that retrieves a manual statement for this enum option
+     * 
      * @return String
      */
     @Override
