@@ -44,7 +44,7 @@ Path must be a string.
 Invalid file path.
 
 > export test.txt
-Saved to C:\Users\Jerrylum\Desktop\Project\git\ProtocolDiagram\test.txt
+Saved to /home/runner/work/ProtocolDiagram/ProtocolDiagram/test.txt
 
 > save a b
 Too many arguments.
@@ -56,10 +56,10 @@ Path must be a string.
 You are not editing a file. Please specify a path to save the file.
 
 > save test
-Saved to C:\Users\Jerrylum\Desktop\Project\git\ProtocolDiagram\test.json
+Saved to /home/runner/work/ProtocolDiagram/ProtocolDiagram/test.json
 
 > save
-Saved to C:\Users\Jerrylum\Desktop\Project\git\ProtocolDiagram\test.json
+Saved to /home/runner/work/ProtocolDiagram/ProtocolDiagram/test.json
 
 > add 32 Field3
 Added field "Field3".

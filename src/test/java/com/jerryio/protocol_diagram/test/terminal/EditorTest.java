@@ -121,6 +121,9 @@ public class EditorTest {
 
     @Test
     public void testEditor5_3() {
+        // skip if it is not github action runner
+        if (System.getenv("GITHUB_ACTIONS") == null)
+            return;
         test("5_3");
     }
 
