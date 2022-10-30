@@ -1,0 +1,127 @@
+
+> add 8 Field0
+Added field "Field0".
+
+ 0
+ 0 1 2 3 4 5 6 7
+┌───────────────┐
+│     Field0    │
+└───────────────┘
+
+
+> add 16 Field1
+Added field "Field1".
+
+ 0                   1                   2
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3
+┌───────────────┬───────────────────────────────┐
+│     Field0    │             Field1            │
+└───────────────┴───────────────────────────────┘
+
+
+> add 24 Field2
+Added field "Field2".
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────┬───────────────────────────────┬───────────────┐
+│     Field0    │             Field1            │               │
+├───────────────┴───────────────┬───────────────┴───────────────┘
+│             Field2            │
+└───────────────────────────────┘
+
+
+> export
+Too few arguments.
+
+> export a b
+Too many arguments.
+
+> export 0
+Path must be a string.
+
+> export .
+Invalid file path.
+
+> export test.txt
+Saved to C:\Users\Jerrylum\Desktop\Project\git\ProtocolDiagram\test.txt
+
+> save a b
+Too many arguments.
+
+> save 0
+Path must be a string.
+
+> save
+You are not editing a file. Please specify a path to save the file.
+
+> save test
+Saved to C:\Users\Jerrylum\Desktop\Project\git\ProtocolDiagram\test.json
+
+> save
+Saved to C:\Users\Jerrylum\Desktop\Project\git\ProtocolDiagram\test.json
+
+> add 32 Field3
+Added field "Field3".
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────┬───────────────────────────────┬───────────────┐
+│     Field0    │             Field1            │               │
+├───────────────┴───────────────┬───────────────┴───────────────┤
+│             Field2            │             Field3            │
+├───────────────────────────────┼───────────────────────────────┘
+│                               │
+└───────────────────────────────┘
+
+
+> load
+Too few arguments.
+
+> load a b
+Too many arguments.
+
+> load 0
+Path must be a string.
+
+> load test
+Unsaved changes. Please save the diagram first or use "discard" before the operation.
+
+> discard
+Now editing a new diagram.
+
+> load test
+Now editing test
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────┬───────────────────────────────┬───────────────┐
+│     Field0    │             Field1            │               │
+├───────────────┴───────────────┬───────────────┴───────────────┘
+│             Field2            │
+└───────────────────────────────┘
+
+
+> add 32 Field3
+Added field "Field3".
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────┬───────────────────────────────┬───────────────┐
+│     Field0    │             Field1            │               │
+├───────────────┴───────────────┬───────────────┴───────────────┤
+│             Field2            │             Field3            │
+├───────────────────────────────┼───────────────────────────────┘
+│                               │
+└───────────────────────────────┘
+
+
+> quit
+Unsaved changes. Please save the diagram first or use "quit force" to quit without saving.
+
+> undo
+Undo add
+
+> quit
+
+See you.

@@ -1,0 +1,13 @@
+
+> config bit 16
+Set "bit" from 32 to 16.
+
+> quit
+Unsaved changes. Please save the diagram first or use "quit force" to quit without saving.
+
+> discard
+Now editing a new diagram.
+
+> quit
+
+See you.

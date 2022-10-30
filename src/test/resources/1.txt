@@ -1,0 +1,26 @@
+
+> help
+Usage:
+add <length> <name>             - Add a field to the end of the diagram
+clear                           - Remove all fields and start again
+config                          - List all settings
+config <key> <value>            - Change options' value
+delete <index>                  - Remove the specified field from the diagram
+discard                         - Discard all changes and start a new diagram
+export <path>                   - Export the diagram to a file
+help                            - Show help message
+insert <index> <length> <name>  - Insert a field at the given index
+list                            - List all fields in the diagram
+load <path>                     - Load the diagram from the specified path
+move <index> <target>           - Move the specified field from one position to another
+quit                            - Quit the program
+redo                            - Redo the last action
+rename <index> <new-name>       - Rename the specified field
+resize <index> <new-size>       - Resize the specified field
+save [path]                     - Save the diagram to the specified path
+undo                            - Undo the last action
+view                            - Print out the diagram
+
+> quit
+
+See you.

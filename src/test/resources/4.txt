@@ -1,0 +1,137 @@
+
+> list a
+Too many arguments.
+
+> list
+There is no field in the diagram.
+
+> add 8 Field0
+Added field "Field0".
+
+ 0
+ 0 1 2 3 4 5 6 7
+┌───────────────┐
+│     Field0    │
+└───────────────┘
+
+
+> add 16 Field1
+Added field "Field1".
+
+ 0                   1                   2
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3
+┌───────────────┬───────────────────────────────┐
+│     Field0    │             Field1            │
+└───────────────┴───────────────────────────────┘
+
+
+> resize 0 4
+Resized field "Field0" from 8 to 4.
+
+ 0                   1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
+┌───────┬───────────────────────────────┐
+│ Field0│             Field1            │
+└───────┴───────────────────────────────┘
+
+
+> add 24 Field2
+Added field "Field2".
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────┬───────────────────────────────┬───────────────────────┐
+│ Field0│             Field1            │         Field2        │
+├───────┴───────────────┬───────────────┴───────────────────────┘
+│                       │
+└───────────────────────┘
+
+
+> resize 1 8
+Resized field "Field1" from 16 to 8.
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────┬───────────────┬───────────────────────────────────────┐
+│ Field0│     Field1    │                 Field2                │
+├───────┼───────────────┴───────────────────────────────────────┘
+│       │
+└───────┘
+
+
+> resize 2 16
+Resized field "Field2" from 24 to 16.
+
+ 0                   1                   2
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7
+┌───────┬───────────────┬───────────────────────────────┐
+│ Field0│     Field1    │             Field2            │
+└───────┴───────────────┴───────────────────────────────┘
+
+
+> list
+There are 3 fields in the diagram:
+0 - Field0: 4
+1 - Field1: 8
+2 - Field2: 16
+
+> undo a
+Too many arguments.
+
+> undo
+Undo resize
+
+> undo
+Undo resize
+
+> undo
+Undo add
+
+> undo
+Undo resize
+
+> undo
+Undo add
+
+> undo
+Undo add
+
+> undo
+Nothing to undo
+
+> redo a
+Too many arguments.
+
+> redo
+Redo add
+
+> redo
+Redo add
+
+> redo
+Redo resize
+
+> redo
+Redo add
+
+> redo
+Redo resize
+
+> clear
+Removed all fields.
+
+> redo
+Nothing to redo
+
+> undo
+Undo clear
+
+> list
+There are 3 fields in the diagram:
+0 - Field0: 4
+1 - Field1: 8
+2 - Field2: 24
+
+> quit force
+
+See you.

@@ -1,0 +1,118 @@
+
+> add 8 Field0
+Added field "Field0".
+
+ 0
+ 0 1 2 3 4 5 6 7
+┌───────────────┐
+│     Field0    │
+└───────────────┘
+
+
+> add 16 Field1
+Added field "Field1".
+
+ 0                   1                   2
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3
+┌───────────────┬───────────────────────────────┐
+│     Field0    │             Field1            │
+└───────────────┴───────────────────────────────┘
+
+
+> add 24 Field2
+Added field "Field2".
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────┬───────────────────────────────┬───────────────┐
+│     Field0    │             Field1            │               │
+├───────────────┴───────────────┬───────────────┴───────────────┘
+│             Field2            │
+└───────────────────────────────┘
+
+
+> delete
+Too few arguments.
+
+> delete a b
+Too many arguments.
+
+> delete -1
+Index start from zero.
+
+> delete 3
+Index out of range.
+
+> delete 0
+Deleted field "Field0".
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────────────────────┬───────────────────────────────┐
+│             Field1            │             Field2            │
+├───────────────┬───────────────┴───────────────────────────────┘
+│               │
+└───────────────┘
+
+
+> rename
+Too few arguments.
+
+> rename a b c
+Too many arguments.
+
+> rename -1 Field0
+Index start from zero.
+
+> rename 0 0
+New name must be a string.
+
+> rename 2 Field0
+Index out of range.
+
+> rename 0 Field0
+Renamed field from "Field1" to "Field0".
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────────────────────┬───────────────────────────────┐
+│             Field0            │             Field2            │
+├───────────────┬───────────────┴───────────────────────────────┘
+│               │
+└───────────────┘
+
+
+> resize
+Too few arguments.
+
+> resize a b c
+Too many arguments.
+
+> resize -1 8
+Index start from zero.
+
+> resize 0 -1
+New size must be a positive integer.
+
+> resize 2 8
+Index out of range.
+
+> resize 0 8
+Resized field "Field0" from 16 to 8.
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────────────┬───────────────────────────────────────────────┐
+│     Field0    │                     Field2                    │
+└───────────────┴───────────────────────────────────────────────┘
+
+
+> clear a
+Too many arguments.
+
+> clear
+Removed all fields.
+
+> quit force
+
+See you.
