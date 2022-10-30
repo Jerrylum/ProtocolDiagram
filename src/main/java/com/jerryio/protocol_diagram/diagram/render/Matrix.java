@@ -8,8 +8,6 @@ import com.jerryio.protocol_diagram.diagram.render.element.Connector;
 import com.jerryio.protocol_diagram.diagram.render.element.DividerSegment;
 import com.jerryio.protocol_diagram.diagram.render.element.Element;
 import com.jerryio.protocol_diagram.diagram.render.element.NextLine;
-import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
-import com.jerryio.protocol_diagram.diagram.render.element.RowTail;
 import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
 public class Matrix {
