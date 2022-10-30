@@ -120,7 +120,7 @@ public class Main {
         }
 
         if (args.print) {
-            System.out.println(diagram);
+            System.out.print(diagram);
         } else {
             doStartScanner();
         }

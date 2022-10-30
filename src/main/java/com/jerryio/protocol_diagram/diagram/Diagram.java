@@ -17,9 +17,20 @@ import com.jerryio.protocol_diagram.config.Configuration;
 import com.jerryio.protocol_diagram.config.EnumOption;
 import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.config.RangeOption;
+import com.jerryio.protocol_diagram.diagram.render.Divider;
+import com.jerryio.protocol_diagram.diagram.render.Matrix;
+import com.jerryio.protocol_diagram.diagram.render.Row;
+import com.jerryio.protocol_diagram.diagram.render.element.Element;
+import com.jerryio.protocol_diagram.diagram.render.element.Segment;
+import com.jerryio.protocol_diagram.diagram.style.AsciiStyle;
+import com.jerryio.protocol_diagram.diagram.style.AsciiVerboseStyle;
+import com.jerryio.protocol_diagram.diagram.style.UTF8CornerStyle;
+import com.jerryio.protocol_diagram.diagram.style.UTF8HeaderStyle;
+import com.jerryio.protocol_diagram.diagram.style.UTF8Style;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Pair;
 import com.jerryio.protocol_diagram.token.Parameter;
+import com.jerryio.protocol_diagram.util.DiagramUtils;
 
 public class Diagram {
 
@@ -114,15 +125,36 @@ public class Diagram {
 
     @Override
     public String toString() {
-        // TODO generate a diagram
+        final int bit = (int) config.getValue("bit");
+        final String style = (String) config.getValue("diagram-style");
+        final String headerStyle = (String) config.getValue("header-style");
+        final boolean leftSpacePlaceholder = (boolean) config.getValue("left-space-placeholder");
+
+        final List<Row> rows = DiagramUtils.convertFieldsToRow(bit, fields, leftSpacePlaceholder);
+        final List<Divider> dividers = DiagramUtils.spliceDividers(bit, rows);
+        final List<Segment> segments = DiagramUtils.mergeRowsAndDividers(rows, dividers);
+        DiagramUtils.setDisplayNameForAllFields(segments, fields);
+
+        final Matrix matrix = new Matrix(segments);
+        matrix.process();
+        matrix.process(); // process twice to make sure all the connector are processed
+
+        final List<Element> elements = matrix.getElements();
+
         StringBuilder sb = new StringBuilder();
 
-        for (Field field : fields) {
-            sb.append(field.getName());
-            sb.append("(");
-            sb.append(field.getLength());
-            sb.append(") ");
-        }
+        sb.append(DiagramUtils.generateHeader(elements, bit, headerStyle));
+
+        if (style.equals("utf8"))
+            sb.append(new UTF8Style(elements).output());
+        else if (style.equals("utf8-header"))
+            sb.append(new UTF8HeaderStyle(elements).output());
+        else if (style.equals("utf8-corner"))
+            sb.append(new UTF8CornerStyle(elements).output());
+        else if (style.equals("ascii"))
+            sb.append(new AsciiStyle(elements).output());
+        else
+            sb.append(new AsciiVerboseStyle(elements).output());
 
         return sb.toString();
     }

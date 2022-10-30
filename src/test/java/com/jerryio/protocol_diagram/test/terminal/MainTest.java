@@ -164,7 +164,7 @@ public class MainTest {
     @Test
     public void testTerminalPrintFlag() {
         Main.main(new String[] { "-p" });
-        assertTrue(!out.toString().equals(""));
+        assertTrue(out.toString().equals(""));
     }
 
     @Test

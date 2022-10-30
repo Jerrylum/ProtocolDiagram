@@ -4,12 +4,20 @@ import com.jerryio.protocol_diagram.token.Pair;
 
 public class Field {
 
+    private static int uidCount = 0;
+
     private String name;
     private int length;
+    private int uid;
 
-    public Field(String name, int length) {
+    private Field(String name, int length, int uid) {
         this.name = name;
         this.length = length;
+        this.uid = uid;
+    }
+
+    public Field(String name, int length) {
+        this(name, length, uidCount++);
     }
 
     public Field(Pair<String, Integer> pair) {
@@ -30,6 +38,24 @@ public class Field {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Field) {
+            Field field = (Field) obj;
+            return field.getUid() == getUid();
+        }
+
+        return false;
+    }
+
+    public Field clone() {
+        return new Field(name, length, uid);
     }
 
 }
