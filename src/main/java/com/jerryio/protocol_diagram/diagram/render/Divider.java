@@ -11,13 +11,11 @@ public class Divider extends SegmentGroup<DividerSegment> {
     }
 
     /**
-     * a method for appending a splice into the segment group (divider),
-     * note that the endindex of before should be always less than the
-     * endindex of after
+     * a method for appending a splice into the segment group (divider), note that
+     * the end index of before should always be less than the end index of after
      * 
      * @param before
      * @param after
-     * @return void
      */
     public void addSplice(RowSegment before, RowSegment after) {
         int length = before.getEndIndex() - used;

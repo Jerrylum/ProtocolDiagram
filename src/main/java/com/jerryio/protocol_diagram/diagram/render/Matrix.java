@@ -44,7 +44,7 @@ public class Matrix {
     }
 
     /**
-     * a getter method that retrieve the width of the current matrix
+     * a getter method that retrieves the width of the current matrix
      * 
      * @return int
      */
@@ -53,7 +53,7 @@ public class Matrix {
     }
 
     /**
-     * a getter method that retrieve the height of the current matrix
+     * a getter method that retrieves the height of the current matrix
      * 
      * @return int
      */
@@ -62,9 +62,9 @@ public class Matrix {
     }
 
     /**
-     * a method that return a readonly clone of the current raw matrix
+     * a method that returns a readonly clone of the current raw matrix
      * 
-     * @return int
+     * @return List<Element>
      */
     public List<Element> getElements() {
         return Collections.unmodifiableList(matrix);
@@ -86,10 +86,8 @@ public class Matrix {
     }
 
     /**
-     * a method that commands all currently holding elements of the current matrix to
-     * shape themselves via the given context and the position of the element.
-     * 
-     * @return void
+     * a method that commands all currently holding elements of the current matrix
+     * to shape themselves via the given context and the position of the element
      */
     public void process() {
         Element last = null;

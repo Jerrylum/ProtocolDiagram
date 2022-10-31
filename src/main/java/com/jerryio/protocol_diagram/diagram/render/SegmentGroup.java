@@ -19,7 +19,7 @@ public class SegmentGroup<T extends Segment> {
     }
 
     /**
-     * a getter method that return the number of bit this group holds
+     * a getter method that returns the number of bit this group holds
      * 
      * @return int
      */
@@ -37,7 +37,7 @@ public class SegmentGroup<T extends Segment> {
     }
 
     /**
-     * a method that return the segment by the specified index
+     * a method that returns the segment by the specified index
      * 
      * @param index
      * @return T extends Segment
@@ -56,7 +56,8 @@ public class SegmentGroup<T extends Segment> {
     }
 
     /**
-     * a getter method that returns the number of segments of the current segment group owns
+     * a getter method that returns the number of segments of the current segment
+     * group owns
      * 
      * @return int
      */

@@ -21,7 +21,6 @@ public class SegmentGroupTest {
         class SegmentGroupTestStub extends SegmentGroup<Segment> {
             public SegmentGroupTestStub(int bit) {
                 super(bit);
-                //TODO Auto-generated constructor stub
             }
             public void add(Segment s) {
                 segments.add(s);

@@ -33,7 +33,6 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
      * a instance method that sets the diagram from Main
      * 
      * @param diagram
-     * @return void
      */
     public void setDiagram(Diagram diagram) {
         Main.diagram = diagram;
@@ -42,8 +41,6 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
     /**
      * a method that eliminates all previous diagram-related logic, and re-creates a
      * new diagram
-     * 
-     * @return void
      */
     public void newDiagram() {
         setDiagram(new Diagram());
@@ -52,7 +49,7 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
     }
 
     /**
-     * a method that checks whether the diagram is modified, return true if the flag
+     * a method that checks whether the diagram is modified, returns true if the flag
      * `isModified` is true or the file is not saved
      * 
      * @return boolean
@@ -68,7 +65,6 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
      * @see #isModified()
      * 
      * @param isModified
-     * @return void
      */
     public void setModified(boolean isModified) {
         this.isModified = isModified;
@@ -122,8 +118,6 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
 
     /**
      * a method that eliminates all history and set the flag `isModified` to false
-     * 
-     * @return void
      */
     @Override
     public void resetHistory() {

@@ -24,7 +24,7 @@ public class Connector extends Element {
     }
 
     /**
-     * a setter method that assign a new flag of directions for this connector
+     * a setter method that assigns a new flag of directions for this connector
      * 
      * @param value
      */
@@ -43,7 +43,7 @@ public class Connector extends Element {
     }
 
     /**
-     * a utility method that provide the ease of checking whether the target element could
+     * a utility method that provides the ease of checking whether the target element could
      * be connected
      * 
      * @param e

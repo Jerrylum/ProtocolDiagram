@@ -87,8 +87,6 @@ public class Diagram {
 
     /**
      * a method that clears all of the fields of the diagram
-     * 
-     * @return void
      */
     public void clear() {
         fields.clear();
@@ -107,7 +105,6 @@ public class Diagram {
      * a method that appends the field to the diagram
      * 
      * @param field
-     * @return void
      */
     public void addField(Field field) {
         fields.add(field);
@@ -118,7 +115,6 @@ public class Diagram {
      * 
      * @param index
      * @param field
-     * @return void
      */
     public void insertField(int index, Field field) {
         fields.add(index, field);
@@ -128,7 +124,6 @@ public class Diagram {
      * a method that removes the field via given index
      * 
      * @param index
-     * @return void
      */
     public void removeField(int index) {
         fields.remove(index);
@@ -139,7 +134,6 @@ public class Diagram {
      * 
      * @param from
      * @param to
-     * @return void
      */
     public void moveField(int from, int to) {
         Field field = fields.remove(from);
@@ -174,7 +168,6 @@ public class Diagram {
      * a method that restores the diagram to the memento recorded state
      * 
      * @param m
-     * @return void
      */
     public void restoreFromMemento(Memento m) {
         fields.clear();
@@ -288,7 +281,6 @@ public class Diagram {
          * 
          * @param writer
          * @param d
-         * @return void
          */
         public void write(JsonWriter writer, Diagram d) throws IOException {
             writer.beginObject();

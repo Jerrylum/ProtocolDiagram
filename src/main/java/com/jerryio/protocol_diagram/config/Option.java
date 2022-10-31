@@ -8,7 +8,7 @@ public abstract class Option {
     private String key;
 
     /**
-     * option constructor that set the value of the key of this option, once it set,
+     * option constructor that sets the value of the key of this option, once it set,
      * it will be come readonly afterward
      * 
      * @param key
@@ -18,7 +18,7 @@ public abstract class Option {
     }
 
     /**
-     * a getter method that retrieve the readonly key
+     * a getter method that retrieves the readonly key
      * 
      * @return
      */

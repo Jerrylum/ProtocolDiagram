@@ -63,7 +63,8 @@ public abstract class Segment extends Element {
     }
 
     /**
-     * a getter method that returns a value to determine whether the segment will display name
+     * a getter method that returns a value to determine whether the segment will
+     * display name
      * 
      * @return boolean
      */

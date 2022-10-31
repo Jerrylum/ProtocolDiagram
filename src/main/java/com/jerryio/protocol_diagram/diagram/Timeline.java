@@ -18,7 +18,7 @@ public class Timeline<T extends ICancellable> {
     /**
      * a getter method that returns the diagram it stored
      * 
-     * @return
+     * @return Diagram
      */
     public Diagram getDiagram() {
         return diagram;
@@ -27,7 +27,7 @@ public class Timeline<T extends ICancellable> {
     /**
      * a getter method that returns the latest memento
      * 
-     * @return
+     * @return Diagram.Memento
      */
     public Diagram.Memento getLatestMemento() {
         return latest;
@@ -57,9 +57,9 @@ public class Timeline<T extends ICancellable> {
 
     /**
      * a method that pops the top of the undo stack, pushes that popped history into
-     * the redo stack, and restore the diagram based on the popped snapshot.
+     * the redo stack, and restores the diagram based on the popped snapshot.
      * 
-     * @return
+     * @return T
      */
     public T undo() {
         if (undoStack.isEmpty())
@@ -74,9 +74,9 @@ public class Timeline<T extends ICancellable> {
 
     /**
      * a method that pops the top of the redo stack, pushes that popped history into
-     * the undo stack, and execute the popped command from the redo stack.
+     * the undo stack, and executes the popped command from the redo stack.
      * 
-     * @return
+     * @return T
      */
     public T redo() {
         if (redoStack.isEmpty())
