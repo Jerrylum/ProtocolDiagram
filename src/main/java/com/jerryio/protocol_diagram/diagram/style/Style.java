@@ -17,24 +17,67 @@ public abstract class Style {
         this.elements = elements;
     }
 
+    /**
+     * a method that transform the RowTail instance to string
+     * 
+     * @param e
+     * @return String
+     */
     public abstract String output(Connector e);
 
+    /**
+     * a method that transform the DividerSegment instance to string
+     * 
+     * @param e
+     * @return String
+     */
     public abstract String output(DividerSegment e);
 
+    /**
+     * a method that transform the RowTail instance to string
+     * 
+     * @param e
+     * @return String
+     */
     public abstract String output(RowTail e);
 
+    /**
+     * a method that transform the NextLine instance to string
+     * 
+     * @param e
+     * @return String
+     */
     public String output(NextLine e) {
         return "\n";
     }
 
+    /**
+     * a method that transforms the RowSegment instance to string
+     * 
+     * @param e
+     * @return String
+     */
     public String output(RowSegment e) {
         return output((Segment) e);
     }
 
+    /**
+     * a method that transforms the Segment instance to string
+     * 
+     * @param e
+     * @return String
+     */
     public String output(Segment e) {
         return output(e.isDisplayName() ? e.getRepresent().getName() : " ", ' ', e.getLength());
     }
 
+    /**
+     * a method that slices the logic of toString by pattern matching for instanceof
+     * to distribute the computation work to different methods
+     * 
+     * @param e
+     * @return String
+     */
     public String output(Element e) {
         if (e instanceof Connector f)
             return output(f);
@@ -50,6 +93,16 @@ public abstract class Style {
             return e.toString();
     }
 
+    /**
+     * a low-level method that takes three parameters, `name`, `placeholder` and `bitLength`,
+     * and generate a string with length `bitLength`, centered text with name and filled with
+     * `placeholder` in the background
+     * 
+     * @param name
+     * @param placeholder
+     * @param bitLength
+     * @return
+     */
     public String output(String name, char placeholder, int bitLength) {
         StringBuilder sb = new StringBuilder();
         int length = bitLength * 2 - 1;
@@ -70,6 +123,16 @@ public abstract class Style {
         return sb.toString();
     }
 
+    /**
+     * a low-level method that takes three parameters, `odd`, `even` and `bitLength`,
+     * and generate a string with length `bitLength`, and interleave with char `odd` and `even`
+     * base on the index.
+     * 
+     * @param odd
+     * @param even
+     * @param bitLength
+     * @return
+     */
     public String output(char odd, char even, int bitLength) {
         StringBuilder sb = new StringBuilder();
         sb.append(odd);
@@ -80,6 +143,11 @@ public abstract class Style {
         return sb.toString();
     }
 
+    /**
+     * a method for converting the list of elements to string
+     * 
+     * @return String
+     */
     public String output() {
         StringBuilder sb = new StringBuilder();
         Element last = null;
