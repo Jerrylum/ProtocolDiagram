@@ -7,10 +7,21 @@ public abstract class Option {
 
     private String key;
 
+    /**
+     * option constructor that set the value of the key of this option, once it set,
+     * it will be come readonly afterward
+     * 
+     * @param key
+     */
     public Option(String key) {
         this.key = key;
     }
 
+    /**
+     * a getter method that retrieve the readonly key
+     * 
+     * @return
+     */
     public String getKey() {
         return key;
     }
