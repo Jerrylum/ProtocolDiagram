@@ -56,43 +56,100 @@ public class Diagram {
                 new BooleanOption("left-space-placeholder", false));
     }
 
+    /**
+     * a getter method that returns the configuration instance of the diagram
+     * 
+     * @return Configuration
+     */
     public Configuration getConfig() {
         return config;
     }
 
+    /**
+     * a getter method that returns a readonly clone of the list of fields of the
+     * diagram
+     * 
+     * @return Collection<Field>
+     */
     public Collection<Field> getFields() {
         return Collections.unmodifiableCollection(fields);
     }
 
+    /**
+     * a getter method that returns the field by specified index
+     * 
+     * @param index
+     * @return Field
+     */
     public Field getField(int index) {
         return fields.get(index);
     }
 
+    /**
+     * a method that clears all of the fields of the diagram
+     * 
+     * @return void
+     */
     public void clear() {
         fields.clear();
     }
 
+    /**
+     * a getter method that returns the amount of fields of the diagram
+     * 
+     * @return int
+     */
     public int size() {
         return fields.size();
     }
 
+    /**
+     * a method that appends the field to the diagram
+     * 
+     * @param field
+     * @return void
+     */
     public void addField(Field field) {
         fields.add(field);
     }
 
+    /**
+     * a method that inserts the field into specified location to the diagram
+     * 
+     * @param index
+     * @param field
+     * @return void
+     */
     public void insertField(int index, Field field) {
         fields.add(index, field);
     }
 
+    /**
+     * a method that removes the field via given index
+     * 
+     * @param index
+     * @return void
+     */
     public void removeField(int index) {
         fields.remove(index);
     }
 
+    /**
+     * a method that moves the field from the `from` index to the `to` index
+     * 
+     * @param from
+     * @param to
+     * @return void
+     */
     public void moveField(int from, int to) {
         Field field = fields.remove(from);
         fields.add(to, field);
     }
 
+    /**
+     * a subclass that used to record the state of the diagram, will be helpful
+     * for restoring diagram via store a list of this object
+     */
     public static class Memento {
         private List<Pair<String, Integer>> fields;
 
@@ -104,10 +161,21 @@ public class Diagram {
         }
     }
 
+    /**
+     * a factory pattern that creates the `Memento` typed instance
+     * 
+     * @return Memento
+     */
     public Memento createMemento() {
         return new Memento(this);
     }
 
+    /**
+     * a method that restores the diagram to the memento recorded state
+     * 
+     * @param m
+     * @return void
+     */
     public void restoreFromMemento(Memento m) {
         fields.clear();
         for (Pair<String, Integer> p : m.fields) {
@@ -115,14 +183,32 @@ public class Diagram {
         }
     }
 
+    /**
+     * a method that transforms the current diagram into a JSON formatted string
+     * 
+     * @return String
+     */
     public String toJson() {
         return GSON_BUILDER.toJson(this);
     }
 
+    /**
+     * a utility function that creates a diagram instance based on the content of
+     * the JSON formatted string
+     * 
+     * @param input
+     * @return Diagram
+     */
     public static Diagram fromJson(String input) {
         return GSON_BUILDER.fromJson(input, Diagram.class);
     }
 
+    /**
+     * a internally object representation toString method, it returns a simple
+     * format of the diagram
+     * 
+     * @return String
+     */
     @Override
     public String toString() {
         final int bit = (int) config.getValue("bit");
@@ -159,9 +245,19 @@ public class Diagram {
         return sb.toString();
     }
 
+    /**
+     * a customized gson type adapter, as the default conversion is not appropriate
+     * for our diagram
+     */
     public static class GsonTypeAdapter extends TypeAdapter<Diagram> {
         private static final Gson INTERNAL_GSON_BUILDER = new GsonBuilder().serializeNulls().create();
 
+        /**
+         * a method that reads JSON and returns a diagram instance
+         * 
+         * @param reader
+         * @return Diagram
+         */
         public Diagram read(JsonReader reader) throws IOException {
             Diagram d = new Diagram();
 
@@ -186,6 +282,14 @@ public class Diagram {
             return d;
         }
 
+        /**
+         * a method that reads the diagram, and writes the appropriate key-value pairs
+         * into the JSON
+         * 
+         * @param writer
+         * @param d
+         * @return void
+         */
         public void write(JsonWriter writer, Diagram d) throws IOException {
             writer.beginObject();
             writer.name("fields").jsonValue(INTERNAL_GSON_BUILDER.toJson(d.getFields()));
