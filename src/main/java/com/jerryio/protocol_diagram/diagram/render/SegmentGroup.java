@@ -18,22 +18,48 @@ public class SegmentGroup<T extends Segment> {
         this.used = 0;
     }
 
+    /**
+     * a getter method that return the number of bit this group holds
+     * 
+     * @return int
+     */
     public int getBit() {
         return bit;
     }
 
+    /**
+     * a method that returns a readonly collection of the segments
+     * 
+     * @return Collection<T>
+     */
     public Collection<T> getSegments() {
         return Collections.unmodifiableCollection(segments);
     }
 
+    /**
+     * a method that return the segment by the specified index
+     * 
+     * @param index
+     * @return T extends Segment
+     */
     public T get(int index) {
         return segments.get(index);
     }
 
+    /**
+     * a getter method that returns the used space for the current segment groups
+     * 
+     * @return int
+     */
     public int getUsed() {
         return used;
     }
 
+    /**
+     * a getter method that returns the number of segments of the current segment group owns
+     * 
+     * @return int
+     */
     public int getCount() {
         return segments.size();
     }
