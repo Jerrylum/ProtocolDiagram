@@ -3,6 +3,9 @@ package com.jerryio.protocol_diagram.token;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this record is a data class that contains the prefix and the parameters of a command line
+ */
 public record CommandLine(String name, List<Parameter> params) implements Token {
     /**
      * a static utility function that parses the CodePointBuffer, which is a wrapper
