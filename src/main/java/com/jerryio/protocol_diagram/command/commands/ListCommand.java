@@ -10,6 +10,9 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command responsible to print all fields in the diagram in a text manner
+ */
 public class ListCommand extends Command {
 
     public ListCommand() {

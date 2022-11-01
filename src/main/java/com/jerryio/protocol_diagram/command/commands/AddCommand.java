@@ -10,11 +10,24 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible for adding fields into the diagram instance
+ */
 public class AddCommand extends CancellableCommand {
 
+    /**
+     * the length of the to-be added field
+     */
     public int paramLength;
+    
+    /**
+     * the name of the to-be added field
+     */
     public String paramName;
 
+    /**
+     * this command is responsible for adding fields into the diagram instance
+     */
     public AddCommand() {
         super("add", "<length> <name>", "Add a field to the end of the diagram");
     }

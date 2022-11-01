@@ -11,6 +11,9 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * a command that lists all available options in the program
+ */
 public class ConfigListCommand extends Command {
 
     public ConfigListCommand() {

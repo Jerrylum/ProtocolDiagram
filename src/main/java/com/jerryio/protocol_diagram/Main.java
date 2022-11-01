@@ -32,8 +32,8 @@ public class Main {
      * returned value will be our defined string that tells the user no command was
      * found, please type help for more information.
      * 
-     * @param input
-     * @return String
+     * @param input the input string
+     * @return the output string
      */
     public static String doHandleCommand(String input) {
         CodePointBuffer buffer = new CodePointBuffer(input);
@@ -70,8 +70,8 @@ public class Main {
      * a static function that requires one line input, parse it, and append all
      * fields into the single diagram instance in the Main class,
      * 
-     * @param input
-     * @return
+     * @param input the input string
+     * @return whether the input is valid and the diagram is modified
      */
     public static HandleResult doHandleSingleLine(String input) {
         OneLineInput line = OneLineInput.parse(new CodePointBuffer(input));

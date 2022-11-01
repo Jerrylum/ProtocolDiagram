@@ -3,14 +3,19 @@ package com.jerryio.protocol_diagram.util;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Token;
 
+/**
+ * a utility class that contains only static functions, for the ease of other
+ * classes reuse the code without instantiating an object before the usage, this
+ * class is responsible in the token utility functions
+ */
 public class TokenUtils {
 
     /**
      * a utility function that checks whether the character is delimiter
      * (null | ' ')
      * 
-     * @param c
-     * @return
+     * @param c the character to be checked
+     * @return whether the character is delimiter
      */
     public static boolean isDelimiter(Character c) {
         return c == null || c == ' ';
@@ -20,8 +25,8 @@ public class TokenUtils {
      * a utility function that checks whether the character is safe delimiter
      * (null | ' ' | ':' | ',')
      * 
-     * @param c
-     * @return
+     * @param c the character to be checked
+     * @return whether the character is safe delimiter
      */
     public static boolean isSafeDelimiter(Character c) {
         return c == null || c == ' ' || c == ':' || c == ',';
@@ -33,8 +38,8 @@ public class TokenUtils {
      * a utility function that transforms a arguments of classes to an array of
      * classes
      * 
-     * @param clazz
-     * @return
+     * @param clazz the classes to be transformed
+     * @return the array of classes
      */
     public static Class<?>[] doGetClasses(Class<?>... clazz) {
         return clazz;
@@ -45,11 +50,11 @@ public class TokenUtils {
      * class T, an array of parameter types of the T's constructor, and an array of
      * parameter values of the T's constructor
      * 
-     * @param <T>
-     * @param token_class
-     * @param args_types
-     * @param args
-     * @return
+     * @param <T>         the type of the instance to be created
+     * @param token_class the class of the instance to be created
+     * @param args_types  the array of parameter types of the T's constructor
+     * @param args        the array of parameter values of the T's constructor
+     * @return the instance of T
      */
     public static <T extends Token> T doNewInstance(Class<T> token_class, Class<?>[] args_types, Object... args) {
         // This is equivalent to "return new TokenClass(a, b, c, d);"
@@ -66,11 +71,11 @@ public class TokenUtils {
      * typed with T which given by the parameter class T if the code point buffer
      * does match one of our specified acceptable characters, else return null
      * 
-     * @param <T>
-     * @param buffer
-     * @param accepts
-     * @param token_class
-     * @return
+     * @param <T>         the type of the token to be created
+     * @param buffer      the code point buffer to be read
+     * @param accepts     the array of acceptable characters
+     * @param token_class the class of the token to be created
+     * @return the token instance
      */
     public static <T extends Token> T doParseCodepoint(CodePointBuffer buffer, char[] accepts, Class<T> token_class) {
         buffer.savepoint();
@@ -88,11 +93,11 @@ public class TokenUtils {
      * an utility function that reads the code point buffer and return a Token
      * instance usually typed with SingleQuotedString or DoubleQuotedString
      * 
-     * @param <T>
-     * @param buffer
-     * @param quote
-     * @param token_class
-     * @return
+     * @param <T>         the type of the token
+     * @param buffer      the code point buffer
+     * @param quote       the quote character
+     * @param token_class the class of the token to be returned
+     * @return the token instance
      */
     public static <T extends Token> T doParseQuoteString(CodePointBuffer buffer, char quote, Class<T> token_class) {
         buffer.savepoint();

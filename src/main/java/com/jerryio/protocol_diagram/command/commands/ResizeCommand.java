@@ -10,9 +10,18 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command responsible in resizing a specific field with a new size
+ */
 public class ResizeCommand extends CancellableCommand {
 
+    /**
+     * the index of the affecting field
+     */
     public int paramIndex;
+    /**
+     * the new size will be applied after the execution
+     */
     public int paramNewSize;
 
     public ResizeCommand() {

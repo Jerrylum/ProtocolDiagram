@@ -1,5 +1,9 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record is a generic number token that is able to parse any types of number token, such as
+ * positive integer, negative integer, zero, number with certain decimal digit, etc.
+ */
 public record NumberT(String value, boolean isPositive, boolean isDouble) implements Token {
     public static NumberT parse(CodePointBuffer buffer) {
         buffer.savepoint();

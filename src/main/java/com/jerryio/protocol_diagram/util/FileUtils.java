@@ -13,6 +13,10 @@ import java.util.Scanner;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Diagram;
 
+/**
+ * a utility class that contains only static functions, for the ease of other classes reuse the code
+ * without instantiating an object before the usage, this class is responsible in the file utility functions
+ */
 public class FileUtils {
 
     public static File resolvePath(String path, String suggestedExt) {

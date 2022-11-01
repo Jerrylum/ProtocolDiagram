@@ -13,18 +13,42 @@ public class Connector extends Element {
     private byte value = 0;
     private boolean individual = false;
 
+    /**
+     * a getter method that returns a flag denoting the direction this connector
+     * will be connecting
+     * 
+     * @return byte
+     */
     public byte getValue() {
         return value;
     }
 
+    /**
+     * a setter method that assigns a new flag of directions for this connector
+     * 
+     * @param value the new flag
+     */
     public void setValue(byte value) {
         this.value = value;
     }
 
+    /**
+     * a getter method that checks whether the current connector should be connected
+     * by other connectors
+     * 
+     * @return is individual
+     */
     public boolean isIndividual() {
         return individual;
     }
 
+    /**
+     * a utility method that provides the ease of checking whether the target
+     * element could be connected
+     * 
+     * @param e the target element
+     * @return is connectable
+     */
     public boolean isConnected(Element e) {
         if (e == null)
             return false;

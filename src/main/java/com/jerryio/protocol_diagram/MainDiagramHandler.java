@@ -22,7 +22,7 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
     }
 
     /**
-     * a instance method that gets the diagram from Main
+     * an instance method that gets the diagram from Main
      */
     @Override
     public Diagram getDiagram() {
@@ -30,10 +30,9 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
     }
 
     /**
-     * a instance method that sets the diagram from Main
+     * an instance method that sets the diagram to Main
      * 
-     * @param diagram
-     * @return void
+     * @param diagram the diagram to be set
      */
     public void setDiagram(Diagram diagram) {
         Main.diagram = diagram;
@@ -42,8 +41,6 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
     /**
      * a method that eliminates all previous diagram-related logic, and re-creates a
      * new diagram
-     * 
-     * @return void
      */
     public void newDiagram() {
         setDiagram(new Diagram());
@@ -52,10 +49,10 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
     }
 
     /**
-     * a method that checks whether the diagram is modified, return true if the flag
-     * `isModified` is true or the file is not saved
+     * a method that checks whether the diagram is modified, returns true if the
+     * flag `isModified` is true or the file is not saved
      * 
-     * @return boolean
+     * @return whether the diagram is modified
      */
     public boolean isModified() {
         return isModified || (sourceCurrentMemento != getLatestMemento());
@@ -67,8 +64,7 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
      * 
      * @see #isModified()
      * 
-     * @param isModified
-     * @return void
+     * @param isModified the value to set
      */
     public void setModified(boolean isModified) {
         this.isModified = isModified;
@@ -77,7 +73,7 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
     /**
      * a getter function that retrieves the source file path
      * 
-     * @return String
+     * @return the source file path
      */
     public String getSourceFilePath() {
         return sourceFilePath;
@@ -87,8 +83,9 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
      * a method that creates a diagram from a JSON file, eliminates all history and
      * renew the source path
      * 
-     * @param path
-     * @return HandleResult
+     * @param path the path of the JSON file
+     * 
+     * @return whether the diagram is loaded successfully
      */
     public HandleResult load(String path) {
         Diagram diagram = FileUtils.load(path);
@@ -107,7 +104,9 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
      * a method that creates a JSON file from the current diagram, and set the flag
      * `isModified` to false
      * 
-     * @return HandleResult
+     * @param path the path of the JSON file
+     * 
+     * @return whether the diagram is saved successfully
      */
     public HandleResult save(String path) {
         HandleResult result = FileUtils.save(path, Main.diagram);
@@ -122,8 +121,6 @@ public final class MainDiagramHandler extends Timeline<CancellableCommand> {
 
     /**
      * a method that eliminates all history and set the flag `isModified` to false
-     * 
-     * @return void
      */
     @Override
     public void resetHistory() {

@@ -11,6 +11,10 @@ import com.jerryio.protocol_diagram.diagram.render.element.Element;
 import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
 import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
+/**
+ * a utility class that contains only static functions, for the ease of other classes reuse the code
+ * without instantiating an object before the usage, this class is responsible in the diagram utility functions
+ */
 public class DiagramUtils {
 
     public static List<Row> convertFieldsToRow(int bit, List<Field> fields, boolean hasTail) {

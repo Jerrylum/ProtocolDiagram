@@ -9,12 +9,33 @@ import com.jerryio.protocol_diagram.command.commands.*;
 import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this abstract class consists the information of a basic command, such as the
+ * prefix, description, and the usage of the command.
+ */
 public abstract class Command {
 
+    /**
+     * the name of the command
+     */
     private final String name;
+    /**
+     * the basic usage of the command
+     */
     private final String usage;
+    /**
+     * the description of the command
+     */
     private final String description;
 
+    /**
+     * a constructor that takes three values, name, usage, and description and
+     * assign them into the instance variables
+     * 
+     * @param name        the name of the command
+     * @param usage       the usage of the command
+     * @param description the description of the command
+     */
     public Command(String name, String usage, String description) {
         this.name = name;
         this.usage = usage;
@@ -56,7 +77,7 @@ public abstract class Command {
      * classes,
      * if no, then return a `HandleResult` not_handled
      * 
-     * @param line
+     * @param line the command line that holds the prefix and the parameters
      * @return HandleResult
      */
     public final HandleResult handle(CommandLine line) {
@@ -75,7 +96,7 @@ public abstract class Command {
      * it is finished, it is required to return
      * a `HandleResult` instance for indicating the state of the command outcome
      * 
-     * @param params
+     * @param params a list of parameters
      * @return HandleResult
      */
     public abstract HandleResult handle(List<Parameter> params);
@@ -83,7 +104,7 @@ public abstract class Command {
     /**
      * a utility method that returns a list of all available commands in the program
      * 
-     * @return List<Command>
+     * @return List
      */
     public static List<Command> getAvailableCommands() {
         return Arrays.asList(

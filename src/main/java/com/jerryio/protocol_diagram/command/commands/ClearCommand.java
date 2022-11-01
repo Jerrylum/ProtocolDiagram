@@ -9,6 +9,9 @@ import com.jerryio.protocol_diagram.command.CancellableCommand;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible for clearing the diagram fields
+ */
 public class ClearCommand extends CancellableCommand {
 
     public ClearCommand() {

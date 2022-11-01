@@ -10,6 +10,10 @@ import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command responsible in popping the redo stack and pushing the popped history
+ * into the undo stack.
+ */
 public class RedoCommand extends Command {
     
     public RedoCommand() {
