@@ -10,9 +10,22 @@ import com.jerryio.protocol_diagram.diagram.render.element.RowSegment;
 import com.jerryio.protocol_diagram.diagram.render.element.RowTail;
 import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
+
+/**
+ * an abstract class that handled a lot of style transforming logic, the descendant of this class
+ * once want to apply changes, could be easily done by implementing only few necessary methods
+ */
 public abstract class Style {
+    /**
+     * a list of elements in the diagram
+     */
     protected List<Element> elements;
 
+    /**
+     * assign the elements into the instance variable
+     * 
+     * @param elements a list of elements in the diagram
+     */
     public Style(List<Element> elements) {
         this.elements = elements;
     }
@@ -20,7 +33,7 @@ public abstract class Style {
     /**
      * a method that transform the RowTail instance to string
      * 
-     * @param e
+     * @param e a connector
      * @return String
      */
     public abstract String output(Connector e);
@@ -28,7 +41,7 @@ public abstract class Style {
     /**
      * a method that transform the DividerSegment instance to string
      * 
-     * @param e
+     * @param e a divider segment
      * @return String
      */
     public abstract String output(DividerSegment e);
@@ -36,7 +49,7 @@ public abstract class Style {
     /**
      * a method that transform the RowTail instance to string
      * 
-     * @param e
+     * @param e a row tail
      * @return String
      */
     public abstract String output(RowTail e);
@@ -44,7 +57,7 @@ public abstract class Style {
     /**
      * a method that transform the NextLine instance to string
      * 
-     * @param e
+     * @param e a next line
      * @return String
      */
     public String output(NextLine e) {
@@ -54,7 +67,7 @@ public abstract class Style {
     /**
      * a method that transforms the RowSegment instance to string
      * 
-     * @param e
+     * @param e a row segment
      * @return String
      */
     public String output(RowSegment e) {
@@ -64,7 +77,7 @@ public abstract class Style {
     /**
      * a method that transforms the Segment instance to string
      * 
-     * @param e
+     * @param e a segment
      * @return String
      */
     public String output(Segment e) {
@@ -75,7 +88,7 @@ public abstract class Style {
      * a method that slices the logic of toString by pattern matching for instanceof
      * to distribute the computation work to different methods
      * 
-     * @param e
+     * @param e an element
      * @return String
      */
     public String output(Element e) {
@@ -98,10 +111,10 @@ public abstract class Style {
      * and generate a string with length `bitLength`, centered text with name and filled with
      * `placeholder` in the background
      * 
-     * @param name
-     * @param placeholder
-     * @param bitLength
-     * @return
+     * @param name the name of the field
+     * @param placeholder the background character of the field
+     * @param bitLength the length of the field
+     * @return String
      */
     public String output(String name, char placeholder, int bitLength) {
         StringBuilder sb = new StringBuilder();
@@ -128,10 +141,10 @@ public abstract class Style {
      * and generate a string with length `bitLength`, and interleave with char `odd` and `even`
      * base on the index.
      * 
-     * @param odd
-     * @param even
-     * @param bitLength
-     * @return
+     * @param odd the character will be applied when the index is odd
+     * @param even the character will be applied when the index is even
+     * @param bitLength the length of the field
+     * @return String
      */
     public String output(char odd, char even, int bitLength) {
         StringBuilder sb = new StringBuilder();
