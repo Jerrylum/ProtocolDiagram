@@ -10,9 +10,18 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command responsible in renaming a specific field with a new name
+ */
 public class RenameCommand extends CancellableCommand {
 
+    /**
+     * the index of the affecting field
+     */
     public int paramIndex;
+    /**
+     * the new name will be applied after the execution
+     */
     public String paramNewName;
 
     public RenameCommand() {
