@@ -73,7 +73,7 @@ public class ExistingProtocol {
     /**
      * an utility function that returns all templates in a readonly map
      * 
-     * @return Map<String, String>
+     * @return Map
      */
     public static Map<String, String> getProtocols() {
         return Collections.unmodifiableMap(protocols);
