@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import com.jerryio.protocol_diagram.util.TokenUtils;
 
+/**
+ * this class is a facade class that wraps the tokens of boolean, number, and string.
+ */
 public class Parameter implements Token {
     private BooleanT bool = null;
     private NumberT number = null;
