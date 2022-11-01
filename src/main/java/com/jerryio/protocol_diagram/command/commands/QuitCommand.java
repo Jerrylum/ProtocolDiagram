@@ -9,6 +9,9 @@ import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible in exiting the program in a controlled manner
+ */
 public class QuitCommand extends Command {
 
     public QuitCommand() {
