@@ -8,8 +8,15 @@ import com.jerryio.protocol_diagram.diagram.render.element.Element;
 import com.jerryio.protocol_diagram.diagram.render.element.RowTail;
 import com.jerryio.protocol_diagram.diagram.render.element.Segment;
 
+/**
+ * this class is responsible in transforming the diagram into UTF-8 style
+ */
 public class UTF8Style extends Style {
-
+    /**
+     * this constructor takes a list of elements and assigns it into private instance variable
+     * 
+     * @param elements a list of elements in the diagram
+     */
     public UTF8Style(List<Element> elements) {
         super(elements);
     }
