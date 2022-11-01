@@ -10,8 +10,14 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible in deleting undesired field from the diagram by specified index
+ */
 public class DeleteCommand extends CancellableCommand {
 
+    /**
+     * the index of the position of the undesired field
+     */
     public int paramIndex;
 
     public DeleteCommand() {
