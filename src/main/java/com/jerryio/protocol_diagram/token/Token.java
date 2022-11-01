@@ -1,5 +1,8 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this interface is used to distinguish whether the class is a token 
+ */
 public interface Token {
     /**
      * a static function that tokenize the CodePointBuffer and returns a processed
