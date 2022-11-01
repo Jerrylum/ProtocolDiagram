@@ -5,6 +5,9 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this class is an option class that extends the logic of confining the possible values into boolean value, truthy and falsy
+ */
 public class BooleanOption extends Option {
 
     private boolean value;
