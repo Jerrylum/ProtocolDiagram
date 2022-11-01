@@ -32,6 +32,10 @@ import com.jerryio.protocol_diagram.token.Pair;
 import com.jerryio.protocol_diagram.token.Parameter;
 import com.jerryio.protocol_diagram.util.DiagramUtils;
 
+/**
+ * this class holds the information of what requires to render a diagram on screen,
+ * such as the list of fields and the configuration of setting.
+ */
 public class Diagram {
 
     private static final Gson GSON_BUILDER = new GsonBuilder()
@@ -40,7 +44,13 @@ public class Diagram {
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
+    /**
+     * the list of fields that the diagram holds
+     */
     private List<Field> fields;
+    /**
+     * the configuration of the diagram
+     */
     private Configuration config;
 
     public Diagram() {
@@ -69,7 +79,7 @@ public class Diagram {
      * a getter method that returns a readonly clone of the list of fields of the
      * diagram
      * 
-     * @return Collection<Field>
+     * @return Collection
      */
     public Collection<Field> getFields() {
         return Collections.unmodifiableCollection(fields);
