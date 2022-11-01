@@ -10,6 +10,11 @@ import java.util.List;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this class responsible in managing a list of available options, provides API
+ * for other classes to get the value of a option, the list of options, set the value
+ * of a option.
+ */
 public class Configuration {
 
     private final List<Option> options;
@@ -77,7 +82,7 @@ public class Configuration {
     /**
      * a pure function that returns a readonly clone of the options list
      * 
-     * @return Collection<Option>
+     * @return Collection
      */
     public Collection<Option> getOptions() {
         return Collections.unmodifiableList(options);
