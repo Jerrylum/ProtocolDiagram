@@ -8,6 +8,9 @@ import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible in showing a user manual on screen
+ */
 public class HelpCommand extends Command {
 
     public HelpCommand() {
