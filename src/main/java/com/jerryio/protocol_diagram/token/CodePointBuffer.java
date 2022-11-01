@@ -4,9 +4,21 @@ import java.util.Stack;
 
 import com.jerryio.protocol_diagram.util.TokenUtils;
 
+/**
+ * this class is a wrapper class that wrapping a string for the ease of tokenizing and parsing
+ */
 public class CodePointBuffer {
+    /**
+     * the be-wrapped string
+     */
     private String target;
+    /**
+     * the character-reading cursor position
+     */
     private int index;
+    /**
+     * the cursor position history, will be used to rewind to historic positions during the parsing
+     */
     private Stack<Integer> history;
 
     /**
@@ -23,7 +35,7 @@ public class CodePointBuffer {
     /**
      * a method to retrieve the length of the internally stored string
      * 
-     * @return
+     * @return int
      */
     public int length() {
         return target.length();
@@ -111,7 +123,6 @@ public class CodePointBuffer {
     /**
      * a method to lookup the cursor pointing character
      * 
-     * @param offset
      * @return Character
      */
     public Character peek() {
