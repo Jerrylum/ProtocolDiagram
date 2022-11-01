@@ -10,10 +10,22 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command responsible in adding new field in to the diagram with specified index
+ */
 public class InsertCommand extends CancellableCommand {
 
+    /**
+     * the index of position that will be injected the new field
+     */
     public int paramIndex;
+    /**
+     * the length of the to-be created field
+     */
     public int paramLength;
+    /**
+     * the name of the to-be created field
+     */
     public String paramName;
 
     public InsertCommand() {
