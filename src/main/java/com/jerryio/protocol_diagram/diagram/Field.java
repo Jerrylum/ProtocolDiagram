@@ -2,6 +2,11 @@ package com.jerryio.protocol_diagram.diagram;
 
 import com.jerryio.protocol_diagram.token.Pair;
 
+/**
+ * this class comprises the information of the field of the diagram, such as the
+ * the name of the field, the length of the field, and the unique identifier of
+ * the field.
+ */
 public class Field {
 
     private static int uidCount = 0;
@@ -10,12 +15,26 @@ public class Field {
     private int length;
     private int uid;
 
+    /**
+     * this constructor is used to assign all necessary instance variable at the born of the instance
+     * 
+     * @param name
+     * @param length
+     * @param uid
+     */
     private Field(String name, int length, int uid) {
         this.name = name;
         this.length = length;
         this.uid = uid;
     }
 
+    /**
+     * this constructor is a wrapper constructor that automatically increase the static `uidCount`
+     * and pass the instantiation logic to the first constructor
+     * 
+     * @param name
+     * @param length
+     */
     public Field(String name, int length) {
         this(name, length, uidCount++);
     }
