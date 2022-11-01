@@ -5,6 +5,9 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this class is an option class that extends the logic of confining the possible range of numeric output
+ */
 public class RangeOption extends Option {
 
     private final int min;
