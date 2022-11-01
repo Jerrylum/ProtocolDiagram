@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * this record is a data class that contains the prefix and the parameters of a command line
+ * this record is a data class that contains the prefix and the parameters of a
+ * command line
  */
 public record CommandLine(String name, List<Parameter> params) implements Token {
     /**
@@ -16,8 +17,8 @@ public record CommandLine(String name, List<Parameter> params) implements Token 
      * via this process, it could assist the program to distinguish each commands
      * and tell the differences.
      * 
-     * @param buffer
-     * @return
+     * @param buffer the CodePointBuffer to be parsed
+     * @return the parsed CommandLine object, or null if the parse failed
      */
     public static CommandLine parse(CodePointBuffer buffer) {
         buffer.readDelimiter();

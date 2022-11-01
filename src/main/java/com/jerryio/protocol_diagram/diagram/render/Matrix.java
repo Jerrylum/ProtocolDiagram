@@ -75,8 +75,8 @@ public class Matrix {
      * from coordinate into index-based position, and return the matrix element by
      * the transformed index
      * 
-     * @param x
-     * @param y
+     * @param x the x coordinate
+     * @param y the y coordinate
      * @return Element
      */
     public Element get(int x, int y) {

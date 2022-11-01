@@ -16,11 +16,12 @@ public class Field {
     private int uid;
 
     /**
-     * this constructor is used to assign all necessary instance variable at the born of the instance
+     * this constructor is used to assign all necessary instance variable at the
+     * born of the instance
      * 
-     * @param name
-     * @param length
-     * @param uid
+     * @param name   the name of the field
+     * @param length the length of the field
+     * @param uid    the unique identifier of the field
      */
     private Field(String name, int length, int uid) {
         this.name = name;
@@ -29,11 +30,11 @@ public class Field {
     }
 
     /**
-     * this constructor is a wrapper constructor that automatically increase the static `uidCount`
-     * and pass the instantiation logic to the first constructor
+     * this constructor is a wrapper constructor that automatically increase the
+     * static `uidCount` and pass the instantiation logic to the first constructor
      * 
-     * @param name
-     * @param length
+     * @param name   the name of the field
+     * @param length the length of the field
      */
     public Field(String name, int length) {
         this(name, length, uidCount++);
@@ -43,7 +44,7 @@ public class Field {
      * this constructor will transform a pair of value into then field name and the
      * length of the field
      * 
-     * @param pair
+     * @param pair the pair of name and length
      */
     public Field(Pair<String, Integer> pair) {
         this(pair.first(), pair.second());
@@ -52,7 +53,7 @@ public class Field {
     /**
      * a getter method that returns the name of this diagram field
      * 
-     * @return
+     * @return the name of this diagram field
      */
     public String getName() {
         return name;
@@ -60,6 +61,8 @@ public class Field {
 
     /**
      * a getter method that returns the length of this diagram field
+     * 
+     * @return the length of this diagram field
      */
     public int getLength() {
         return length;
@@ -68,7 +71,7 @@ public class Field {
     /**
      * a setter method that sets the name of this diagram field
      * 
-     * @param name
+     * @param name the name of this diagram field
      */
     public void setName(String name) {
         this.name = name;
@@ -77,12 +80,17 @@ public class Field {
     /**
      * a setter method that sets the length of this diagram field
      * 
-     * @param length
+     * @param length the length of this diagram field
      */
     public void setLength(int length) {
         this.length = length;
     }
 
+    /**
+     * a getter method that returns the unique identifier of this diagram field
+     * 
+     * @return the unique identifier of this diagram field
+     */
     public int getUid() {
         return uid;
     }

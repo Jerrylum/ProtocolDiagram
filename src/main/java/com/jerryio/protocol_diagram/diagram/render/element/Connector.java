@@ -26,28 +26,28 @@ public class Connector extends Element {
     /**
      * a setter method that assigns a new flag of directions for this connector
      * 
-     * @param value
+     * @param value the new flag
      */
     public void setValue(byte value) {
         this.value = value;
     }
 
     /**
-     * a getter method that checks whether the current connector should be connected by
-     * other connectors
+     * a getter method that checks whether the current connector should be connected
+     * by other connectors
      * 
-     * @return
+     * @return is individual
      */
     public boolean isIndividual() {
         return individual;
     }
 
     /**
-     * a utility method that provides the ease of checking whether the target element could
-     * be connected
+     * a utility method that provides the ease of checking whether the target
+     * element could be connected
      * 
-     * @param e
-     * @return
+     * @param e the target element
+     * @return is connectable
      */
     public boolean isConnected(Element e) {
         if (e == null)

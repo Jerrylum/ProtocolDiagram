@@ -12,7 +12,8 @@ import com.jerryio.protocol_diagram.token.Parameter;
 
 /**
  * this class responsible in managing a list of available options, provides API
- * for other classes to get the value of a option, the list of options, set the value
+ * for other classes to get the value of a option, the list of options, set the
+ * value
  * of a option.
  */
 public class Configuration {
@@ -27,8 +28,8 @@ public class Configuration {
      * a method that sets the value of specified option from this configuration by
      * the given key and value
      * 
-     * @param key
-     * @param value
+     * @param key   the key of the option
+     * @param value the value of the option
      * @return HandleResult
      */
     public HandleResult setValue(String key, Parameter value) {
@@ -43,8 +44,8 @@ public class Configuration {
     /**
      * a getter method that retrieves the value of option by the specified key
      * 
-     * @param key
-     * @return Object
+     * @param key the key of the option
+     * @return the value of the option
      */
     public Object getValue(String key) {
         Option option = getOption(key);
@@ -58,8 +59,8 @@ public class Configuration {
     /**
      * a find method that lookups the matching option based on the given key
      * 
-     * @param key
-     * @return Option
+     * @param key the key of the option
+     * @return the option that matches the key
      */
     public Option getOption(String key) {
         Option selected = null;
@@ -82,7 +83,7 @@ public class Configuration {
     /**
      * a pure function that returns a readonly clone of the options list
      * 
-     * @return Collection
+     * @return the readonly list of options
      */
     public Collection<Option> getOptions() {
         return Collections.unmodifiableList(options);

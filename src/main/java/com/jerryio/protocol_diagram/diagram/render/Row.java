@@ -13,8 +13,8 @@ public class Row extends SegmentGroup<RowSegment> {
     /**
      * a method for appending a field into the segment group (row)
      * 
-     * @param field
-     * @return
+     * @param field the field to be appended
+     * @return this
      */
     public Row addField(Field field) {
         int consume = Math.min(field.getLength(), bit - used);
@@ -32,7 +32,7 @@ public class Row extends SegmentGroup<RowSegment> {
      * the segment group, note that if the used space is equal to the number
      * of bit it has, no row tail would be appended has the row is already full
      * 
-     * @param isVisible
+     * @param isVisible whether the row tail is visible
      */
     public void addTail(boolean isVisible) {
         if (used != bit)

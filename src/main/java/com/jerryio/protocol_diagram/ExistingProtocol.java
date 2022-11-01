@@ -63,8 +63,8 @@ public class ExistingProtocol {
     /**
      * an utility function that returns a protocol template given its name
      * 
-     * @param name
-     * @return String
+     * @param name the name of the protocol template
+     * @return the protocol template, or null if the name is not found
      */
     public static String getProtocol(String name) {
         return protocols.getOrDefault(name, null);
@@ -73,7 +73,7 @@ public class ExistingProtocol {
     /**
      * an utility function that returns all templates in a readonly map
      * 
-     * @return Map
+     * @return the map of templates
      */
     public static Map<String, String> getProtocols() {
         return Collections.unmodifiableMap(protocols);

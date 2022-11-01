@@ -10,8 +10,8 @@ import com.jerryio.protocol_diagram.token.CommandLine;
 import com.jerryio.protocol_diagram.token.Parameter;
 
 /**
- * this abstract class consists the information of a basic command, such as the prefix, description,
- * and the usage of the command.
+ * this abstract class consists the information of a basic command, such as the
+ * prefix, description, and the usage of the command.
  */
 public abstract class Command {
 
@@ -29,11 +29,11 @@ public abstract class Command {
     private final String description;
 
     /**
-     * a constructor that takes three values, name, usage, and description and assign them
-     * into the instance variables
+     * a constructor that takes three values, name, usage, and description and
+     * assign them into the instance variables
      * 
-     * @param name the name of the command
-     * @param usage the usage of the command
+     * @param name        the name of the command
+     * @param usage       the usage of the command
      * @param description the description of the command
      */
     public Command(String name, String usage, String description) {

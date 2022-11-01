@@ -9,8 +9,8 @@ public interface Token {
      * token, by default, it will return null if the parse function is not
      * implemented
      * 
-     * @param buffer
-     * @return
+     * @param buffer the CodePointBuffer to be tokenized
+     * @return the processed token
      */
     public static Token parse(CodePointBuffer buffer) {
         return null;

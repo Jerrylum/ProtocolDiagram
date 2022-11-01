@@ -47,7 +47,7 @@ public class Timeline<T extends ICancellable> {
      * a method that pushes a modifier into the undo history, and resets the stack
      * of redo.
      * 
-     * @param modifier
+     * @param modifier the modifier that is going to be pushed into the undo history
      */
     public void operate(T modifier) {
         undoStack.push(new Snapshot<T>(latest, modifier));

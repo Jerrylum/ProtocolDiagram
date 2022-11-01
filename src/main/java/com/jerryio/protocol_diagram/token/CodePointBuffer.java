@@ -5,7 +5,8 @@ import java.util.Stack;
 import com.jerryio.protocol_diagram.util.TokenUtils;
 
 /**
- * this class is a wrapper class that wrapping a string for the ease of tokenizing and parsing
+ * this class is a wrapper class that wrapping a string for the ease of
+ * tokenizing and parsing
  */
 public class CodePointBuffer {
     /**
@@ -17,14 +18,15 @@ public class CodePointBuffer {
      */
     private int index;
     /**
-     * the cursor position history, will be used to rewind to historic positions during the parsing
+     * the cursor position history, will be used to rewind to historic positions
+     * during the parsing
      */
     private Stack<Integer> history;
 
     /**
      * a constructor that takes a string as the input
      * 
-     * @param target
+     * @param target the string to be wrapped
      */
     public CodePointBuffer(String target) {
         this.target = target;
@@ -53,7 +55,7 @@ public class CodePointBuffer {
     /**
      * a method to lookup the character by specified index
      * 
-     * @param index
+     * @param index the index to be looked up
      * @return Character
      */
     public Character at(int index) {
@@ -77,11 +79,10 @@ public class CodePointBuffer {
 
     /**
      * a wrapper function that receives and returns the value without performing any
-     * operation on top of that value
-     * and rollback behind the scene
+     * operation on top of that value and rollback behind the scene
      * 
-     * @param <T>
-     * @param value
+     * @param <T>   the type of the value
+     * @param value the value to be wrapped
      * @return T
      */
     public <T> T rollbackAndReturn(T value) {
@@ -98,11 +99,10 @@ public class CodePointBuffer {
 
     /**
      * a wrapper function that receives and returns the value without performing any
-     * operation on top of that value
-     * and commit behind the scene
+     * operation on top of that value and commit behind the scene
      * 
-     * @param <T>
-     * @param value
+     * @param <T>   the type of the value
+     * @param value the value to be returned
      * @return T
      */
     public <T> T commitAndReturn(T value) {
@@ -132,7 +132,7 @@ public class CodePointBuffer {
     /**
      * a method to look a head character by given offset
      * 
-     * @param offset
+     * @param offset the offset to look ahead
      * @return Character
      */
     public Character peek(int offset) {
@@ -151,6 +151,7 @@ public class CodePointBuffer {
     /**
      * a method that reads every delimiter and stops once it bumps into a
      * non-delimiter character and return
+     * 
      * @return int a integer denoting the number of delimiter has read
      */
     public int readDelimiter() {

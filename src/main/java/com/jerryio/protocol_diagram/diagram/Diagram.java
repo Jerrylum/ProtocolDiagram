@@ -33,8 +33,8 @@ import com.jerryio.protocol_diagram.token.Parameter;
 import com.jerryio.protocol_diagram.util.DiagramUtils;
 
 /**
- * this class holds the information of what requires to render a diagram on screen,
- * such as the list of fields and the configuration of setting.
+ * this class holds the information of what requires to render a diagram on
+ * screen, such as the list of fields and the configuration of setting.
  */
 public class Diagram {
 
@@ -88,7 +88,7 @@ public class Diagram {
     /**
      * a getter method that returns the field by specified index
      * 
-     * @param index
+     * @param index the index of the field
      * @return Field
      */
     public Field getField(int index) {
@@ -114,7 +114,7 @@ public class Diagram {
     /**
      * a method that appends the field to the diagram
      * 
-     * @param field
+     * @param field the field to be appended
      */
     public void addField(Field field) {
         fields.add(field);
@@ -123,8 +123,8 @@ public class Diagram {
     /**
      * a method that inserts the field into specified location to the diagram
      * 
-     * @param index
-     * @param field
+     * @param index the location to insert
+     * @param field the field to be inserted
      */
     public void insertField(int index, Field field) {
         fields.add(index, field);
@@ -133,7 +133,7 @@ public class Diagram {
     /**
      * a method that removes the field via given index
      * 
-     * @param index
+     * @param index the index of the field to be removed
      */
     public void removeField(int index) {
         fields.remove(index);
@@ -142,8 +142,8 @@ public class Diagram {
     /**
      * a method that moves the field from the `from` index to the `to` index
      * 
-     * @param from
-     * @param to
+     * @param from the index of the field to be moved
+     * @param to   the index of the field to be moved to
      */
     public void moveField(int from, int to) {
         Field field = fields.remove(from);
@@ -177,7 +177,7 @@ public class Diagram {
     /**
      * a method that restores the diagram to the memento recorded state
      * 
-     * @param m
+     * @param m the memento to be restored
      */
     public void restoreFromMemento(Memento m) {
         fields.clear();
@@ -199,7 +199,7 @@ public class Diagram {
      * a utility function that creates a diagram instance based on the content of
      * the JSON formatted string
      * 
-     * @param input
+     * @param input the JSON formatted string
      * @return Diagram
      */
     public static Diagram fromJson(String input) {
@@ -258,7 +258,7 @@ public class Diagram {
         /**
          * a method that reads JSON and returns a diagram instance
          * 
-         * @param reader
+         * @param reader the reader to read JSON
          * @return Diagram
          */
         public Diagram read(JsonReader reader) throws IOException {
@@ -289,8 +289,8 @@ public class Diagram {
          * a method that reads the diagram, and writes the appropriate key-value pairs
          * into the JSON
          * 
-         * @param writer
-         * @param d
+         * @param writer the writer to write the JSON
+         * @param d      the diagram to be written
          */
         public void write(JsonWriter writer, Diagram d) throws IOException {
             writer.beginObject();

@@ -8,9 +8,9 @@ public abstract class Element {
      * of the matrix by the given matrix instance and the position of the current
      * element
      * 
-     * @param m
-     * @param x
-     * @param y
+     * @param m the matrix instance
+     * @param x the x position of the current element
+     * @param y the y position of the current element
      */
     public abstract void process(Matrix m, int x, int y);
 }
