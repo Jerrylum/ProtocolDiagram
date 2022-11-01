@@ -3,6 +3,10 @@ package com.jerryio.protocol_diagram.util;
 import com.jerryio.protocol_diagram.token.CodePointBuffer;
 import com.jerryio.protocol_diagram.token.Token;
 
+/**
+ * a utility class that contains only static functions, for the ease of other classes reuse the code
+ * without instantiating an object before the usage, this class is responsible in the token utility functions
+ */
 public class TokenUtils {
 
     /**
