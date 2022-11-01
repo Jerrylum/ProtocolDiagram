@@ -5,6 +5,9 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this class is an option class that extends the logic of confining the possible values of string literals
+ */
 public class EnumOption extends Option {
 
     private final String[] acceptedValues;
@@ -22,7 +25,7 @@ public class EnumOption extends Option {
      * a wrapper method that sets the value of the parameters, the value of the
      * parameter is required to be string
      * 
-     * @param Parameter
+     * @param value
      * @return HandleResult
      */
     @Override
