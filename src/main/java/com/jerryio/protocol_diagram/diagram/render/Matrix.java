@@ -64,7 +64,7 @@ public class Matrix {
     /**
      * a method that returns a readonly clone of the current raw matrix
      * 
-     * @return List<Element>
+     * @return List
      */
     public List<Element> getElements() {
         return Collections.unmodifiableList(matrix);
