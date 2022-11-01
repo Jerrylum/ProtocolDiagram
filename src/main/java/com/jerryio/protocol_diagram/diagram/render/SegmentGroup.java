@@ -12,6 +12,12 @@ public class SegmentGroup<T extends Segment> {
     protected final List<T> segments;
     protected int used;
 
+    /**
+     * this constructor takes one parameter and recognize the bit
+     * as the maximum length of the segment group
+     * 
+     * @param bit the number of bit the segment group should have
+     */
     public SegmentGroup(int bit) {
         this.bit = bit;
         this.segments = new ArrayList<T>();
@@ -30,7 +36,7 @@ public class SegmentGroup<T extends Segment> {
     /**
      * a method that returns a readonly collection of the segments
      * 
-     * @return Collection<T>
+     * @return Collection
      */
     public Collection<T> getSegments() {
         return Collections.unmodifiableCollection(segments);
@@ -39,8 +45,8 @@ public class SegmentGroup<T extends Segment> {
     /**
      * a method that returns the segment by the specified index
      * 
-     * @param index
-     * @return T extends Segment
+     * @param index the index of the desire segment
+     * @return T
      */
     public T get(int index) {
         return segments.get(index);
