@@ -1,5 +1,8 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record that contains the values of the fractal that starts with character '.' and the sequence of digit followed
+ */
 public record Frac(String value) implements Token {
     public static Frac parse(CodePointBuffer buffer) {
         buffer.savepoint();

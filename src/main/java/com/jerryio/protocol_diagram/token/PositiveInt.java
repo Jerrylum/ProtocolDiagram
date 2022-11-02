@@ -1,5 +1,8 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record is used to represent the non-signed and non-zero integer
+ */
 public record PositiveInt(String value) {
     public static PositiveInt parse(CodePointBuffer buffer) {
         buffer.savepoint();

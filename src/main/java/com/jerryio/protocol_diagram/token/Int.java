@@ -1,5 +1,8 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record is used to represent the non-signed integer
+ */
 public record Int(String value) implements Token {
     public static Int parse(CodePointBuffer buffer) {
         buffer.savepoint();

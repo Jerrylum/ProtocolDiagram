@@ -1,5 +1,10 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record is a safer version of the universalized string literal, contains only the inner-value of
+ * both double-quoted string and single-quoted string, however, if the inner-value of the string literal
+ * is empty, the static parse function of this record yields the constant null instead.
+ */
 public record SafeString(String content) implements Token {
     public static SafeString parse(CodePointBuffer buffer) {
         StringBuffer sb = new StringBuffer();

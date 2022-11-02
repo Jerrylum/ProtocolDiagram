@@ -5,6 +5,10 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this class is an option class that extends the logic of confining the
+ * possible values of string literals
+ */
 public class EnumOption extends Option {
 
     private final String[] acceptedValues;
@@ -18,6 +22,13 @@ public class EnumOption extends Option {
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * a wrapper method that sets the value of the parameters, the value of the
+     * parameter is required to be string
+     * 
+     * @param value the value of this option
+     * @return whether the value is set successfully
+     */
     @Override
     public HandleResult setValue(Parameter value) {
         if (value.isString()) {
@@ -27,6 +38,15 @@ public class EnumOption extends Option {
         }
     }
 
+    /**
+     * a method that takes the hint from user, auto-completes the hint with the most
+     * accurate-accepted value, it will fail when the hint is too ambiguous that
+     * shares the prefix more than one accepted values, cannot predict the value,
+     * and already set with the same value.
+     * 
+     * @param hint the hint from user
+     * @return weather the value is set successfully
+     */
     public HandleResult setValue(String hint) {
         String selected = null;
         for (String acceptedValue : acceptedValues) {
@@ -55,15 +75,30 @@ public class EnumOption extends Option {
         }
     }
 
+    /**
+     * a getter method that retrieves the value of this enum option
+     * 
+     * @return the value of this enum option
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * a getter method that retrieves the default value of this enum option
+     * 
+     * @return the default value of this enum option
+     */
     @Override
     public String getDefault() {
         return defaultValue;
     }
 
+    /**
+     * a method that retrieves a manual statement for this enum option
+     * 
+     * @return the manual statement for this enum option
+     */
     @Override
     public String getUsageDescription() {
         StringBuilder sb = new StringBuilder();

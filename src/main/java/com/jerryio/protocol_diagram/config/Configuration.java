@@ -10,6 +10,12 @@ import java.util.List;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this class responsible in managing a list of available options, provides API
+ * for other classes to get the value of a option, the list of options, set the
+ * value
+ * of a option.
+ */
 public class Configuration {
 
     private final List<Option> options;
@@ -18,6 +24,14 @@ public class Configuration {
         this.options = Arrays.asList(options);
     }
 
+    /**
+     * a method that sets the value of specified option from this configuration by
+     * the given key and value
+     * 
+     * @param key   the key of the option
+     * @param value the value of the option
+     * @return HandleResult
+     */
     public HandleResult setValue(String key, Parameter value) {
         Option option = getOption(key);
         if (option == null) {
@@ -27,6 +41,12 @@ public class Configuration {
         }
     }
 
+    /**
+     * a getter method that retrieves the value of option by the specified key
+     * 
+     * @param key the key of the option
+     * @return the value of the option
+     */
     public Object getValue(String key) {
         Option option = getOption(key);
         if (option == null) {
@@ -36,6 +56,12 @@ public class Configuration {
         }
     }
 
+    /**
+     * a find method that lookups the matching option based on the given key
+     * 
+     * @param key the key of the option
+     * @return the option that matches the key
+     */
     public Option getOption(String key) {
         Option selected = null;
         for (Option option : options) {
@@ -54,6 +80,11 @@ public class Configuration {
         return selected;
     }
 
+    /**
+     * a pure function that returns a readonly clone of the options list
+     * 
+     * @return the readonly list of options
+     */
     public Collection<Option> getOptions() {
         return Collections.unmodifiableList(options);
     }

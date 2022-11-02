@@ -9,8 +9,14 @@ import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command responsible in saving a diagram structure into a file format by a given path
+ */
 public class SaveCommand extends Command {
 
+    /**
+     * the path that this command used to store the serialized diagram structure
+     */
     public String paramPath;
 
     public SaveCommand() {

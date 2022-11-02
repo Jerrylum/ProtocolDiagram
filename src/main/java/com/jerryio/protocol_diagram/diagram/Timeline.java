@@ -15,26 +15,52 @@ public class Timeline<T extends ICancellable> {
         resetHistory();
     }
 
+    /**
+     * a getter method that returns the diagram it stored
+     * 
+     * @return Diagram
+     */
     public Diagram getDiagram() {
         return diagram;
     }
 
+    /**
+     * a getter method that returns the latest memento
+     * 
+     * @return Diagram.Memento
+     */
     public Diagram.Memento getLatestMemento() {
         return latest;
     }
 
+    /**
+     * a method that eliminates all undo history and redo history, and generates a
+     * new memento
+     */
     public void resetHistory() {
         undoStack.clear();
         redoStack.clear();
         latest = getDiagram().createMemento();
     }
 
+    /**
+     * a method that pushes a modifier into the undo history, and resets the stack
+     * of redo.
+     * 
+     * @param modifier the modifier that is going to be pushed into the undo history
+     */
     public void operate(T modifier) {
         undoStack.push(new Snapshot<T>(latest, modifier));
         redoStack.clear();
         latest = getDiagram().createMemento();
     }
 
+    /**
+     * a method that pops the top of the undo stack, pushes that popped history into
+     * the redo stack, and restores the diagram based on the popped snapshot.
+     * 
+     * @return T
+     */
     public T undo() {
         if (undoStack.isEmpty())
             return null;
@@ -46,6 +72,12 @@ public class Timeline<T extends ICancellable> {
         return snapshot.modifier();
     }
 
+    /**
+     * a method that pops the top of the redo stack, pushes that popped history into
+     * the undo stack, and executes the popped command from the redo stack.
+     * 
+     * @return T
+     */
     public T redo() {
         if (redoStack.isEmpty())
             return null;

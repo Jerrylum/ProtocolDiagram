@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import org.junit.After;
@@ -39,10 +40,10 @@ public class FileUtilsTest {
 
     public String getFileContent(String path) throws IOException {
         File file = new File(path);
-        Scanner sc = new Scanner(file);
+        Scanner sc = new Scanner(file, StandardCharsets.UTF_8);
         String str = "";
         while (sc.hasNextLine()) {
-            str += sc.nextLine();
+            str += sc.nextLine() + "\n";
         }
         sc.close();
         return str;

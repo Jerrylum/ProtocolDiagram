@@ -3,6 +3,9 @@ package com.jerryio.protocol_diagram.token;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this record parses multiple key-value pairs into a list of pairs (string, integer)
+ */
 public record OneLineInput(List<Pair<String, Integer>> params) implements Token {
     public static OneLineInput parse(CodePointBuffer buffer) {
         buffer.readDelimiter();

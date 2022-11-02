@@ -10,8 +10,15 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 import com.jerryio.protocol_diagram.util.FileUtils;
 
+/**
+ * this command is responsible in storing the well-formatted TUI diagram into a file, unlike save command,
+ * it does not store the raw information of the diagram, it stores the screen product of the diagram
+ */
 public class ExportCommand extends Command {
     
+    /**
+     * the path that will be used to store the diagram
+     */
     public String paramPath;
 
     public ExportCommand() {

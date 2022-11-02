@@ -1,5 +1,8 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record is used to represent the negative non-zero integer
+ */
 public record NegativeInt(String value) implements Token {
     public static NegativeInt parse(CodePointBuffer buffer) {
         buffer.savepoint();

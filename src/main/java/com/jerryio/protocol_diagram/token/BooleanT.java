@@ -1,5 +1,8 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record is data class that contains the tokenizing information of the boolean token
+ */
 public record BooleanT(String value, boolean bool) implements Token {
     public static BooleanT parse(CodePointBuffer buffer) {
         buffer.savepoint();

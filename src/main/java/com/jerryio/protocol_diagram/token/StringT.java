@@ -1,5 +1,8 @@
 package com.jerryio.protocol_diagram.token;
 
+/**
+ * this record is a universalized string literal, contains only the inner-value of both double-quoted string and single-quoted string
+ */
 public record StringT(String content) implements Token {
     public static StringT parse(CodePointBuffer buffer) {
         Character c = buffer.peek();

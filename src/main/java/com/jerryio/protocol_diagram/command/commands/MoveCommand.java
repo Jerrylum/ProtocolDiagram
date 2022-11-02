@@ -10,9 +10,18 @@ import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.diagram.Field;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible in rearrange the field from a specified index to an another specified index
+ */
 public class MoveCommand extends CancellableCommand {
 
+    /**
+     * the index of the to-be rearranged field
+     */
     public int paramIndex;
+    /**
+     * the new position of the field
+     */
     public int paramTargetIndex;
 
     public MoveCommand() {

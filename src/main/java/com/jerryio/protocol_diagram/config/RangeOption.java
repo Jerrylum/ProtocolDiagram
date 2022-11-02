@@ -5,6 +5,10 @@ import static com.jerryio.protocol_diagram.command.HandleResult.*;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this class is an option class that extends the logic of confining the
+ * possible range of numeric output
+ */
 public class RangeOption extends Option {
 
     private final int min;
@@ -20,6 +24,12 @@ public class RangeOption extends Option {
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * a wrapper method that sets the value of this range option, the value of the
+     * parameter is required to be an integer
+     * 
+     * @return whether the value is set successfully
+     */
     @Override
     public HandleResult setValue(Parameter value) {
         if (value.isNumber() && !value.isDouble()) {
@@ -29,6 +39,15 @@ public class RangeOption extends Option {
         }
     }
 
+    /**
+     * a method that sets the value of this range option, note that if the value is
+     * out of range, such as less than our minimum requirement or greater than our
+     * maximum requirement, a handling failure will be returned, and if the value
+     * is set with same value of the old value a failure will also be returned
+     * 
+     * @param value the value of this range option
+     * @return whether the value is set successfully
+     */
     public HandleResult setValue(int value) {
         int oldValue = this.value;
         if (oldValue == value) {
@@ -41,15 +60,30 @@ public class RangeOption extends Option {
         }
     }
 
+    /**
+     * a getter method that retrieve the value of this range option
+     * 
+     * @return the value of this range option
+     */
     public Integer getValue() {
         return value;
     }
 
+    /**
+     * a getter method that return the default value of this range option
+     * 
+     * @return the default value of this range option
+     */
     @Override
     public Integer getDefault() {
         return defaultValue;
     }
 
+    /**
+     * a method that return a manual statement.
+     * 
+     * @return the manual statement
+     */
     @Override
     public String getUsageDescription() {
         return "min:" + min + " max:" + max + " default:" + defaultValue;

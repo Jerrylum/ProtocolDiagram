@@ -1,0 +1,115 @@
+
+> add
+Too few arguments.
+
+> add 0 Hello World
+Too many arguments.
+
+> add 0 "Hello World"
+Length must be a positive integer.
+
+> add 8 0
+Name must be a string.
+
+> add 8 Field0
+Added field "Field0".
+
+ 0
+ 0 1 2 3 4 5 6 7
+┌───────────────┐
+│     Field0    │
+└───────────────┘
+
+
+> insert
+Too few arguments.
+
+> insert a b c d
+Too many arguments.
+
+> insert -1 4 Field1
+Index start from zero.
+
+> insert 0 0 Field1
+Length must be a positive integer.
+
+> insert 0 4 1
+Name must be a string.
+
+> insert 1 4 Field1
+Index out of range.
+
+> insert 0 4 Field1
+Inserted field "Field1" to the beginning.
+
+ 0                   1
+ 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────┬───────────────┐
+│ Field1│     Field0    │
+└───────┴───────────────┘
+
+
+> insert 1 4 Field2
+Inserted field "Field2" after "Field1".
+
+ 0                   1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+┌───────┬───────┬───────────────┐
+│ Field1│ Field2│     Field0    │
+└───────┴───────┴───────────────┘
+
+
+> move
+Too few arguments.
+
+> move a b c
+Too many arguments.
+
+> move -1 1
+Index start from zero.
+
+> move 0 -1
+Target index start from zero.
+
+> move 3 0
+Index out of range.
+
+> move 0 3
+Target index out of range.
+
+> move 0 0
+Index and target index cannot be the same.
+
+> move 2 0
+Moved field "Field0" to the beginning.
+
+ 0                   1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+┌───────────────┬───────┬───────┐
+│     Field0    │ Field1│ Field2│
+└───────────────┴───────┴───────┘
+
+
+> move 1 2
+Moved field "Field1" to the end.
+
+ 0                   1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+┌───────────────┬───────┬───────┐
+│     Field0    │ Field2│ Field1│
+└───────────────┴───────┴───────┘
+
+
+> move 2 1
+Moved field "Field1" after "Field0".
+
+ 0                   1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+┌───────────────┬───────┬───────┐
+│     Field0    │ Field1│ Field2│
+└───────────────┴───────┴───────┘
+
+
+> quit force
+
+See you.

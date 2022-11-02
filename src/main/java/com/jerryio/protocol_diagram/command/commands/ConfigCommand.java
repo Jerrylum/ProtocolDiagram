@@ -11,9 +11,19 @@ import com.jerryio.protocol_diagram.config.Option;
 import com.jerryio.protocol_diagram.diagram.IDiagramModifier;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible in setting the value of the specified option by its key name
+ */
 public class ConfigCommand extends Command implements IDiagramModifier {
 
+    /**
+     * the key of the specified option
+     */
     public String paramKey;
+
+    /**
+     * the value will be applied after the execution
+     */
     public Parameter paramValue;
 
     public ConfigCommand() {

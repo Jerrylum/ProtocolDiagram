@@ -9,6 +9,9 @@ import com.jerryio.protocol_diagram.command.Command;
 import com.jerryio.protocol_diagram.command.HandleResult;
 import com.jerryio.protocol_diagram.token.Parameter;
 
+/**
+ * this command is responsible in clearing all fields and eliminating all history
+ */
 public class DiscardCommand extends Command {
 
     public DiscardCommand() {
