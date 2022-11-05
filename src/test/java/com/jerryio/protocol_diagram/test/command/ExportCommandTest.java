@@ -36,10 +36,19 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void testHandle() {
+    public void testExportCommandHandleSuccess() {
+        List<Parameter> params = new ArrayList<Parameter>();
+        ExportCommand cmd = new ExportCommand();
+        params.add(Parameter.parse(new CodePointBuffer("test.txt")));
+        assertTrue(cmd.handle(params).success()); // save to txt
+    }
+
+    @Test
+    public void testExportCommandHandleFail() {
         List<Parameter> params = new ArrayList<Parameter>();
         ExportCommand cmd = new ExportCommand();
         assertFalse(cmd.handle(params).success()); // too few args
+
         params.add(Parameter.parse(new CodePointBuffer("test.txt")));
         params.add(Parameter.parse(new CodePointBuffer("test.txt")));
         assertFalse(cmd.handle(params).success()); // too many args
@@ -47,9 +56,5 @@ public class ExportCommandTest {
 
         params.add(Parameter.parse(new CodePointBuffer("123")));
         assertFalse(cmd.handle(params).success()); // not string
-        params.clear();
-
-        params.add(Parameter.parse(new CodePointBuffer("test.txt")));
-        assertTrue(cmd.handle(params).success()); // save to txt
     }
 }

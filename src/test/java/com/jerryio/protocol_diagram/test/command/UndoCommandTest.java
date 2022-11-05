@@ -17,17 +17,21 @@ import com.jerryio.protocol_diagram.token.Parameter;
 public class UndoCommandTest {
     
     @Test
-    public void testHandle() {
+    public void testUndoCommandHandleSuccess() {
+        UndoCommand uc = new UndoCommand();
+        List<Parameter> params = new ArrayList<Parameter>();
+        AddCommand tic = new AddCommand();
+        Main.handler.operate(tic);
+        assertTrue(uc.handle(params).success());
+    }
+
+    @Test
+    public void testUndoCommandHandleFail() {
         UndoCommand uc = new UndoCommand();
         List<Parameter> params = new ArrayList<Parameter>();
         assertFalse(uc.handle(params).success());
 
-        AddCommand tic = new AddCommand();
-        Main.handler.operate(tic);
-        assertTrue(uc.handle(params).success());
-
         params.add(Parameter.parse(new CodePointBuffer("test")));
         assertFalse(uc.handle(params).success());
-
     }
 }

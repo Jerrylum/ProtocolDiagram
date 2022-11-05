@@ -37,14 +37,21 @@ public class DiscardCommandTest {
     }
 
     @Test
-    public void testHandle() {
+    public void testDiscardCommandHandleSuccess() {
         List<Parameter> params = new ArrayList<Parameter>();
         DiscardCommand cmd = new DiscardCommand();
-        params.add(Parameter.parse(new CodePointBuffer("test")));
-        assertFalse(cmd.handle(params).success()); // have args
-        params.clear();
         assertEquals(3, Main.diagram.getFields().size());
         assertTrue(cmd.handle(params).success()); // no args
         assertEquals(0, Main.diagram.getFields().size());
+    }
+
+    @Test
+    public void testDiscardCommandHandleFail() {
+        List<Parameter> params = new ArrayList<Parameter>();
+        DiscardCommand cmd = new DiscardCommand();
+        params.add(Parameter.parse(new CodePointBuffer("test")));
+        assertEquals(3, Main.diagram.getFields().size());
+        assertFalse(cmd.handle(params).success()); // have args
+        assertEquals(3, Main.diagram.getFields().size());
     }
 }
