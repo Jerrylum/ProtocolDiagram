@@ -40,7 +40,15 @@ public class LoadCommandTest {
     }
 
     @Test
-    public void testHandle() {
+    public void testLoadCommandHandleSuccess() {
+        List<Parameter> params = new ArrayList<Parameter>();
+        LoadCommand cmd = new LoadCommand();
+        params.add(Parameter.parse(new CodePointBuffer("test.json")));
+        assertTrue(cmd.handle(params).success());
+    }
+
+    @Test
+    public void testLoadCommandHandleFail() {
         List<Parameter> params = new ArrayList<Parameter>();
         LoadCommand cmd = new LoadCommand();
         assertFalse(cmd.handle(params).success()); // no file name
@@ -48,24 +56,18 @@ public class LoadCommandTest {
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
         assertFalse(cmd.handle(params).success()); // too many args
-
         params.clear();
+
         params.add(Parameter.parse(new CodePointBuffer("123"))); // not string
         assertFalse(cmd.handle(params).success());
-
         params.clear();
-        params.add(Parameter.parse(new CodePointBuffer("test.json")));
-        assertTrue(cmd.handle(params).success());
 
         Main.handler.setModified(true);
-
         assertFalse(cmd.handle(params).success()); // file un-save changes
-
         Main.handler.setModified(false);
-
         params.clear();
+
         params.add(Parameter.parse(new CodePointBuffer("test2.json")));
         assertFalse(cmd.handle(params).success()); // no diagram
     }
-
 }

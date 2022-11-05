@@ -36,7 +36,22 @@ public class SaveCommandTest {
     }
 
     @Test
-    public void testHandle() {
+    public void testSaveCommandHandleSuccess() {
+        List<Parameter> params = new ArrayList<Parameter>();
+        SaveCommand cmd = new SaveCommand();
+        params.add(Parameter.parse(new CodePointBuffer("test.json")));
+        assertTrue(cmd.handle(params).success()); // save to json
+
+        params.clear();
+        assertTrue(cmd.handle(params).success()); // no arg save after save
+
+        params.clear();
+        params.add(Parameter.parse(new CodePointBuffer("test"))); // no .json
+        assertTrue(cmd.handle(params).success());
+    }
+
+    @Test
+    public void testSaveCommandHandleFail() {
         List<Parameter> params = new ArrayList<Parameter>();
         SaveCommand cmd = new SaveCommand();
         String root = "";
@@ -47,25 +62,15 @@ public class SaveCommandTest {
 
         params.add(Parameter.parse(new CodePointBuffer(root)));
         assertFalse(cmd.handle(params).success());
-
         params.clear();
+
         assertFalse(cmd.handle(params).success()); // no file name
-
-        params.add(Parameter.parse(new CodePointBuffer("test.json")));
-        assertTrue(cmd.handle(params).success()); // save to json
-
-        params.clear();
-        assertTrue(cmd.handle(params).success()); // no arg save after save
 
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
         params.add(Parameter.parse(new CodePointBuffer("test.json")));
         assertFalse(cmd.handle(params).success()); // too many args
-
         params.clear();
-        params.add(Parameter.parse(new CodePointBuffer("test"))); // no .json
-        assertTrue(cmd.handle(params).success());
 
-        params.clear();
         params.add(Parameter.parse(new CodePointBuffer("123"))); // not string
         assertFalse(cmd.handle(params).success());
     }
