@@ -63,6 +63,7 @@ public class LoadCommandTest {
         params.clear();
 
         Main.handler.setModified(true);
+        params.add(Parameter.parse(new CodePointBuffer("test.json")));
         assertFalse(cmd.handle(params).success()); // file un-save changes
         Main.handler.setModified(false);
         params.clear();
